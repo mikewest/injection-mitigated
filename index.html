@@ -1490,6 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version d765c696b, updated Fri Mar 8 15:58:52 2024 -0800" name="generator">
   <link href="https://mikewest.github.io/injection-mitigated/" rel="canonical">
+  <meta content="a6fe13ab1a832fcf5c38c2d8e6613fae53393df6" name="revision">
   <meta content="dark light" name="color-scheme">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -2046,6 +2047,127 @@ a.self-link::before            { content: "¶"; }
 .heading > a.self-link::before { content: "§"; }
 dfn > a.self-link::before      { content: "#"; }
 </style>
+<style>/* Boilerplate: style-syntax-highlighting */
+code.highlight { padding: .1em; border-radius: .3em; }
+pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+
+.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
+c-[a] { color: #990055 } /* Keyword.Declaration */
+c-[b] { color: #990055 } /* Keyword.Type */
+c-[c] { color: #708090 } /* Comment */
+c-[d] { color: #708090 } /* Comment.Multiline */
+c-[e] { color: #0077aa } /* Name.Attribute */
+c-[f] { color: #669900 } /* Name.Tag */
+c-[g] { color: #222222 } /* Name.Variable */
+c-[k] { color: #990055 } /* Keyword */
+c-[l] { color: #000000 } /* Literal */
+c-[m] { color: #000000 } /* Literal.Number */
+c-[n] { color: #0077aa } /* Name */
+c-[o] { color: #999999 } /* Operator */
+c-[p] { color: #999999 } /* Punctuation */
+c-[s] { color: #a67f59 } /* Literal.String */
+c-[t] { color: #a67f59 } /* Literal.String.Single */
+c-[u] { color: #a67f59 } /* Literal.String.Double */
+c-[cp] { color: #708090 } /* Comment.Preproc */
+c-[c1] { color: #708090 } /* Comment.Single */
+c-[cs] { color: #708090 } /* Comment.Special */
+c-[kc] { color: #990055 } /* Keyword.Constant */
+c-[kn] { color: #990055 } /* Keyword.Namespace */
+c-[kp] { color: #990055 } /* Keyword.Pseudo */
+c-[kr] { color: #990055 } /* Keyword.Reserved */
+c-[ld] { color: #000000 } /* Literal.Date */
+c-[nc] { color: #0077aa } /* Name.Class */
+c-[no] { color: #0077aa } /* Name.Constant */
+c-[nd] { color: #0077aa } /* Name.Decorator */
+c-[ni] { color: #0077aa } /* Name.Entity */
+c-[ne] { color: #0077aa } /* Name.Exception */
+c-[nf] { color: #0077aa } /* Name.Function */
+c-[nl] { color: #0077aa } /* Name.Label */
+c-[nn] { color: #0077aa } /* Name.Namespace */
+c-[py] { color: #0077aa } /* Name.Property */
+c-[ow] { color: #999999 } /* Operator.Word */
+c-[mb] { color: #000000 } /* Literal.Number.Bin */
+c-[mf] { color: #000000 } /* Literal.Number.Float */
+c-[mh] { color: #000000 } /* Literal.Number.Hex */
+c-[mi] { color: #000000 } /* Literal.Number.Integer */
+c-[mo] { color: #000000 } /* Literal.Number.Oct */
+c-[sb] { color: #a67f59 } /* Literal.String.Backtick */
+c-[sc] { color: #a67f59 } /* Literal.String.Char */
+c-[sd] { color: #a67f59 } /* Literal.String.Doc */
+c-[se] { color: #a67f59 } /* Literal.String.Escape */
+c-[sh] { color: #a67f59 } /* Literal.String.Heredoc */
+c-[si] { color: #a67f59 } /* Literal.String.Interpol */
+c-[sx] { color: #a67f59 } /* Literal.String.Other */
+c-[sr] { color: #a67f59 } /* Literal.String.Regex */
+c-[ss] { color: #a67f59 } /* Literal.String.Symbol */
+c-[vc] { color: #0077aa } /* Name.Variable.Class */
+c-[vg] { color: #0077aa } /* Name.Variable.Global */
+c-[vi] { color: #0077aa } /* Name.Variable.Instance */
+c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
+
+@media (prefers-color-scheme: dark) {
+    .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
+
+    c-[a] { color: #d33682 } /* Keyword.Declaration */
+    c-[b] { color: #d33682 } /* Keyword.Type */
+    c-[c] { color: #2aa198 } /* Comment */
+    c-[d] { color: #2aa198 } /* Comment.Multiline */
+    c-[e] { color: #268bd2 } /* Name.Attribute */
+    c-[f] { color: #b58900 } /* Name.Tag */
+    c-[g] { color: #cb4b16 } /* Name.Variable */
+    c-[k] { color: #d33682 } /* Keyword */
+    c-[l] { color: #657b83 } /* Literal */
+    c-[m] { color: #657b83 } /* Literal.Number */
+    c-[n] { color: #268bd2 } /* Name */
+    c-[o] { color: #657b83 } /* Operator */
+    c-[p] { color: #657b83 } /* Punctuation */
+    c-[s] { color: #6c71c4 } /* Literal.String */
+    c-[t] { color: #6c71c4 } /* Literal.String.Single */
+    c-[u] { color: #6c71c4 } /* Literal.String.Double */
+    c-[ch] { color: #2aa198 } /* Comment.Hashbang */
+    c-[cp] { color: #2aa198 } /* Comment.Preproc */
+    c-[cpf] { color: #2aa198 } /* Comment.PreprocFile */
+    c-[c1] { color: #2aa198 } /* Comment.Single */
+    c-[cs] { color: #2aa198 } /* Comment.Special */
+    c-[kc] { color: #d33682 } /* Keyword.Constant */
+    c-[kn] { color: #d33682 } /* Keyword.Namespace */
+    c-[kp] { color: #d33682 } /* Keyword.Pseudo */
+    c-[kr] { color: #d33682 } /* Keyword.Reserved */
+    c-[ld] { color: #657b83 } /* Literal.Date */
+    c-[nc] { color: #268bd2 } /* Name.Class */
+    c-[no] { color: #268bd2 } /* Name.Constant */
+    c-[nd] { color: #268bd2 } /* Name.Decorator */
+    c-[ni] { color: #268bd2 } /* Name.Entity */
+    c-[ne] { color: #268bd2 } /* Name.Exception */
+    c-[nf] { color: #268bd2 } /* Name.Function */
+    c-[nl] { color: #268bd2 } /* Name.Label */
+    c-[nn] { color: #268bd2 } /* Name.Namespace */
+    c-[py] { color: #268bd2 } /* Name.Property */
+    c-[ow] { color: #657b83 } /* Operator.Word */
+    c-[mb] { color: #657b83 } /* Literal.Number.Bin */
+    c-[mf] { color: #657b83 } /* Literal.Number.Float */
+    c-[mh] { color: #657b83 } /* Literal.Number.Hex */
+    c-[mi] { color: #657b83 } /* Literal.Number.Integer */
+    c-[mo] { color: #657b83 } /* Literal.Number.Oct */
+    c-[sa] { color: #6c71c4 } /* Literal.String.Affix */
+    c-[sb] { color: #6c71c4 } /* Literal.String.Backtick */
+    c-[sc] { color: #6c71c4 } /* Literal.String.Char */
+    c-[dl] { color: #6c71c4 } /* Literal.String.Delimiter */
+    c-[sd] { color: #6c71c4 } /* Literal.String.Doc */
+    c-[se] { color: #6c71c4 } /* Literal.String.Escape */
+    c-[sh] { color: #6c71c4 } /* Literal.String.Heredoc */
+    c-[si] { color: #6c71c4 } /* Literal.String.Interpol */
+    c-[sx] { color: #6c71c4 } /* Literal.String.Other */
+    c-[sr] { color: #6c71c4 } /* Literal.String.Regex */
+    c-[ss] { color: #6c71c4 } /* Literal.String.Symbol */
+    c-[fm] { color: #268bd2 } /* Name.Function.Magic */
+    c-[vc] { color: #cb4b16 } /* Name.Variable.Class */
+    c-[vg] { color: #cb4b16 } /* Name.Variable.Global */
+    c-[vi] { color: #cb4b16 } /* Name.Variable.Instance */
+    c-[vm] { color: #cb4b16 } /* Name.Variable.Magic */
+    c-[il] { color: #657b83 } /* Literal.Number.Integer.Long */
+}
+</style>
 <style>/* Boilerplate: style-var-click-highlighting */
 /*
 Colors were chosen in Lab using https://nixsensor.com/free-color-converter/
@@ -2118,6 +2240,19 @@ like XSS.</p>
         <li><a href="#csp-script-mitigation"><span class="secno">2.1.5</span> <span class="content">Does a policy sufficiently mitigate script execution?</span></a>
         <li><a href="#csp-sink-mitigation"><span class="secno">2.1.6</span> <span class="content">Does a policy sufficiently mitigate DOM sinks?</span></a>
        </ol>
+      <li><a href="#monkey-html"><span class="secno">2.2</span> <span class="content">HTML</span></a>
+      <li>
+       <a href="#monkey-webidl"><span class="secno">2.3</span> <span class="content">WebIDL</span></a>
+       <ol class="toc">
+        <li><a href="#InjectionMitigated"><span class="secno">2.3.1</span> <span class="content">[InjectionMitigated]</span></a>
+        <li><a href="#monkey-webidl-exposed"><span class="secno">2.3.2</span> <span class="content">Patches to the "exposed" algorithm</span></a>
+       </ol>
+     </ol>
+    <li>
+     <a href="#impl"><span class="secno">3</span> <span class="content">Implementation Considerations</span></a>
+     <ol class="toc">
+      <li><a href="#impl-csp"><span class="secno">3.1</span> <span class="content">What defenses does <code>[InjectionMitigated]</code> require?</span></a>
+      <li><a href="#impl-apis"><span class="secno">3.2</span> <span class="content">What APIs should be marked as <code>[InjectionMitigated]</code>?</span></a>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
@@ -2140,13 +2275,10 @@ like XSS.</p>
    <p>This is a monkey-patch spec meant to outline the changes necessary to define an <code>[InjectionMitigated]</code> WebIDL attribute that limits the exposure of interfaces,
 attributes, methods, etc. to those context which sufficiently mitigate various
 forms of injection attack.</p>
-   <p>Ideally, this constraint would be applied to any API that required user
-mediation, as users' intent to grant a particular privilege to a particular
-origin is deeply undermined if that origin can be tricked into executing an
-attacker’s code.</p>
-   <p>Realistically, we’ll pick our battles.</p>
-   <p>In any event, this document sketches the following modifications to three
-specifications:</p>
+   <p><a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> and <a href="#impl-apis">§ 3.2 What APIs should be marked as [InjectionMitigated]?</a> provide useful context for the kinds of
+mitigation this document proposes, and the ways in which those mitigations
+ought to restrict the set of capabilities we offer to web developers.</p>
+   <p>This document sketches the following modifications to three specifications:</p>
    <ul>
     <li data-md>
      <p><a data-link-type="biblio" href="#biblio-csp" title="Content Security Policy Level 3">[CSP]</a> will define the characteristics of a policy that’s robust enough to
@@ -2164,41 +2296,16 @@ construct.</p>
    <p>Let’s get to it.</p>
    <h2 class="heading settled" data-level="2" id="monkey"><span class="secno">2. </span><span class="content">Monkey Patches</span><a class="self-link" href="#monkey"></a></h2>
    <h3 class="heading settled" data-level="2.1" id="monkey-csp"><span class="secno">2.1. </span><span class="content">Content Security Policy</span><a class="self-link" href="#monkey-csp"></a></h3>
-   <p>In <a data-link-type="biblio" href="#biblio-csp" title="Content Security Policy Level 3">[CSP]</a>, we’ll define a way of evaluating the strength of the amalgamation of
-policies contained within a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-csp/#csp-list" id="ref-for-csp-list">CSP list</a>. We’re aiming for four characteristics:</p>
-   <ol>
-    <li data-md>
-     <p>At least one of the policies in the list enforces a restriction on plugin
-content via <code>object-src 'none'</code>.</p>
-     <p class="issue" id="issue-39e34e50"><a class="self-link" href="#issue-39e34e50"></a> Is this necessary anymore? Chrome certainly has weird things like <a href="https://www.chromium.org/nativeclient/">Native Client</a>, at least in Chrome
-App and Extensions contexts. Those seem separable from the web, though. We
-should look into browser behavior here, as it might be possible to simplify
-the recommendation.</p>
-    <li data-md>
-     <p>At least one of the policies in the list enforces a restriction on modifying
-the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/urls-and-fetching.html#document-base-url" id="ref-for-document-base-url">document base URL</a> via <code>base-uri 'none'</code> or <code>base-uri 'self'</code>. This
-prevents attackers from injecting a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-base-element" id="ref-for-the-base-element">base</a></code> element that could maliciously
-push scripts specified with relative URLs (e.g. <code>&lt;script src="/app.js"></code>)
-out to an attacker-controlled server.</p>
-    <li data-md>
-     <p>At least one of the policies in the list enforces a restriction on script
-execution that relies on nonces and/or hashes rather than URLs. Research
-like <a data-link-type="biblio" href="#biblio-long-live-csp" title="CSP Is Dead, Long Live CSP! On the Insecurity of Whitelists and the Future of Content Security Policy">[long-live-csp]</a> has shown URL-based allowlisting to be quite
-ineffective at creating meaningful protection, while content-based
-allowlisting (hashes) or element tagging (nonces) are far more robust.</p>
-    <li data-md>
-     <p>At least one of the policies in the list enforces <a data-link-type="biblio" href="#biblio-trusted-types" title="Trusted Types">[Trusted-Types]</a> via <code>require-trusted-types-for 'script'</code>.</p>
-     <p class="issue" id="issue-9410ab2d"><a class="self-link" href="#issue-9410ab2d"></a> It might be helpful for deployment to make this last requirement
-optional while user agents are still in the process of implementing bits
-and pieces of trusted types. We could parameterize the IDL attribute, for
-example (e.g. <code>[InjectionMitigated=Basic]</code> vs <code>[InjectionMitigated=RequireTrustedTypes]</code>), though I’ve no idea how we’d
-spell out a meaningful bar that would allow folks creating APIs to decide
-which they’d prefer.</p>
-   </ol>
+   <p>In <a data-link-type="biblio" href="#biblio-csp" title="Content Security Policy Level 3">[CSP]</a>, we’ll define an algorithm for evaluating the strength of the
+amalgamation of policies contained within a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-csp/#csp-list" id="ref-for-csp-list">CSP list</a>. We’ll define a
+few supporting algorithms as well, but <a href="#meaningful-injection-mitigation">§ 2.1.1 Does a policy meaningfully mitigate injection attacks?</a> is the core entry point CSP will expose to HTML.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> <a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> explains and justifies the threat model and constraints we
+believe are necessary to address it.</p>
    <h4 class="heading settled" data-level="2.1.1" id="meaningful-injection-mitigation"><span class="secno">2.1.1. </span><span class="content">Does a policy meaningfully mitigate injection attacks?</span><a class="self-link" href="#meaningful-injection-mitigation"></a></h4>
    <div class="algorithm" data-algorithm="meaningfully mitigates injection">
-     With the above characteristics in mind, a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-csp/#csp-list" id="ref-for-csp-list①">CSP list</a> <var>policies</var> is said to <dfn class="dfn-paneled" data-dfn-for="CSP list" data-dfn-type="dfn" data-export id="csp-list-meaningfully-mitigate-injection-attacks">meaningfully mitigate injection attacks</dfn> if the
-following algorithm returns "<code>Sufficient</code>": 
+     With the characteristics described in <a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> in mind, a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-csp/#csp-list" id="ref-for-csp-list①">CSP list</a> <var>policies</var> is said to <dfn class="dfn-paneled" data-dfn-for="CSP list" data-dfn-type="dfn" data-export data-lt="csp-list-mitigate-injection" id="csp-list-csp-list-mitigate-injection">meaningfully
+mitigate injection attacks</dfn> if the following algorithm returns
+"<code>Meaningful</code>": 
     <ol class="algorithm">
      <li data-md>
       <p>Let <var>meets object requirements</var>, <var>meets base requirements</var>, <var>meets script requirements</var>, and <var>meets trusted type requirements</var> be <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#boolean" id="ref-for-boolean">booleans</a> whose value is <code>false</code>.</p>
@@ -2206,7 +2313,7 @@ following algorithm returns "<code>Sufficient</code>":
       <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-iterate" id="ref-for-list-iterate">For each</a> <var>policy</var> in <var>policies</var>:</p>
       <ol>
        <li data-md>
-        <p>If <var>policy</var>’s <a data-link-type="dfn" href="https://w3c.github.io/webappsec-csp/#policy-disposition" id="ref-for-policy-disposition">disposition</a> is not "<code>enforce</code>", <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue">continue</a>.</p>
+        <p>If <var>policy</var>’s <a data-link-type="dfn" href="https://w3c.github.io/webappsec-csp/#policy-disposition" id="ref-for-policy-disposition">disposition</a> is not "<code>enforce</code>" or <var>policy</var>’s <a data-link-type="dfn" href="https://w3c.github.io/webappsec-csp/#policy-source" id="ref-for-policy-source">source</a> is not "<code>header</code>", <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#iteration-continue" id="ref-for-iteration-continue">continue</a>.</p>
        <li data-md>
         <p>If <var>policy</var> <a data-link-type="dfn" href="#policy-sufficiently-mitigates-plugins" id="ref-for-policy-sufficiently-mitigates-plugins">sufficiently mitigates plugins</a>, set <var>meets object requirements</var> to <code>true</code>.</p>
        <li data-md>
@@ -2217,9 +2324,9 @@ following algorithm returns "<code>Sufficient</code>":
         <p>If <var>policy</var> <a data-link-type="dfn" href="#policy-sufficiently-mitigates-dom-sinks" id="ref-for-policy-sufficiently-mitigates-dom-sinks">sufficiently mitigates DOM sinks</a>, set <var>meets trusted type requirements</var> to <code>true</code>.</p>
       </ol>
      <li data-md>
-      <p>Return "<code>Sufficient</code>" if <var>meets object requirements</var>, <var>meets base requirements</var>, <var>meets script requirements</var>, and <var>meets trusted type requirements</var> are all <code>true</code>.</p>
+      <p>Return "<code>Meaningful</code>" if <var>meets object requirements</var>, <var>meets base requirements</var>, <var>meets script requirements</var>, and <var>meets trusted type requirements</var> are all <code>true</code>.</p>
      <li data-md>
-      <p>Return "<code>Not sufficient</code>".</p>
+      <p>Return "<code>Not meaningful enough</code>".</p>
     </ol>
    </div>
    <h4 class="heading settled" data-level="2.1.2" id="csp-active-directive"><span class="secno">2.1.2. </span><span class="content">Obtain the active directive for a type</span><a class="self-link" href="#csp-active-directive"></a></h4>
@@ -2357,6 +2464,146 @@ the following algorithm returns "<code>Sufficient</code>":
     </ol>
     <p class="note" role="note"><span class="marker">Note:</span> This algorithm does not distinguish between policies with a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-csp/#policy-disposition" id="ref-for-policy-disposition④">disposition</a> of "<code>enforce</code>" or "<code>report</code>".</p>
    </div>
+   <h3 class="heading settled" data-level="2.2" id="monkey-html"><span class="secno">2.2. </span><span class="content">HTML</span><a class="self-link" href="#monkey-html"></a></h3>
+   <p>In HTML, we’ll use the algorithms described in <a href="#monkey-csp">§ 2.1 Content Security Policy</a> to define characteristics
+of the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object">environment settings object</a> that will be examined from <a data-link-type="biblio" href="#biblio-webidl" title="Web IDL Standard">[WEBIDL]</a> when
+determining whether or not a given IDL construct is exposed on the associated <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-global" id="ref-for-concept-settings-object-global">global object</a>.</p>
+   <div class="algorithm" data-algorithm="environment settings object mitigates injection">
+     An <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object①">environment settings object</a> is said to <dfn class="dfn-paneled" data-dfn-for="environment settings object" data-dfn-type="dfn" data-export id="environment-settings-object-meaningfully-mitigate-injection-attacks">meaningfully mitigate injection attacks</dfn> if its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container" id="ref-for-concept-settings-object-policy-container">policy container</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#policy-container-csp-list" id="ref-for-policy-container-csp-list">CSP list</a> <a data-link-type="dfn" href="#csp-list-csp-list-mitigate-injection" id="ref-for-csp-list-csp-list-mitigate-injection">meaningfully mitigates injection attacks</a>. 
+    <p class="note" role="note"><span class="marker">Note:</span> Because the definition of meaningful injection mitigation for a CSP list depends only upon
+the header-delivered policies, this property will not mutate during an environment’s lifetime.</p>
+   </div>
+   <h3 class="heading settled" data-level="2.3" id="monkey-webidl"><span class="secno">2.3. </span><span class="content">WebIDL</span><a class="self-link" href="#monkey-webidl"></a></h3>
+   <p>In WebIDL, we’ll define the <code>[InjectionMitigated]</code> attribute, and wire it up to the hook created
+in HTML above:</p>
+   <h4 class="heading settled dfn-paneled idl-code" data-dfn-type="extended-attribute" data-export data-level="2.3.1" data-lt="InjectionMitigated" id="InjectionMitigated"><span class="secno">2.3.1. </span><span class="content">[InjectionMitigated]</span><a class="self-link" href="#InjectionMitigated" id="ref-for-InjectionMitigated"></a></h4>
+   <p>If the [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated①①">InjectionMitigated</a></code>] <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-extended-attribute" id="ref-for-dfn-extended-attribute">extended attribute</a> appears on an <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface" id="ref-for-dfn-interface">interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-partial-interface" id="ref-for-dfn-partial-interface">partial interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#interface-mixin" id="ref-for-interface-mixin">interface mixin</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#partial-interface-mixin" id="ref-for-partial-interface-mixin">partial interface mixin</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-callback-interface" id="ref-for-dfn-callback-interface">callback interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace" id="ref-for-dfn-namespace">namespace</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-partial-namespace" id="ref-for-dfn-partial-namespace">partial namespace</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface-member" id="ref-for-dfn-interface-member">interface member</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#interface-mixin-member" id="ref-for-interface-mixin-member">interface mixin member</a>, or <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace-member" id="ref-for-dfn-namespace-member">namespace member</a>,
+it indicates that the construct is <a data-link-type="dfn" href="#dfn-exposed" id="ref-for-dfn-exposed">exposed</a> only within an environment which can <a data-link-type="dfn" href="#environment-settings-object-meaningfully-mitigate-injection-attacks" id="ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks">meaningfully mitigate injection attacks</a>. The
+[<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated①">InjectionMitigated</a></code>] extended attribute must not be used on any other construct.</p>
+   <p>The [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated②">InjectionMitigated</a></code>] extended attribute must <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-xattr-no-arguments" id="ref-for-dfn-xattr-no-arguments">take no arguments</a>.</p>
+   <p class="issue" id="issue-310401b6"><a class="self-link" href="#issue-310401b6"></a> It might be reasonable to parameterize this attribute, either because we think that
+a subset of the protections defined in this document are easier to deploy (e.g. strict CSP
+but not Trusted Types), or because we have different characteristics in mind for different
+contexts (e.g. <a href="https://github.com/WICG/isolated-web-apps/">Isolated Web Apps</a>). See issues <a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> below.</p>
+   <p>If [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated③">InjectionMitigated</a></code>] appears on an <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-overloaded" id="ref-for-dfn-overloaded">overloaded</a> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-operation" id="ref-for-dfn-operation">operation</a>,
+then it must appear on all overloads.</p>
+   <p>The [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated④">InjectionMitigated</a></code>] <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-extended-attribute" id="ref-for-dfn-extended-attribute①">extended attribute</a> must not be specified both on</p>
+   <ul>
+    <li data-md>
+     <p>an <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface-member" id="ref-for-dfn-interface-member①">interface member</a> and its <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface" id="ref-for-dfn-interface①">interface</a> or <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-partial-interface" id="ref-for-dfn-partial-interface①">partial interface</a>;</p>
+    <li data-md>
+     <p>an <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#interface-mixin-member" id="ref-for-interface-mixin-member①">interface mixin member</a> and its <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#interface-mixin" id="ref-for-interface-mixin①">interface mixin</a> or <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#partial-interface-mixin" id="ref-for-partial-interface-mixin①">partial interface mixin</a>;</p>
+    <li data-md>
+     <p>a <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace-member" id="ref-for-dfn-namespace-member①">namespace member</a> and its <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace" id="ref-for-dfn-namespace①">namespace</a> or <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-partial-namespace" id="ref-for-dfn-partial-namespace①">partial namespace</a>.</p>
+   </ul>
+   <p class="note" role="note"><span class="marker">Note:</span> This is because adding the [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated⑤">InjectionMitigated</a></code>] <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-extended-attribute" id="ref-for-dfn-extended-attribute②">extended attribute</a> on a <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-member" id="ref-for-dfn-member">member</a> when its containing definition is also annotated with the [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated⑥">InjectionMitigated</a></code>] <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-extended-attribute" id="ref-for-dfn-extended-attribute③">extended attribute</a> does not further restrict the exposure of the <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-member" id="ref-for-dfn-member①">member</a>.</p>
+   <p>An <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface" id="ref-for-dfn-interface②">interface</a> without the [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated⑦">InjectionMitigated</a></code>] <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-extended-attribute" id="ref-for-dfn-extended-attribute④">extended attribute</a> must not <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-inherit" id="ref-for-dfn-inherit">inherit</a> from another interface
+that does specify [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated⑧">InjectionMitigated</a></code>].</p>
+   <div class="example" id="its-an-example">
+    <a class="self-link" href="#its-an-example"></a> The following <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-idl-fragment" id="ref-for-dfn-idl-fragment">IDL fragment</a> defines an interface with one <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-operation" id="ref-for-dfn-operation①">operation</a> that is executable
+    from all contexts, and two which are executable only from contexts with meaningful injection
+    attack mitigation: 
+<pre class="highlight">[<c- g>Exposed</c->=<c- n>Window</c->]
+<c- b>interface</c-> <c- g>ExampleFeature</c-> {
+  // This call will succeed in all contexts.
+  <c- b>Promise</c-> &lt;<c- n>Result</c->> <c- g>doBoringThing</c->();
+
+  // This operation will not be exposed to context that lacks sufficient mitigation against
+  // injection attack. In such a context, there will be no "doPowerfulThing" property on
+  // ExampleFeature.prototype.
+  [<c- g>InjectionMitigated</c->] <c- b>Promise</c->&lt;<c- n>Result</c->> <c- g>doPowerfulThing</c->();
+
+  // The same applies here: the attribute will not be exposed to an unprotected context,
+  // and in such a context there will be no "secretBoolean" property on
+  // ExampleFeature.prototype.
+  [<c- g>InjectionMitigated</c->] <c- b>readonly</c-> <c- b>attribute</c-> <c- b>boolean</c-> <c- g>secretBoolean</c->;
+};
+</pre>
+   </div>
+   <h4 class="heading settled" data-level="2.3.2" id="monkey-webidl-exposed"><span class="secno">2.3.2. </span><span class="content">Patches to the "exposed" algorithm</span><a class="self-link" href="#monkey-webidl-exposed"></a></h4>
+   <p>WebIDL’s <a data-link-type="dfn" href="#dfn-exposed" id="ref-for-dfn-exposed①">exposed</a> algorithm is adjusted as follows, adding a single step after
+similarly handling [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#CrossOriginIsolated" id="ref-for-CrossOriginIsolated">CrossOriginIsolated</a></code>] (step 4 below).</p>
+   <div class="algorithm" data-algorithm="exposed">
+     An <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface" id="ref-for-dfn-interface③">interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-callback-interface" id="ref-for-dfn-callback-interface①">callback interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace" id="ref-for-dfn-namespace②">namespace</a>, or <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-member" id="ref-for-dfn-member②">member</a> <var>construct</var> is <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="dfn-exposed">exposed</dfn> in a given <a data-link-type="dfn" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#realm" id="ref-for-realm">realm</a> <var>realm</var> if the following steps
+    return true: 
+    <ol>
+     <li>If <var>construct</var>’s <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exposure-set" id="ref-for-dfn-exposure-set">exposure set</a> is not <code>*</code>, and <var>realm</var>.[[GlobalObject]] does not implement an <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface" id="ref-for-dfn-interface④">interface</a> that is in <var>construct</var>’s <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-exposure-set" id="ref-for-dfn-exposure-set①">exposure set</a>, then return false.
+     <li>If <var>realm</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-settings-object" id="ref-for-concept-realm-settings-object">settings object</a> is not a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#secure-context" id="ref-for-secure-context①">secure context</a>, and <var>construct</var> is <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-conditionally-exposed" id="ref-for-dfn-conditionally-exposed">conditionally exposed</a> on [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext">SecureContext</a></code>], then return false.
+     <li>If <var>realm</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-settings-object" id="ref-for-concept-realm-settings-object①">settings object</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-cross-origin-isolated-capability" id="ref-for-concept-settings-object-cross-origin-isolated-capability①">cross-origin isolated capability</a> is false, and <var>construct</var> is <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-conditionally-exposed" id="ref-for-dfn-conditionally-exposed①">conditionally exposed</a> on [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#CrossOriginIsolated" id="ref-for-CrossOriginIsolated①">CrossOriginIsolated</a></code>], then return false.
+     <li>
+      <ins> If <var>realm</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-settings-object" id="ref-for-concept-realm-settings-object②">settings object</a>'s does not <a data-link-type="dfn" href="#environment-settings-object-meaningfully-mitigate-injection-attacks" id="ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks①">meaningfully mitigate injection attacks</a>, and <var>construct</var> is <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-conditionally-exposed" id="ref-for-dfn-conditionally-exposed②">conditionally exposed</a> on [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated⑨">InjectionMitigated</a></code>], then return <code>false</code>. </ins>
+     <li>Return true. 
+    </ol>
+   </div>
+   <h2 class="heading settled" data-level="3" id="impl"><span class="secno">3. </span><span class="content">Implementation Considerations</span><a class="self-link" href="#impl"></a></h2>
+   <h3 class="heading settled" data-level="3.1" id="impl-csp"><span class="secno">3.1. </span><span class="content">What defenses does <code>[InjectionMitigated]</code> require?</span><a class="self-link" href="#impl-csp"></a></h3>
+   <p>If we start from a threat model in which an attacker can cause a server to
+"reflect" unexpected content directly into the body of any given response,
+or manipulate the inputs to client-side code (DOM APIs and otherwise), we
+can point to five characteristics of a Content Security Policy that gives
+developers a reasonable chance of avoiding unexpected script execution:</p>
+   <ol>
+    <li data-md>
+     <p>At least one of the policies in the list enforces a restriction on plugin
+content via <code>object-src 'none'</code>.</p>
+     <p class="issue" id="issue-39e34e50"><a class="self-link" href="#issue-39e34e50"></a> Is this necessary anymore? Chrome certainly has weird things like <a href="https://www.chromium.org/nativeclient/">Native Client</a>, at least in Chrome
+App and Extensions contexts. Those seem separable from the web, though. We
+should look into browser behavior here, as it might be possible to simplify
+the recommendation.</p>
+    <li data-md>
+     <p>At least one of the policies in the list enforces a restriction on modifying
+the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/urls-and-fetching.html#document-base-url" id="ref-for-document-base-url">document base URL</a> via <code>base-uri 'none'</code> or <code>base-uri 'self'</code>. This
+prevents attackers from injecting a <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#the-base-element" id="ref-for-the-base-element">base</a></code> element that could maliciously
+push scripts specified with relative URLs (e.g. <code>&lt;script src="/app.js"></code>)
+out to an attacker-controlled server.</p>
+    <li data-md>
+     <p>At least one of the policies in the list enforces a restriction on script
+execution that relies on nonces and/or hashes rather than URLs. Research
+like <a data-link-type="biblio" href="#biblio-long-live-csp" title="CSP Is Dead, Long Live CSP! On the Insecurity of Whitelists and the Future of Content Security Policy">[long-live-csp]</a> has shown URL-based allowlisting to be quite
+ineffective at creating meaningful protection, while content-based
+allowlisting (hashes) or element tagging (nonces) are far more robust.</p>
+     <p>ISSUES: <a href="https://github.com/WICG/isolated-web-apps/">Isolated Web Apps</a> are an example of a context that can get away with a looser policy for
+this aspect of the story (e.g. <code>script-src 'self'</code>) because of other
+layers of injection mitigation (in this case the requirement that script
+be staticly embedded in the app’s package). Perhaps we should expand the
+restriction to include that case as well?</p>
+    <li data-md>
+     <p>At least one of the policies in the list enforces <a data-link-type="biblio" href="#biblio-trusted-types" title="Trusted Types">[Trusted-Types]</a> via <code>require-trusted-types-for 'script'</code>.</p>
+     <p class="issue" id="issue-9410ab2d"><a class="self-link" href="#issue-9410ab2d"></a> It might be helpful for deployment to make this last requirement
+optional while user agents are still in the process of implementing bits
+and pieces of trusted types. We could parameterize the IDL attribute, for
+example (e.g. <code>[InjectionMitigated=Basic]</code> vs <code>[InjectionMitigated=RequireTrustedTypes]</code>), though I’ve no idea how we’d
+spell out a meaningful bar that would allow folks creating APIs to decide
+which they’d prefer.</p>
+    <li data-md>
+     <p>Each of the above characteristics is true in a way provably prior to any
+potential code execution. This boils down to ensuring that the policies
+creating the relevant constraints are delivered via headers that are applied
+at the time the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object②">environment settings object</a> is created, and are not
+added later via <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/semantics.html#meta" id="ref-for-meta">meta</a></code> tags.</p>
+   </ol>
+   <p>These characteristics aren’t pulled from thin air, but are the result of a good
+deal of experimentation and research over the years since CSP was introduced. <a data-link-type="biblio" href="#biblio-long-live-csp" title="CSP Is Dead, Long Live CSP! On the Insecurity of Whitelists and the Future of Content Security Policy">[long-live-csp]</a> is a seminal paper on the topic.</p>
+   <p>Policies matching these requirements are deployed at scale today, and are
+emperically proven to be fairly robust defenses.</p>
+   <h3 class="heading settled" data-level="3.2" id="impl-apis"><span class="secno">3.2. </span><span class="content">What APIs should be marked as <code>[InjectionMitigated]</code>?</span><a class="self-link" href="#impl-apis"></a></h3>
+   <p>Ideally, we’d be able to apply [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated①⓪">InjectionMitigated</a></code>] broadly, covering a
+broad spectrum of capabilities to ensure that they’re used for the purposes
+that users and developers alike might expect.</p>
+   <p>Realistically, applying the attribute to existing APIs is going to be a
+difficult sell (similar to the introduction of the [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext①">SecureContext</a></code>]
+attribute). We’ll want to pick our battles.</p>
+   <p>The highest-priority APIs are those that grant access to capabilities that sit
+somewhat outside the web’s general origin-based security model. Device
+capabilities like <a data-link-type="biblio" href="#biblio-webusb" title="WebUSB API">[WebUSB]</a>, OS primitives like the clipboard, and user
+location are all good examples of powerful and potentially dangerous capabilites
+that we’d really like to ensure are used by the site to whom they’re granted,
+and not to anyone who can trick the site into executing script.</p>
+   <p>More broadly, any API that requires user permission seems like a valid target
+for this new attribute. When user agents gain confidence that code running on
+an origin is code that origin intended to execute, we can make a much more
+reasonable claim about the exclusivity associated with a user’s choice to grant
+a capability to that origin, and thereby ship new capabilities more safely.</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -2507,7 +2754,10 @@ the following algorithm returns "<code>Sufficient</code>":
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#csp-list-meaningfully-mitigate-injection-attacks">meaningfully mitigate injection attacks</a><span>, in § 2.1.1</span>
+   <li><a href="#csp-list-csp-list-mitigate-injection">csp-list-mitigate-injection</a><span>, in § 2.1.1</span>
+   <li><a href="#dfn-exposed">exposed</a><span>, in § 2.3.2</span>
+   <li><a href="#InjectionMitigated">InjectionMitigated</a><span>, in § 2.3</span>
+   <li><a href="#environment-settings-object-meaningfully-mitigate-injection-attacks">meaningfully mitigate injection attacks</a><span>, in § 2.2</span>
    <li><a href="#abstract-opdef-obtain-directive">obtain-directive</a><span>, in § 2.1.2</span>
    <li><a href="#policy-sufficiently-mitigates-dom-sinks">sufficiently mitigates DOM sinks</a><span>, in § 2.1.6</span>
    <li><a href="#policy-sufficiently-mitigates-plugins">sufficiently mitigates plugins</a><span>, in § 2.1.3</span>
@@ -2530,15 +2780,27 @@ the following algorithm returns "<code>Sufficient</code>":
      <li><span class="dfn-paneled" id="4945e6fc">nonce-source</span>
      <li><span class="dfn-paneled" id="de921304">policy</span>
      <li><span class="dfn-paneled" id="d4ec2d19">scheme-source</span>
+     <li><span class="dfn-paneled" id="54872557">source</span>
      <li><span class="dfn-paneled" id="461b765a">value</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[ECMASCRIPT]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="a5f015e3">realm</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="c847111b">base</span>
      <li><span class="dfn-paneled" id="473036cd">cross-origin isolated capability</span>
+     <li><span class="dfn-paneled" id="158b3a38">csp list</span>
      <li><span class="dfn-paneled" id="6eb8a5d8">document base url</span>
+     <li><span class="dfn-paneled" id="3e12e042">environment settings object</span>
+     <li><span class="dfn-paneled" id="8a30477b">global object</span>
+     <li><span class="dfn-paneled" id="64b89595">meta</span>
+     <li><span class="dfn-paneled" id="bd1db03d">policy container</span>
      <li><span class="dfn-paneled" id="65181da8">secure context</span>
+     <li><span class="dfn-paneled" id="7deb6835">settings object</span>
     </ul>
    <li>
     <a data-link-type="biblio">[INFRA]</a> defines the following terms:
@@ -2550,20 +2812,49 @@ the following algorithm returns "<code>Sufficient</code>":
      <li><span class="dfn-paneled" id="16d07e10">for each</span>
      <li><span class="dfn-paneled" id="0204d188">size</span>
     </ul>
+   <li>
+    <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="cc2141c1">CrossOriginIsolated</span>
+     <li><span class="dfn-paneled" id="b75bb3bd">SecureContext</span>
+     <li><span class="dfn-paneled" id="b197a79c">callback interface</span>
+     <li><span class="dfn-paneled" id="d9659204">conditionally exposed</span>
+     <li><span class="dfn-paneled" id="631ad9e6">exposure set</span>
+     <li><span class="dfn-paneled" id="3f252540">extended attribute</span>
+     <li><span class="dfn-paneled" id="5dcb6b9f">idl fragment</span>
+     <li><span class="dfn-paneled" id="eab3771a">inherit</span>
+     <li><span class="dfn-paneled" id="1422ec4e">interface</span>
+     <li><span class="dfn-paneled" id="1c84257e">interface member</span>
+     <li><span class="dfn-paneled" id="d08c79a9">interface mixin</span>
+     <li><span class="dfn-paneled" id="d7a206d7">interface mixin member</span>
+     <li><span class="dfn-paneled" id="22e6d952">members</span>
+     <li><span class="dfn-paneled" id="2039631f">namespace</span>
+     <li><span class="dfn-paneled" id="5be3b9a5">namespace member</span>
+     <li><span class="dfn-paneled" id="bac9095f">operation</span>
+     <li><span class="dfn-paneled" id="c71e04da">overloaded</span>
+     <li><span class="dfn-paneled" id="d0eba3fd">partial interface</span>
+     <li><span class="dfn-paneled" id="33e1d425">partial interface mixin</span>
+     <li><span class="dfn-paneled" id="2f83c241">partial namespace</span>
+     <li><span class="dfn-paneled" id="843fcc5a">takes no arguments</span>
+    </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-csp">[CSP]
    <dd>Mike West; Antonio Sartori. <a href="https://w3c.github.io/webappsec-csp/"><cite>Content Security Policy Level 3</cite></a>. URL: <a href="https://w3c.github.io/webappsec-csp/">https://w3c.github.io/webappsec-csp/</a>
+   <dt id="biblio-ecmascript">[ECMASCRIPT]
+   <dd><a href="https://tc39.es/ecma262/multipage/"><cite>ECMAScript Language Specification</cite></a>. URL: <a href="https://tc39.es/ecma262/multipage/">https://tc39.es/ecma262/multipage/</a>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-infra">[INFRA]
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
-   <dt id="biblio-trusted-types">[TRUSTED-TYPES]
+   <dt id="biblio-trusted-types">[Trusted-Types]
    <dd>Krzysztof Kotowicz. <a href="https://w3c.github.io/trusted-types/dist/spec/"><cite>Trusted Types</cite></a>. URL: <a href="https://w3c.github.io/trusted-types/dist/spec/">https://w3c.github.io/trusted-types/dist/spec/</a>
+   <dt id="biblio-webidl">[WEBIDL]
+   <dd>Edgar Chen; Timothy Gu. <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
@@ -2573,11 +2864,15 @@ the following algorithm returns "<code>Sufficient</code>":
    <dd>Mike West. <a href="https://github.com/mikewest/securer-contexts"><cite>Securer Contexts</cite></a>. URL: <a href="https://github.com/mikewest/securer-contexts">https://github.com/mikewest/securer-contexts</a>
    <dt id="biblio-strict-csp">[STRICT-CSP]
    <dd>Lukas Weichselbaum. <a href="https://web.dev/strict-csp/"><cite>Mitigate cross-site scripting (XSS) with a strict Content Security Policy (CSP)</cite></a>. 15 March 2021. URL: <a href="https://web.dev/strict-csp/">https://web.dev/strict-csp/</a>
-   <dt id="biblio-webidl">[WEBIDL]
-   <dd>Edgar Chen; Timothy Gu. <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
+   <dt id="biblio-webusb">[WebUSB]
+   <dd><a href="https://wicg.github.io/webusb/"><cite>WebUSB API</cite></a>. cg-draft. URL: <a href="https://wicg.github.io/webusb/">https://wicg.github.io/webusb/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
+   <div class="issue"> It might be reasonable to parameterize this attribute, either because we think that
+a subset of the protections defined in this document are easier to deploy (e.g. strict CSP
+but not Trusted Types), or because we have different characteristics in mind for different
+contexts (e.g. <a href="https://github.com/WICG/isolated-web-apps/">Isolated Web Apps</a>). See issues <a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> below. <a class="issue-return" href="#issue-310401b6" title="Jump to section">↵</a></div>
    <div class="issue"> Is this necessary anymore? Chrome certainly has weird things like <a href="https://www.chromium.org/nativeclient/">Native Client</a>, at least in Chrome
 App and Extensions contexts. Those seem separable from the web, though. We
 should look into browser behavior here, as it might be possible to simplify
@@ -2791,27 +3086,59 @@ function parseHTML(markup) {
 let dfnPanelData = {
 "0204d188": {"dfnID":"0204d188","dfnText":"size","external":true,"refSections":[{"refs":[{"id":"ref-for-list-size"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-list-size\u2460"}],"title":"2.1.4. Does a policy sufficiently mitigate redirection?"}],"url":"https://infra.spec.whatwg.org/#list-size"},
 "0950067d": {"dfnID":"0950067d","dfnText":"host-source","external":true,"refSections":[{"refs":[{"id":"ref-for-grammardef-host-source"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"https://w3c.github.io/webappsec-csp/#grammardef-host-source"},
+"1422ec4e": {"dfnID":"1422ec4e","dfnText":"interface","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-interface"},{"id":"ref-for-dfn-interface\u2460"},{"id":"ref-for-dfn-interface\u2461"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-interface\u2462"},{"id":"ref-for-dfn-interface\u2463"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-interface"},
+"158b3a38": {"dfnID":"158b3a38","dfnText":"csp list","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-container-csp-list"}],"title":"2.2. HTML"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#policy-container-csp-list"},
 "16d07e10": {"dfnID":"16d07e10","dfnText":"for each","external":true,"refSections":[{"refs":[{"id":"ref-for-list-iterate"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"},{"refs":[{"id":"ref-for-list-iterate\u2460"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-list-iterate\u2461"}],"title":"2.1.4. Does a policy sufficiently mitigate redirection?"},{"refs":[{"id":"ref-for-list-iterate\u2462"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"},{"refs":[{"id":"ref-for-list-iterate\u2463"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://infra.spec.whatwg.org/#list-iterate"},
+"1c84257e": {"dfnID":"1c84257e","dfnText":"interface member","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-interface-member"},{"id":"ref-for-dfn-interface-member\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-interface-member"},
+"2039631f": {"dfnID":"2039631f","dfnText":"namespace","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-namespace"},{"id":"ref-for-dfn-namespace\u2460"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-namespace\u2461"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-namespace"},
+"22e6d952": {"dfnID":"22e6d952","dfnText":"members","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-member"},{"id":"ref-for-dfn-member\u2460"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-member\u2461"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-member"},
+"2f83c241": {"dfnID":"2f83c241","dfnText":"partial namespace","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-partial-namespace"},{"id":"ref-for-dfn-partial-namespace\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-partial-namespace"},
+"33e1d425": {"dfnID":"33e1d425","dfnText":"partial interface mixin","external":true,"refSections":[{"refs":[{"id":"ref-for-partial-interface-mixin"},{"id":"ref-for-partial-interface-mixin\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#partial-interface-mixin"},
 "36858240": {"dfnID":"36858240","dfnText":"boolean","external":true,"refSections":[{"refs":[{"id":"ref-for-boolean"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"https://infra.spec.whatwg.org/#boolean"},
 "3d7ed2c2": {"dfnID":"3d7ed2c2","dfnText":"directive set","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-directive-set"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-policy-directive-set\u2460"}],"title":"2.1.4. Does a policy sufficiently mitigate redirection?"},{"refs":[{"id":"ref-for-policy-directive-set\u2461"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://w3c.github.io/webappsec-csp/#policy-directive-set"},
+"3e12e042": {"dfnID":"3e12e042","dfnText":"environment settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-environment-settings-object"},{"id":"ref-for-environment-settings-object\u2460"}],"title":"2.2. HTML"},{"refs":[{"id":"ref-for-environment-settings-object\u2461"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object"},
+"3f252540": {"dfnID":"3f252540","dfnText":"extended attribute","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-extended-attribute"},{"id":"ref-for-dfn-extended-attribute\u2460"},{"id":"ref-for-dfn-extended-attribute\u2461"},{"id":"ref-for-dfn-extended-attribute\u2462"},{"id":"ref-for-dfn-extended-attribute\u2463"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-extended-attribute"},
 "4582ec82": {"dfnID":"4582ec82","dfnText":"disposition","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-disposition"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"},{"refs":[{"id":"ref-for-policy-disposition\u2460"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-policy-disposition\u2461"}],"title":"2.1.4. Does a policy sufficiently mitigate redirection?"},{"refs":[{"id":"ref-for-policy-disposition\u2462"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"},{"refs":[{"id":"ref-for-policy-disposition\u2463"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://w3c.github.io/webappsec-csp/#policy-disposition"},
 "461b765a": {"dfnID":"461b765a","dfnText":"value","external":true,"refSections":[{"refs":[{"id":"ref-for-directive-value"},{"id":"ref-for-directive-value\u2460"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-directive-value\u2461"},{"id":"ref-for-directive-value\u2462"}],"title":"2.1.4. Does a policy sufficiently mitigate redirection?"},{"refs":[{"id":"ref-for-directive-value\u2463"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"},{"refs":[{"id":"ref-for-directive-value\u2464"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://w3c.github.io/webappsec-csp/#directive-value"},
-"473036cd": {"dfnID":"473036cd","dfnText":"cross-origin isolated capability","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-cross-origin-isolated-capability"}],"title":"1. Introduction"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-cross-origin-isolated-capability"},
+"473036cd": {"dfnID":"473036cd","dfnText":"cross-origin isolated capability","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-cross-origin-isolated-capability"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-concept-settings-object-cross-origin-isolated-capability\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-cross-origin-isolated-capability"},
 "4945e6fc": {"dfnID":"4945e6fc","dfnText":"nonce-source","external":true,"refSections":[{"refs":[{"id":"ref-for-grammardef-nonce-source"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"https://w3c.github.io/webappsec-csp/#grammardef-nonce-source"},
 "51218496": {"dfnID":"51218496","dfnText":"name","external":true,"refSections":[{"refs":[{"id":"ref-for-directive-name"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-directive-name\u2460"}],"title":"2.1.4. Does a policy sufficiently mitigate redirection?"},{"refs":[{"id":"ref-for-directive-name\u2461"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://w3c.github.io/webappsec-csp/#directive-name"},
+"54872557": {"dfnID":"54872557","dfnText":"source","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-source"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"https://w3c.github.io/webappsec-csp/#policy-source"},
 "550c8676": {"dfnID":"550c8676","dfnText":"hash-source","external":true,"refSections":[{"refs":[{"id":"ref-for-grammardef-hash-source"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"https://w3c.github.io/webappsec-csp/#grammardef-hash-source"},
-"65181da8": {"dfnID":"65181da8","dfnText":"secure context","external":true,"refSections":[{"refs":[{"id":"ref-for-secure-context"}],"title":"1. Introduction"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context"},
-"6eb8a5d8": {"dfnID":"6eb8a5d8","dfnText":"document base url","external":true,"refSections":[{"refs":[{"id":"ref-for-document-base-url"}],"title":"2.1. Content Security Policy"}],"url":"https://html.spec.whatwg.org/multipage/urls-and-fetching.html#document-base-url"},
+"5be3b9a5": {"dfnID":"5be3b9a5","dfnText":"namespace member","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-namespace-member"},{"id":"ref-for-dfn-namespace-member\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-namespace-member"},
+"5dcb6b9f": {"dfnID":"5dcb6b9f","dfnText":"idl fragment","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-idl-fragment"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-idl-fragment"},
+"631ad9e6": {"dfnID":"631ad9e6","dfnText":"exposure set","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-exposure-set"},{"id":"ref-for-dfn-exposure-set\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-exposure-set"},
+"64b89595": {"dfnID":"64b89595","dfnText":"meta","external":true,"refSections":[{"refs":[{"id":"ref-for-meta"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://html.spec.whatwg.org/multipage/semantics.html#meta"},
+"65181da8": {"dfnID":"65181da8","dfnText":"secure context","external":true,"refSections":[{"refs":[{"id":"ref-for-secure-context"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-secure-context\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context"},
+"6eb8a5d8": {"dfnID":"6eb8a5d8","dfnText":"document base url","external":true,"refSections":[{"refs":[{"id":"ref-for-document-base-url"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://html.spec.whatwg.org/multipage/urls-and-fetching.html#document-base-url"},
 "76a07ab2": {"dfnID":"76a07ab2","dfnText":"Get fetch directive fallback list","external":true,"refSections":[{"refs":[{"id":"ref-for-directive-fallback-list"}],"title":"2.1.2. Obtain the active directive for a type"}],"url":"https://w3c.github.io/webappsec-csp/#directive-fallback-list"},
 "78b596f6": {"dfnID":"78b596f6","dfnText":"csp list","external":true,"refSections":[{"refs":[{"id":"ref-for-csp-list"}],"title":"2.1. Content Security Policy"},{"refs":[{"id":"ref-for-csp-list\u2460"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"https://w3c.github.io/webappsec-csp/#csp-list"},
+"7deb6835": {"dfnID":"7deb6835","dfnText":"settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-realm-settings-object"},{"id":"ref-for-concept-realm-settings-object\u2460"},{"id":"ref-for-concept-realm-settings-object\u2461"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-settings-object"},
 "7f9469b5": {"dfnID":"7f9469b5","dfnText":"ascii case-insensitive","external":true,"refSections":[{"refs":[{"id":"ref-for-ascii-case-insensitive"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-ascii-case-insensitive\u2460"}],"title":"2.1.4. Does a policy sufficiently mitigate redirection?"},{"refs":[{"id":"ref-for-ascii-case-insensitive\u2461"},{"id":"ref-for-ascii-case-insensitive\u2462"},{"id":"ref-for-ascii-case-insensitive\u2463"},{"id":"ref-for-ascii-case-insensitive\u2464"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"},{"refs":[{"id":"ref-for-ascii-case-insensitive\u2465"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://infra.spec.whatwg.org/#ascii-case-insensitive"},
+"843fcc5a": {"dfnID":"843fcc5a","dfnText":"takes no arguments","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-xattr-no-arguments"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-xattr-no-arguments"},
+"8a30477b": {"dfnID":"8a30477b","dfnText":"global object","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-global"}],"title":"2.2. HTML"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-global"},
+"InjectionMitigated": {"dfnID":"InjectionMitigated","dfnText":"2.3.1. [InjectionMitigated]","external":false,"refSections":[{"refs":[{"id":"ref-for-InjectionMitigated"},{"id":"ref-for-InjectionMitigated"},{"id":"ref-for-InjectionMitigated\u2460"},{"id":"ref-for-InjectionMitigated\u2461"},{"id":"ref-for-InjectionMitigated\u2462"},{"id":"ref-for-InjectionMitigated\u2463"},{"id":"ref-for-InjectionMitigated\u2464"},{"id":"ref-for-InjectionMitigated\u2465"},{"id":"ref-for-InjectionMitigated\u2466"},{"id":"ref-for-InjectionMitigated\u2467"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-InjectionMitigated\u2468"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"},{"refs":[{"id":"ref-for-InjectionMitigated\u2460\u24ea"}],"title":"3.2. What APIs should be marked as [InjectionMitigated]?"}],"url":"#InjectionMitigated"},
+"a5f015e3": {"dfnID":"a5f015e3","dfnText":"realm","external":true,"refSections":[{"refs":[{"id":"ref-for-realm"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#realm"},
 "abstract-opdef-obtain-directive": {"dfnID":"abstract-opdef-obtain-directive","dfnText":"obtain\nthe active directive","external":false,"refSections":[{"refs":[{"id":"ref-for-abstract-opdef-obtain-directive"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-abstract-opdef-obtain-directive\u2460"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"#abstract-opdef-obtain-directive"},
 "ae8def21": {"dfnID":"ae8def21","dfnText":"contain","external":true,"refSections":[{"refs":[{"id":"ref-for-list-contain"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-list-contain\u2460"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://infra.spec.whatwg.org/#list-contain"},
+"b197a79c": {"dfnID":"b197a79c","dfnText":"callback interface","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-callback-interface"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-callback-interface\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-callback-interface"},
+"b75bb3bd": {"dfnID":"b75bb3bd","dfnText":"SecureContext","external":true,"refSections":[{"refs":[{"id":"ref-for-SecureContext"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"},{"refs":[{"id":"ref-for-SecureContext\u2460"}],"title":"3.2. What APIs should be marked as [InjectionMitigated]?"}],"url":"https://webidl.spec.whatwg.org/#SecureContext"},
+"bac9095f": {"dfnID":"bac9095f","dfnText":"operation","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-operation"},{"id":"ref-for-dfn-operation\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-operation"},
+"bd1db03d": {"dfnID":"bd1db03d","dfnText":"policy container","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-policy-container"}],"title":"2.2. HTML"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container"},
+"c71e04da": {"dfnID":"c71e04da","dfnText":"overloaded","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-overloaded"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-overloaded"},
 "c80aa797": {"dfnID":"c80aa797","dfnText":"directives","external":true,"refSections":[{"refs":[{"id":"ref-for-directives"}],"title":"2.1.2. Obtain the active directive for a type"}],"url":"https://w3c.github.io/webappsec-csp/#directives"},
-"c847111b": {"dfnID":"c847111b","dfnText":"base","external":true,"refSections":[{"refs":[{"id":"ref-for-the-base-element"}],"title":"2.1. Content Security Policy"}],"url":"https://html.spec.whatwg.org/multipage/semantics.html#the-base-element"},
-"csp-list-meaningfully-mitigate-injection-attacks": {"dfnID":"csp-list-meaningfully-mitigate-injection-attacks","dfnText":"meaningfully mitigate injection attacks","external":false,"refSections":[],"url":"#csp-list-meaningfully-mitigate-injection-attacks"},
+"c847111b": {"dfnID":"c847111b","dfnText":"base","external":true,"refSections":[{"refs":[{"id":"ref-for-the-base-element"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://html.spec.whatwg.org/multipage/semantics.html#the-base-element"},
+"cc2141c1": {"dfnID":"cc2141c1","dfnText":"CrossOriginIsolated","external":true,"refSections":[{"refs":[{"id":"ref-for-CrossOriginIsolated"},{"id":"ref-for-CrossOriginIsolated\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#CrossOriginIsolated"},
+"csp-list-csp-list-mitigate-injection": {"dfnID":"csp-list-csp-list-mitigate-injection","dfnText":"meaningfully\nmitigate injection attacks","external":false,"refSections":[{"refs":[{"id":"ref-for-csp-list-csp-list-mitigate-injection"}],"title":"2.2. HTML"}],"url":"#csp-list-csp-list-mitigate-injection"},
+"d08c79a9": {"dfnID":"d08c79a9","dfnText":"interface mixin","external":true,"refSections":[{"refs":[{"id":"ref-for-interface-mixin"},{"id":"ref-for-interface-mixin\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#interface-mixin"},
+"d0eba3fd": {"dfnID":"d0eba3fd","dfnText":"partial interface","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-partial-interface"},{"id":"ref-for-dfn-partial-interface\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-partial-interface"},
 "d4ec2d19": {"dfnID":"d4ec2d19","dfnText":"scheme-source","external":true,"refSections":[{"refs":[{"id":"ref-for-grammardef-scheme-source"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"https://w3c.github.io/webappsec-csp/#grammardef-scheme-source"},
+"d7a206d7": {"dfnID":"d7a206d7","dfnText":"interface mixin member","external":true,"refSections":[{"refs":[{"id":"ref-for-interface-mixin-member"},{"id":"ref-for-interface-mixin-member\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#interface-mixin-member"},
+"d9659204": {"dfnID":"d9659204","dfnText":"conditionally exposed","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-conditionally-exposed"},{"id":"ref-for-dfn-conditionally-exposed\u2460"},{"id":"ref-for-dfn-conditionally-exposed\u2461"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-conditionally-exposed"},
 "de921304": {"dfnID":"de921304","dfnText":"policy","external":true,"refSections":[{"refs":[{"id":"ref-for-violation-policy"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-violation-policy\u2460"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-violation-policy\u2461"}],"title":"2.1.4. Does a policy sufficiently mitigate redirection?"},{"refs":[{"id":"ref-for-violation-policy\u2462"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"},{"refs":[{"id":"ref-for-violation-policy\u2463"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://w3c.github.io/webappsec-csp/#violation-policy"},
+"dfn-exposed": {"dfnID":"dfn-exposed","dfnText":"exposed","external":false,"refSections":[{"refs":[{"id":"ref-for-dfn-exposed"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-exposed\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"#dfn-exposed"},
+"eab3771a": {"dfnID":"eab3771a","dfnText":"inherit","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-inherit"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-inherit"},
+"environment-settings-object-meaningfully-mitigate-injection-attacks": {"dfnID":"environment-settings-object-meaningfully-mitigate-injection-attacks","dfnText":"meaningfully mitigate injection attacks","external":false,"refSections":[{"refs":[{"id":"ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"#environment-settings-object-meaningfully-mitigate-injection-attacks"},
 "f937b7b6": {"dfnID":"f937b7b6","dfnText":"continue","external":true,"refSections":[{"refs":[{"id":"ref-for-iteration-continue"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"https://infra.spec.whatwg.org/#iteration-continue"},
 "policy-sufficiently-mitigates-dom-sinks": {"dfnID":"policy-sufficiently-mitigates-dom-sinks","dfnText":"sufficiently mitigates DOM sinks","external":false,"refSections":[{"refs":[{"id":"ref-for-policy-sufficiently-mitigates-dom-sinks"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"#policy-sufficiently-mitigates-dom-sinks"},
 "policy-sufficiently-mitigates-plugins": {"dfnID":"policy-sufficiently-mitigates-plugins","dfnText":"sufficiently mitigates plugins","external":false,"refSections":[{"refs":[{"id":"ref-for-policy-sufficiently-mitigates-plugins"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"#policy-sufficiently-mitigates-plugins"},
@@ -3205,14 +3532,24 @@ function genLinkingSyntaxes(dfn) {
 "use strict";
 {
 let refsData = {
+"#InjectionMitigated": {"export":true,"for_":[],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"InjectionMitigated","type":"extended-attribute","url":"#InjectionMitigated"},
 "#abstract-opdef-obtain-directive": {"export":true,"for_":[],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"obtain-directive","type":"abstract-op","url":"#abstract-opdef-obtain-directive"},
+"#csp-list-csp-list-mitigate-injection": {"export":true,"for_":["CSP list"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"csp-list-mitigate-injection","type":"dfn","url":"#csp-list-csp-list-mitigate-injection"},
+"#dfn-exposed": {"export":true,"for_":[],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"exposed","type":"dfn","url":"#dfn-exposed"},
+"#environment-settings-object-meaningfully-mitigate-injection-attacks": {"export":true,"for_":["environment settings object"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"meaningfully mitigate injection attacks","type":"dfn","url":"#environment-settings-object-meaningfully-mitigate-injection-attacks"},
 "#policy-sufficiently-mitigates-dom-sinks": {"export":true,"for_":["policy"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"sufficiently mitigates dom sinks","type":"dfn","url":"#policy-sufficiently-mitigates-dom-sinks"},
 "#policy-sufficiently-mitigates-plugins": {"export":true,"for_":["policy"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"sufficiently mitigates plugins","type":"dfn","url":"#policy-sufficiently-mitigates-plugins"},
 "#policy-sufficiently-mitigates-redirection": {"export":true,"for_":["policy"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"sufficiently mitigates redirection","type":"dfn","url":"#policy-sufficiently-mitigates-redirection"},
 "#policy-sufficiently-mitigates-script-execution": {"export":true,"for_":["policy"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"sufficiently mitigates script execution","type":"dfn","url":"#policy-sufficiently-mitigates-script-execution"},
+"https://html.spec.whatwg.org/multipage/browsers.html#policy-container-csp-list": {"export":true,"for_":["policy container"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"csp list","type":"dfn","url":"https://html.spec.whatwg.org/multipage/browsers.html#policy-container-csp-list"},
+"https://html.spec.whatwg.org/multipage/semantics.html#meta": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"meta","type":"element","url":"https://html.spec.whatwg.org/multipage/semantics.html#meta"},
 "https://html.spec.whatwg.org/multipage/semantics.html#the-base-element": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"base","type":"element","url":"https://html.spec.whatwg.org/multipage/semantics.html#the-base-element"},
 "https://html.spec.whatwg.org/multipage/urls-and-fetching.html#document-base-url": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"document base url","type":"dfn","url":"https://html.spec.whatwg.org/multipage/urls-and-fetching.html#document-base-url"},
+"https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-settings-object": {"export":true,"for_":["realm"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"settings object","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-settings-object"},
 "https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-cross-origin-isolated-capability": {"export":true,"for_":["environment settings object"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"cross-origin isolated capability","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-cross-origin-isolated-capability"},
+"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-global": {"export":true,"for_":["environment settings object"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"global object","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-global"},
+"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container": {"export":true,"for_":["environment settings object"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"policy container","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container"},
+"https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"environment settings object","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object"},
 "https://html.spec.whatwg.org/multipage/webappapis.html#secure-context": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"secure context","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context"},
 "https://infra.spec.whatwg.org/#ascii-case-insensitive": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"ascii case-insensitive","type":"dfn","url":"https://infra.spec.whatwg.org/#ascii-case-insensitive"},
 "https://infra.spec.whatwg.org/#boolean": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"boolean","type":"dfn","url":"https://infra.spec.whatwg.org/#boolean"},
@@ -3220,6 +3557,7 @@ let refsData = {
 "https://infra.spec.whatwg.org/#list-contain": {"export":true,"for_":["list","stack","queue","set"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"contain","type":"dfn","url":"https://infra.spec.whatwg.org/#list-contain"},
 "https://infra.spec.whatwg.org/#list-iterate": {"export":true,"for_":["list","set"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"for each","type":"dfn","url":"https://infra.spec.whatwg.org/#list-iterate"},
 "https://infra.spec.whatwg.org/#list-size": {"export":true,"for_":["list","stack","queue","set"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"size","type":"dfn","url":"https://infra.spec.whatwg.org/#list-size"},
+"https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#realm": {"export":true,"for_":["ECMAScript"],"level":"1","normative":true,"shortname":"ecmascript","spec":"ecmascript","status":"current","text":"realm","type":"dfn","url":"https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#realm"},
 "https://w3c.github.io/webappsec-csp/#csp-list": {"export":true,"for_":[],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"csp list","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#csp-list"},
 "https://w3c.github.io/webappsec-csp/#directive-fallback-list": {"export":true,"for_":[],"level":"","normative":true,"shortname":"csp3","spec":"csp3","status":"anchor-block","text":"Get fetch directive fallback list","type":"abstract-op","url":"https://w3c.github.io/webappsec-csp/#directive-fallback-list"},
 "https://w3c.github.io/webappsec-csp/#directive-name": {"export":true,"for_":["directive"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"name","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#directive-name"},
@@ -3231,7 +3569,29 @@ let refsData = {
 "https://w3c.github.io/webappsec-csp/#grammardef-scheme-source": {"export":true,"for_":[],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"scheme-source","type":"grammar","url":"https://w3c.github.io/webappsec-csp/#grammardef-scheme-source"},
 "https://w3c.github.io/webappsec-csp/#policy-directive-set": {"export":true,"for_":["policy"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"directive set","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#policy-directive-set"},
 "https://w3c.github.io/webappsec-csp/#policy-disposition": {"export":true,"for_":["policy"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"disposition","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#policy-disposition"},
+"https://w3c.github.io/webappsec-csp/#policy-source": {"export":true,"for_":["policy"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"source","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#policy-source"},
 "https://w3c.github.io/webappsec-csp/#violation-policy": {"export":true,"for_":["violation"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"policy","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#violation-policy"},
+"https://webidl.spec.whatwg.org/#CrossOriginIsolated": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"CrossOriginIsolated","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#CrossOriginIsolated"},
+"https://webidl.spec.whatwg.org/#SecureContext": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"SecureContext","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#SecureContext"},
+"https://webidl.spec.whatwg.org/#dfn-callback-interface": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"callback interface","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-callback-interface"},
+"https://webidl.spec.whatwg.org/#dfn-conditionally-exposed": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"conditionally exposed","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-conditionally-exposed"},
+"https://webidl.spec.whatwg.org/#dfn-exposure-set": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"exposure set","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-exposure-set"},
+"https://webidl.spec.whatwg.org/#dfn-extended-attribute": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"extended attribute","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-extended-attribute"},
+"https://webidl.spec.whatwg.org/#dfn-idl-fragment": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"idl fragment","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-idl-fragment"},
+"https://webidl.spec.whatwg.org/#dfn-inherit": {"export":true,"for_":["interface"],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"inherit","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-inherit"},
+"https://webidl.spec.whatwg.org/#dfn-interface": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"interface","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-interface"},
+"https://webidl.spec.whatwg.org/#dfn-interface-member": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"interface member","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-interface-member"},
+"https://webidl.spec.whatwg.org/#dfn-member": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"members","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-member"},
+"https://webidl.spec.whatwg.org/#dfn-namespace": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"namespace","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-namespace"},
+"https://webidl.spec.whatwg.org/#dfn-namespace-member": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"namespace member","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-namespace-member"},
+"https://webidl.spec.whatwg.org/#dfn-operation": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"operation","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-operation"},
+"https://webidl.spec.whatwg.org/#dfn-overloaded": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"overloaded","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-overloaded"},
+"https://webidl.spec.whatwg.org/#dfn-partial-interface": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"partial interface","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-partial-interface"},
+"https://webidl.spec.whatwg.org/#dfn-partial-namespace": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"partial namespace","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-partial-namespace"},
+"https://webidl.spec.whatwg.org/#dfn-xattr-no-arguments": {"export":true,"for_":["extended attribute"],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"takes no arguments","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-xattr-no-arguments"},
+"https://webidl.spec.whatwg.org/#interface-mixin": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"interface mixin","type":"dfn","url":"https://webidl.spec.whatwg.org/#interface-mixin"},
+"https://webidl.spec.whatwg.org/#interface-mixin-member": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"interface mixin member","type":"dfn","url":"https://webidl.spec.whatwg.org/#interface-mixin-member"},
+"https://webidl.spec.whatwg.org/#partial-interface-mixin": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"partial interface mixin","type":"dfn","url":"https://webidl.spec.whatwg.org/#partial-interface-mixin"},
 };
 
 function mkRefHint(link, ref) {

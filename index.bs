@@ -17,6 +17,8 @@ Markup Shorthands: markdown yes, css no
 <pre class=link-defaults>
 spec:csp3; type:dfn; for:/; text:csp list
 spec:infra; type:dfn; for:list; text:for each
+spec:webidl; type:dfn; text:namespace
+spec:ecmascript; type:dfn; for:ECMAScript; text:realm
 </pre>
 <pre class=anchors>
 urlPrefix: https://w3c.github.io/webappsec-csp/; spec:CSP3
@@ -53,15 +55,11 @@ This is a monkey-patch spec meant to outline the changes necessary to define an
 attributes, methods, etc. to those context which sufficiently mitigate various
 forms of injection attack.
 
-Ideally, this constraint would be applied to any API that required user
-mediation, as users' intent to grant a particular privilege to a particular
-origin is deeply undermined if that origin can be tricked into executing an
-attacker's code.
+[[#impl-csp]] and [[#impl-apis]] provide useful context for the kinds of
+mitigation this document proposes, and the ways in which those mitigations
+ought to restrict the set of capabilities we offer to web developers.
 
-Realistically, we'll pick our battles.
-
-In any event, this document sketches the following modifications to three
-specifications:
+This document sketches the following modifications to three specifications:
 
 *   [[CSP]] will define the characteristics of a policy that's robust enough to
     meaningfully defend against attack. It builds on what we've learned from
@@ -84,47 +82,22 @@ Monkey Patches {#monkey}
 Content Security Policy {#monkey-csp}
 -----------------------
 
-In [[CSP]], we'll define a way of evaluating the strength of the amalgamation of
-policies contained within a [=CSP list=]. We're aiming for four characteristics:
+In [[CSP]], we'll define an algorithm for evaluating the strength of the
+amalgamation of policies contained within a [=CSP list=]. We'll define a
+few supporting algorithms as well, but [[#meaningful-injection-mitigation]]
+is the core entry point CSP will expose to HTML.
 
-1.  At least one of the policies in the list enforces a restriction on plugin
-    content via `object-src 'none'`.
-
-    ISSUE: Is this necessary anymore? Chrome certainly has weird things like
-    [Native Client](https://www.chromium.org/nativeclient/), at least in Chrome
-    App and Extensions contexts. Those seem separable from the web, though. We
-    should look into browser behavior here, as it might be possible to simplify
-    the recommendation.
-
-2.  At least one of the policies in the list enforces a restriction on modifying
-    the [=document base URL=] via `base-uri 'none'` or `base-uri 'self'`. This
-    prevents attackers from injecting a <{base}> element that could maliciously
-    push scripts specified with relative URLs (e.g. `<script src="/app.js">`)
-    out to an attacker-controlled server.
-
-3.  At least one of the policies in the list enforces a restriction on script
-    execution that relies on nonces and/or hashes rather than URLs. Research
-    like [[long-live-csp]] has shown URL-based allowlisting to be quite
-    ineffective at creating meaningful protection, while content-based
-    allowlisting (hashes) or element tagging (nonces) are far more robust.
-
-4.  At least one of the policies in the list enforces [[Trusted-Types]] via
-    `require-trusted-types-for 'script'`.
-
-    ISSUE: It might be helpful for deployment to make this last requirement
-    optional while user agents are still in the process of implementing bits
-    and pieces of trusted types. We could parameterize the IDL attribute, for
-    example (e.g. `[InjectionMitigated=Basic]` vs
-    `[InjectionMitigated=RequireTrustedTypes]`), though I've no idea how we'd
-    spell out a meaningful bar that would allow folks creating APIs to decide
-    which they'd prefer.
+Note: [[#impl-csp]] explains and justifies the threat model and constraints we
+believe are necessary to address it.
 
 ### Does a policy meaningfully mitigate injection attacks? ### {#meaningful-injection-mitigation}
 
 <div algorithm="meaningfully mitigates injection">
-With the above characteristics in mind, a [=CSP list=] |policies| is said to
-<dfn for="CSP list" export>meaningfully mitigate injection attacks</dfn> if the
-following algorithm returns "`Sufficient`":
+With the characteristics described in [[#impl-csp]] in mind, a [=CSP list=]
+|policies| is said to
+<dfn for="CSP list" export lt="csp-list-mitigate-injection">meaningfully
+mitigate injection attacks</dfn> if the following algorithm returns
+"`Meaningful`":
 
 <ol class="algorithm">
     1.  Let |meets object requirements|, |meets base requirements|,
@@ -133,7 +106,8 @@ following algorithm returns "`Sufficient`":
 
     1.  [=For each=] |policy| in |policies|:
 
-        1.  If |policy|'s [=policy/disposition=] is not "`enforce`",
+        1.  If |policy|'s [=policy/disposition=] is not "`enforce`" or
+            |policy|'s [=policy/source=] is not "`header`",
             [=iteration/continue=].
 
         1.  If |policy| [=policy/sufficiently mitigates plugins=], set
@@ -148,11 +122,11 @@ following algorithm returns "`Sufficient`":
         1.  If |policy| [=policy/sufficiently mitigates DOM sinks=], set
             |meets trusted type requirements| to `true`. 
 
-    1.  Return "`Sufficient`" if |meets object requirements|,
+    1.  Return "`Meaningful`" if |meets object requirements|,
         |meets base requirements|, |meets script requirements|, and
         |meets trusted type requirements| are all `true`.
 
-    1. Return "`Not sufficient`".
+    1. Return "`Not meaningful enough`".
 </ol>
 </div>
 
@@ -297,3 +271,204 @@ if the following algorithm returns "`Sufficient`":
 Note: This algorithm does not distinguish between policies with a
 [=policy/disposition=] of "`enforce`" or "`report`".
 </div>
+
+HTML {#monkey-html}
+----
+
+In HTML, we'll use the algorithms described in [[#monkey-csp]] to define characteristics
+of the [=environment settings object=] that will be examined from [[WEBIDL]] when
+determining whether or not a given IDL construct is exposed on the associated
+[=environment settings object/global object=].
+
+<div algorithm="environment settings object mitigates injection">
+An [=environment settings object=] is said to
+<dfn for="environment settings object" export>meaningfully mitigate injection attacks</dfn> if its
+[=environment settings object/policy container=]'s [=policy container/CSP list=]
+<a lt="csp-list-mitigate-injection">meaningfully mitigates injection attacks</a>.
+
+Note: Because the definition of meaningful injection mitigation for a CSP list depends only upon
+the header-delivered policies, this property will not mutate during an environment's lifetime.
+</div>
+
+WebIDL {#monkey-webidl}
+------
+
+In WebIDL, we'll define the `[InjectionMitigated]` attribute, and wire it up to the hook created
+in HTML above:
+
+<h4 id="InjectionMitigated" extended-attribute lt="InjectionMitigated">[InjectionMitigated]</h4>
+
+If the [{{InjectionMitigated}}] [=extended attribute=] appears on an
+[=interface=],
+[=partial interface=],
+[=interface mixin=],
+[=partial interface mixin=],
+[=callback interface=],
+[=namespace=],
+[=partial namespace=],
+[=interface member=],
+[=interface mixin member=], or
+[=namespace member=],
+it indicates that the construct is [=exposed=] only within an environment which can
+[=environment settings object/meaningfully mitigate injection attacks=]. The
+[{{InjectionMitigated}}] extended attribute must not be used on any other construct.
+
+The [{{InjectionMitigated}}] extended attribute must [=takes no arguments|take no arguments=].
+
+ISSUE: It might be reasonable to parameterize this attribute, either because we think that
+a subset of the protections defined in this document are easier to deploy (e.g. strict CSP
+but not Trusted Types), or because we have different characteristics in mind for different
+contexts (e.g. [Isolated Web Apps](https://github.com/WICG/isolated-web-apps/)). See issues
+[[#impl-csp]] below.
+
+If [{{InjectionMitigated}}] appears on an [=overloaded=] [=operation=],
+then it must appear on all overloads.
+
+The [{{InjectionMitigated}}] [=extended attribute=] must not be specified both on
+
+* an [=interface member=] and its [=interface=] or [=partial interface=];
+* an [=interface mixin member=] and its [=interface mixin=] or [=partial interface mixin=];
+* a [=namespace member=] and its [=namespace=] or [=partial namespace=].
+
+Note: This is because adding the [{{InjectionMitigated}}] [=extended attribute=] on a [=member=]
+when its containing definition is also annotated with the [{{InjectionMitigated}}]
+[=extended attribute=] does not further restrict the exposure of the [=member=].
+
+An [=interface=] without the [{{InjectionMitigated}}] [=extended attribute=]
+must not [=interface/inherit=] from another interface
+that does specify [{{InjectionMitigated}}].
+
+<div class="example" id="its-an-example">
+    The following [=IDL fragment=] defines an interface with one [=operation=] that is executable
+    from all contexts, and two which are executable only from contexts with meaningful injection
+    attack mitigation:
+
+    <pre highlight="webidl">
+        [Exposed=Window]
+        interface ExampleFeature {
+          // This call will succeed in all contexts.
+          Promise &lt;Result&gt; doBoringThing();
+
+          // This operation will not be exposed to context that lacks sufficient mitigation against
+          // injection attack. In such a context, there will be no "doPowerfulThing" property on
+          // ExampleFeature.prototype.
+          [InjectionMitigated] Promise&lt;Result&gt; doPowerfulThing();
+
+          // The same applies here: the attribute will not be exposed to an unprotected context,
+          // and in such a context there will be no "secretBoolean" property on
+          // ExampleFeature.prototype.
+          [InjectionMitigated] readonly attribute boolean secretBoolean;
+        };
+    </pre>
+</div>
+
+### Patches to the "exposed" algorithm ### {#monkey-webidl-exposed}
+
+WebIDL's [=exposed=] algorithm is adjusted as follows, adding a single step after
+similarly handling [{{CrossOriginIsolated}}] (step 4 below).
+
+<div algorithm>
+    An [=interface=], [=callback interface=], [=namespace=], or [=member=] |construct| is
+    <dfn id="dfn-exposed" export>exposed</dfn> in a given [=realm=] |realm| if the following steps
+    return true:
+
+    <ol>
+        <li>If |construct|'s [=exposure set=] is not <code>*</code>, and |realm|.\[[GlobalObject]] does not implement an [=interface=] that is in |construct|'s [=exposure set=], then return false.</li>
+        <li>If |realm|'s [=realm/settings object=] is not a [=secure context=], and |construct| is [=conditionally exposed=] on [{{SecureContext}}], then return false.</li>
+        <li>If |realm|'s [=realm/settings object=]'s [=environment settings object/cross-origin isolated capability=] is false, and |construct| is [=conditionally exposed=] on [{{CrossOriginIsolated}}], then return false.</li>
+        <li><ins>
+            If |realm|'s [=realm/settings object=]'s does not
+            [=environment settings object/meaningfully mitigate injection attacks=], and |construct|
+            is [=conditionally exposed=] on [{{InjectionMitigated}}], then return `false`.
+        </ins></li>
+        <li>Return true.
+    </ol>
+</div>
+
+Implementation Considerations {#impl}
+=============================
+
+What defenses does `[InjectionMitigated]` require? {#impl-csp}
+--------------------------------------------------
+
+If we start from a threat model in which an attacker can cause a server to
+"reflect" unexpected content directly into the body of any given response,
+or manipulate the inputs to client-side code (DOM APIs and otherwise), we
+can point to five characteristics of a Content Security Policy that gives
+developers a reasonable chance of avoiding unexpected script execution:
+
+1.  At least one of the policies in the list enforces a restriction on plugin
+    content via `object-src 'none'`.
+
+    ISSUE: Is this necessary anymore? Chrome certainly has weird things like
+    [Native Client](https://www.chromium.org/nativeclient/), at least in Chrome
+    App and Extensions contexts. Those seem separable from the web, though. We
+    should look into browser behavior here, as it might be possible to simplify
+    the recommendation.
+
+2.  At least one of the policies in the list enforces a restriction on modifying
+    the [=document base URL=] via `base-uri 'none'` or `base-uri 'self'`. This
+    prevents attackers from injecting a <{base}> element that could maliciously
+    push scripts specified with relative URLs (e.g. `<script src="/app.js">`)
+    out to an attacker-controlled server.
+
+3.  At least one of the policies in the list enforces a restriction on script
+    execution that relies on nonces and/or hashes rather than URLs. Research
+    like [[long-live-csp]] has shown URL-based allowlisting to be quite
+    ineffective at creating meaningful protection, while content-based
+    allowlisting (hashes) or element tagging (nonces) are far more robust.
+
+    ISSUES: [Isolated Web Apps](https://github.com/WICG/isolated-web-apps/)
+    are an example of a context that can get away with a looser policy for
+    this aspect of the story (e.g. `script-src 'self'`) because of other
+    layers of injection mitigation (in this case the requirement that script
+    be staticly embedded in the app's package). Perhaps we should expand the
+    restriction to include that case as well?
+
+4.  At least one of the policies in the list enforces [[Trusted-Types]] via
+    `require-trusted-types-for 'script'`.
+
+    ISSUE: It might be helpful for deployment to make this last requirement
+    optional while user agents are still in the process of implementing bits
+    and pieces of trusted types. We could parameterize the IDL attribute, for
+    example (e.g. `[InjectionMitigated=Basic]` vs
+    `[InjectionMitigated=RequireTrustedTypes]`), though I've no idea how we'd
+    spell out a meaningful bar that would allow folks creating APIs to decide
+    which they'd prefer.
+
+5.  Each of the above characteristics is true in a way provably prior to any
+    potential code execution. This boils down to ensuring that the policies
+    creating the relevant constraints are delivered via headers that are applied
+    at the time the [=environment settings object=] is created, and are not
+    added later via <{meta}> tags.
+
+These characteristics aren't pulled from thin air, but are the result of a good
+deal of experimentation and research over the years since CSP was introduced.
+[[long-live-csp]] is a seminal paper on the topic.
+
+Policies matching these requirements are deployed at scale today, and are
+emperically proven to be fairly robust defenses.
+
+What APIs should be marked as `[InjectionMitigated]`? {#impl-apis}
+-----------------------------------------------------
+
+Ideally, we'd be able to apply [{{InjectionMitigated}}] broadly, covering a
+broad spectrum of capabilities to ensure that they're used for the purposes
+that users and developers alike might expect.
+
+Realistically, applying the attribute to existing APIs is going to be a
+difficult sell (similar to the introduction of the [{{SecureContext}}]
+attribute). We'll want to pick our battles.
+
+The highest-priority APIs are those that grant access to capabilities that sit
+somewhat outside the web's general origin-based security model. Device
+capabilities like [[WebUSB]], OS primitives like the clipboard, and user
+location are all good examples of powerful and potentially dangerous capabilites
+that we'd really like to ensure are used by the site to whom they're granted,
+and not to anyone who can trick the site into executing script.
+
+More broadly, any API that requires user permission seems like a valid target
+for this new attribute. When user agents gain confidence that code running on
+an origin is code that origin intended to execute, we can make a much more
+reasonable claim about the exclusivity associated with a user's choice to grant
+a capability to that origin, and thereby ship new capabilities more safely.
