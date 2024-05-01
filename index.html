@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version d765c696b, updated Fri Mar 8 15:58:52 2024 -0800" name="generator">
   <link href="https://mikewest.github.io/injection-mitigated/" rel="canonical">
-  <meta content="a6fe13ab1a832fcf5c38c2d8e6613fae53393df6" name="revision">
+  <meta content="22e2ea87aa7958fdbb51c9b54b810354cbf79fb1" name="revision">
   <meta content="dark light" name="color-scheme">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -2481,10 +2481,11 @@ in HTML above:</p>
 it indicates that the construct is <a data-link-type="dfn" href="#dfn-exposed" id="ref-for-dfn-exposed">exposed</a> only within an environment which can <a data-link-type="dfn" href="#environment-settings-object-meaningfully-mitigate-injection-attacks" id="ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks">meaningfully mitigate injection attacks</a>. The
 [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated①">InjectionMitigated</a></code>] extended attribute must not be used on any other construct.</p>
    <p>The [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated②">InjectionMitigated</a></code>] extended attribute must <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-xattr-no-arguments" id="ref-for-dfn-xattr-no-arguments">take no arguments</a>.</p>
-   <p class="issue" id="issue-310401b6"><a class="self-link" href="#issue-310401b6"></a> It might be reasonable to parameterize this attribute, either because we think that
+   <p class="issue" id="issue-9ed53645"><a class="self-link" href="#issue-9ed53645"></a> It might be reasonable to parameterize this attribute, either because we think that
 a subset of the protections defined in this document are easier to deploy (e.g. strict CSP
 but not Trusted Types), or because we have different characteristics in mind for different
-contexts (e.g. <a href="https://github.com/WICG/isolated-web-apps/">Isolated Web Apps</a>). See issues <a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> below.</p>
+contexts (e.g. <a href="https://github.com/WICG/isolated-web-apps/">Isolated Web Apps</a>). See the
+issues called out in <a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> below for more thoughts.</p>
    <p>If [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated③">InjectionMitigated</a></code>] appears on an <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-overloaded" id="ref-for-dfn-overloaded">overloaded</a> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-operation" id="ref-for-dfn-operation">operation</a>,
 then it must appear on all overloads.</p>
    <p>The [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated④">InjectionMitigated</a></code>] <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-extended-attribute" id="ref-for-dfn-extended-attribute①">extended attribute</a> must not be specified both on</p>
@@ -2562,7 +2563,7 @@ execution that relies on nonces and/or hashes rather than URLs. Research
 like <a data-link-type="biblio" href="#biblio-long-live-csp" title="CSP Is Dead, Long Live CSP! On the Insecurity of Whitelists and the Future of Content Security Policy">[long-live-csp]</a> has shown URL-based allowlisting to be quite
 ineffective at creating meaningful protection, while content-based
 allowlisting (hashes) or element tagging (nonces) are far more robust.</p>
-     <p>ISSUES: <a href="https://github.com/WICG/isolated-web-apps/">Isolated Web Apps</a> are an example of a context that can get away with a looser policy for
+     <p class="issue" id="issue-134c1be0"><a class="self-link" href="#issue-134c1be0"></a> <a href="https://github.com/WICG/isolated-web-apps/">Isolated Web Apps</a> are an example of a context that can get away with a looser policy for
 this aspect of the story (e.g. <code>script-src 'self'</code>) because of other
 layers of injection mitigation (in this case the requirement that script
 be staticly embedded in the app’s package). Perhaps we should expand the
@@ -2872,11 +2873,17 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
    <div class="issue"> It might be reasonable to parameterize this attribute, either because we think that
 a subset of the protections defined in this document are easier to deploy (e.g. strict CSP
 but not Trusted Types), or because we have different characteristics in mind for different
-contexts (e.g. <a href="https://github.com/WICG/isolated-web-apps/">Isolated Web Apps</a>). See issues <a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> below. <a class="issue-return" href="#issue-310401b6" title="Jump to section">↵</a></div>
+contexts (e.g. <a href="https://github.com/WICG/isolated-web-apps/">Isolated Web Apps</a>). See the
+issues called out in <a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> below for more thoughts. <a class="issue-return" href="#issue-9ed53645" title="Jump to section">↵</a></div>
    <div class="issue"> Is this necessary anymore? Chrome certainly has weird things like <a href="https://www.chromium.org/nativeclient/">Native Client</a>, at least in Chrome
 App and Extensions contexts. Those seem separable from the web, though. We
 should look into browser behavior here, as it might be possible to simplify
 the recommendation. <a class="issue-return" href="#issue-39e34e50" title="Jump to section">↵</a></div>
+   <div class="issue"> <a href="https://github.com/WICG/isolated-web-apps/">Isolated Web Apps</a> are an example of a context that can get away with a looser policy for
+this aspect of the story (e.g. <code>script-src 'self'</code>) because of other
+layers of injection mitigation (in this case the requirement that script
+be staticly embedded in the app’s package). Perhaps we should expand the
+restriction to include that case as well? <a class="issue-return" href="#issue-134c1be0" title="Jump to section">↵</a></div>
    <div class="issue"> It might be helpful for deployment to make this last requirement
 optional while user agents are still in the process of implementing bits
 and pieces of trusted types. We could parameterize the IDL attribute, for

@@ -318,8 +318,8 @@ The [{{InjectionMitigated}}] extended attribute must [=takes no arguments|take n
 ISSUE: It might be reasonable to parameterize this attribute, either because we think that
 a subset of the protections defined in this document are easier to deploy (e.g. strict CSP
 but not Trusted Types), or because we have different characteristics in mind for different
-contexts (e.g. [Isolated Web Apps](https://github.com/WICG/isolated-web-apps/)). See issues
-[[#impl-csp]] below.
+contexts (e.g. [Isolated Web Apps](https://github.com/WICG/isolated-web-apps/)). See the
+issues called out in [[#impl-csp]] below for more thoughts.
 
 If [{{InjectionMitigated}}] appears on an [=overloaded=] [=operation=],
 then it must appear on all overloads.
@@ -418,7 +418,7 @@ developers a reasonable chance of avoiding unexpected script execution:
     ineffective at creating meaningful protection, while content-based
     allowlisting (hashes) or element tagging (nonces) are far more robust.
 
-    ISSUES: [Isolated Web Apps](https://github.com/WICG/isolated-web-apps/)
+    ISSUE: [Isolated Web Apps](https://github.com/WICG/isolated-web-apps/)
     are an example of a context that can get away with a looser policy for
     this aspect of the story (e.g. `script-src 'self'`) because of other
     layers of injection mitigation (in this case the requirement that script
