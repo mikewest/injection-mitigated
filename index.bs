@@ -1,0 +1,299 @@
+<pre class='metadata'>
+Title: The `[InjectionMitigated]` WebIDL Attribute
+Shortname: injection-mitigated
+Status: DREAM
+Repository: mikewest/injection-mitigated
+URL: https://mikewest.github.io/injection-mitigated/
+Editor: Mike West, Google LLC.
+Abstract: A short description of your spec, one or two sentences.
+Abstract:
+  This document defines the `[InjectionMitigated]` WebIDL attribute
+  as a way of limiting the exposure of capabilities to those
+  contexts which are sufficiently protected against injection attacks
+  like XSS.
+Complain About: accidental-2119 yes, missing-example-ids yes
+Markup Shorthands: markdown yes, css no
+</pre>
+<pre class=link-defaults>
+spec:csp3; type:dfn; for:/; text:csp list
+spec:infra; type:dfn; for:list; text:for each
+</pre>
+<pre class=anchors>
+urlPrefix: https://w3c.github.io/webappsec-csp/; spec:CSP3
+    type: abstract-op
+        text: Get fetch directive fallback list; url: #directive-fallback-list
+</pre>
+<pre class=biblio>
+{
+  "long-live-csp": {
+      "href": "https://dl.acm.org/doi/10.1145/2976749.2978363",
+      "title": "CSP Is Dead, Long Live CSP! On the Insecurity of Whitelists and the Future of Content Security Policy",
+      "authors": [ "Lukas Weichselbaum", "Michele Spagnuolo", "Sebastian Lekies", "Artur Janc" ],
+      "date": "24 October 2016"
+  },
+  "strict-csp": {
+      "href": "https://web.dev/strict-csp/",
+      "title": "Mitigate cross-site scripting (XSS) with a strict Content Security Policy (CSP)",
+      "authors": [ "Lukas Weichselbaum" ],
+      "date": "15 March 2021"
+  },
+  "securer-contexts": {
+    "authors": [ "Mike West" ],
+    "href": "https://github.com/mikewest/securer-contexts",
+    "title": "Securer Contexts"
+  }
+}
+</pre>
+
+Introduction {#intro}
+============
+
+This is a monkey-patch spec meant to outline the changes necessary to define an
+`[InjectionMitigated]` WebIDL attribute that limits the exposure of interfaces,
+attributes, methods, etc. to those context which sufficiently mitigate various
+forms of injection attack.
+
+Ideally, this constraint would be applied to any API that required user
+mediation, as users' intent to grant a particular privilege to a particular
+origin is deeply undermined if that origin can be tricked into executing an
+attacker's code.
+
+Realistically, we'll pick our battles.
+
+In any event, this document sketches the following modifications to three
+specifications:
+
+*   [[CSP]] will define the characteristics of a policy that's robust enough to
+    meaningfully defend against attack. It builds on what we've learned from
+    explorations like [[strict-csp]] and [[securer-contexts]], pushing
+    developers towards well-understood and valuable defenses.
+
+*   [[HTML]] will define the ways in which those characteristics are evaluated
+    within a given context, similar conceptually to [=secure context=] and
+    [=environment settings object/cross-origin isolated capability=].
+
+*   [[WEBIDL]] will define the `[InjectionMitigated]` attribute, and the way it
+    relies on the changes above to control the exposure of a given WebIDL
+    construct.
+
+Let's get to it.
+
+Monkey Patches {#monkey}
+==============
+
+Content Security Policy {#monkey-csp}
+-----------------------
+
+In [[CSP]], we'll define a way of evaluating the strength of the amalgamation of
+policies contained within a [=CSP list=]. We're aiming for four characteristics:
+
+1.  At least one of the policies in the list enforces a restriction on plugin
+    content via `object-src 'none'`.
+
+    ISSUE: Is this necessary anymore? Chrome certainly has weird things like
+    [Native Client](https://www.chromium.org/nativeclient/), at least in Chrome
+    App and Extensions contexts. Those seem separable from the web, though. We
+    should look into browser behavior here, as it might be possible to simplify
+    the recommendation.
+
+2.  At least one of the policies in the list enforces a restriction on modifying
+    the [=document base URL=] via `base-uri 'none'` or `base-uri 'self'`. This
+    prevents attackers from injecting a <{base}> element that could maliciously
+    push scripts specified with relative URLs (e.g. `<script src="/app.js">`)
+    out to an attacker-controlled server.
+
+3.  At least one of the policies in the list enforces a restriction on script
+    execution that relies on nonces and/or hashes rather than URLs. Research
+    like [[long-live-csp]] has shown URL-based allowlisting to be quite
+    ineffective at creating meaningful protection, while content-based
+    allowlisting (hashes) or element tagging (nonces) are far more robust.
+
+4.  At least one of the policies in the list enforces [[Trusted-Types]] via
+    `require-trusted-types-for 'script'`.
+
+    ISSUE: It might be helpful for deployment to make this last requirement
+    optional while user agents are still in the process of implementing bits
+    and pieces of trusted types. We could parameterize the IDL attribute, for
+    example (e.g. `[InjectionMitigated=Basic]` vs
+    `[InjectionMitigated=RequireTrustedTypes]`), though I've no idea how we'd
+    spell out a meaningful bar that would allow folks creating APIs to decide
+    which they'd prefer.
+
+### Does a policy meaningfully mitigate injection attacks? ### {#meaningful-injection-mitigation}
+
+<div algorithm="meaningfully mitigates injection">
+With the above characteristics in mind, a [=CSP list=] |policies| is said to
+<dfn for="CSP list" export>meaningfully mitigate injection attacks</dfn> if the
+following algorithm returns "`Sufficient`":
+
+<ol class="algorithm">
+    1.  Let |meets object requirements|, |meets base requirements|,
+        |meets script requirements|, and |meets trusted type requirements| be
+        [=booleans=] whose value is `false`.
+
+    1.  [=For each=] |policy| in |policies|:
+
+        1.  If |policy|'s [=policy/disposition=] is not "`enforce`",
+            [=iteration/continue=].
+
+        1.  If |policy| [=policy/sufficiently mitigates plugins=], set
+            |meets object requirements| to `true`. 
+
+        1.  If |policy| [=policy/sufficiently mitigates redirection=], set
+            |meets base requirements| to `true`. 
+
+        1.  If |policy| [=policy/sufficiently mitigates script execution=], set
+            |meets script requirements| to `true`.
+
+        1.  If |policy| [=policy/sufficiently mitigates DOM sinks=], set
+            |meets trusted type requirements| to `true`. 
+
+    1.  Return "`Sufficient`" if |meets object requirements|,
+        |meets base requirements|, |meets script requirements|, and
+        |meets trusted type requirements| are all `true`.
+
+    1. Return "`Not sufficient`".
+</ol>
+</div>
+
+### Obtain the active directive for a type ### {#csp-active-directive}
+
+<div algorithm="get active directive">
+CSP defines a fallback chain for some directives which we need to account for
+when evaluating a given policy. To <dfn abstract-op lt="obtain-directive">obtain
+the active directive</dfn> given a [=policy=] |policy| and a |directive name|:
+
+<ol class="algorithm">
+    1.  Let |fallback chain| be the result of executing <a abstract-op>Get fetch
+        directive fallback list</a> on |directive name|.
+
+    1.  [=For each=] |name| in |fallback chain|:
+
+        1.  If |policy|'s [=policy/directive set=] [=set/contains=] a [=directive=]
+            |directive| whose [=directive/name=] is |name|, return |directive|.
+
+    1.  Return null.
+</ol>
+</div>
+
+### Does a policy sufficiently mitigate plugins? ### {#csp-plugin-mitigation}
+
+<div algorithm="object requirements">
+A [=policy=] |policy| <dfn for="policy">sufficiently mitigates plugins</dfn> if
+the following algorithm returns "`Sufficient`":
+
+<ol class="algorithm">
+    1.  <a abstract-op lt="obtain-directive">Obtain</a> |active directive| from
+        |policy|, given "`object-src`".
+
+    1.  Return "`Sufficient`" if all of the following are true:
+
+        *   |active directive| is not null
+        *   |active directive|'s [=directive/value=]'s [=set/size=] is 1
+        *   |active directive|'s [=directive/value=][0] is an
+            [=ASCII case-insensitive=] match for the string "`'none'`".
+
+    1.  Return "`Not sufficient`".
+</ol>
+
+Note: This algorithm does not distinguish between policies with a
+[=policy/disposition=] of "`enforce`" or "`report`".
+</div>
+
+### Does a policy sufficiently mitigate redirection? ### {#csp-redirection-mitigation}
+
+<div algorithm="base requirements">
+A [=policy=] |policy| <dfn for="policy">sufficiently mitigates redirection</dfn> if
+the following algorithm returns "`Sufficient`":
+
+<ol class="algorithm">
+    1.  [=For each=] |directive| in |policy|'s [=policy/directive set=]:
+
+        1.  Return "`Sufficient`" if all of the following are true:
+
+            *   |directive|'s [=directive/name=] is "`base-uri`".
+            *   |directive|'s [=directive/value=]'s [=set/size=] is 1
+            *   |directive|'s [=directive/value=][0] is an
+                [=ASCII case-insensitive=] match for either the string
+                "`'none'`" or the string "`'self'`".
+
+    1.  Return "`Not sufficient`".
+</ol>
+
+Note: This algorithm does not distinguish between policies with a
+[=policy/disposition=] of "`enforce`" or "`report`".
+</div>
+
+### Does a policy sufficiently mitigate script execution? ### {#csp-script-mitigation}
+
+<div algorithm="script requirements">
+A [=policy=] |policy| <dfn for="policy">sufficiently mitigates script execution</dfn>
+if the following algorithm returns "`Sufficient`":
+
+<ol class="algorithm">
+    1.  <a abstract-op lt="obtain-directive">Obtain</a> |element directive| from
+        |policy|, given "`script-src-elem`".
+
+    1.  If |element directive| is null, return "`Not sufficient`".
+
+    1.  Let |strict-dynamic| and |insufficient mitigation unless strict-dynamic is specified|
+        be `false`.
+
+    1.  Let |hash-or-nonce| and |insufficient mitigation unless hash-or-nonce or strict-dynamic is specified|
+        be `false`.
+
+    1.  [=For each=] |source expression| in |element directive|'s [=directive/value=]:
+
+        1.  Set |strict-dynamic| to `true` if |source expression| is an
+            [=ASCII case-insensitive=] match for the string "`'strict-dynamic'`".
+
+        1.  Set |insufficient mitigation unless strict-dynamic is specified| to `true`
+            if any of the following conditions are met:
+
+            *   |source expression| is an [=ASCII case-insensitive=] match for the string "`'self'`".
+            *   |source expression| is an [=ASCII case-insensitive=] match for the string "`'unsafe-eval'`".
+            *   |source expression| matches the <a grammar>host-source</a> grammar.
+            *   |source expression| matches the <a grammar>scheme-source</a> grammar.
+
+        1.  Set |hash-or-nonce| to `true` if |source expression| matches the <a grammar>nonce-source</a>
+            or <a grammar>hash-source</a>.
+
+        1.  Set |insufficient mitigation unless hash-or-nonce or strict-dynamic is specified| to `true` if
+            |source expression| is an [=ASCII case-insensitive=] match for the string "`'unsafe-inline'`".
+    
+    1.  Return "`Sufficient`" if all of the following are true:
+
+        *   |insufficient mitigation unless strict-dynamic is specified| is `false`
+            **or** |strict-dynamic| is `true`.
+        *   |insufficient mitigation unless hash-or-nonce or strict-dynamic is specified| is `false`
+            **or** |strict-dynamic| is `true` **or** |hash-or-nonce| is `true`.
+
+    1.  Return "`Not sufficient`".
+</ol>
+
+Note: This algorithm does not distinguish between policies with a
+[=policy/disposition=] of "`enforce`" or "`report`".
+</div>
+
+### Does a policy sufficiently mitigate DOM sinks? ### {#csp-sink-mitigation}
+
+<div algorithm="trusted type requirements">
+A [=policy=] |policy| <dfn for="policy">sufficiently mitigates DOM sinks</dfn>
+if the following algorithm returns "`Sufficient`":
+
+<ol class="algorithm">
+    1.  [=For each=] |directive| in |policy|'s [=policy/directive set=]:
+
+        1.  Return "`Sufficient`" if all of the following are true:
+
+            *   |directive|'s [=directive/name=] is
+                "`require-trusted-types-for`". [[!TRUSTED-TYPES]]
+            *   |directive|'s [=directive/value=] [=set/contains=][0] an
+                [=ASCII case-insensitive=] match for the string "`'script'`".
+
+    1.  Return "`Not sufficient`".
+</ol>
+
+Note: This algorithm does not distinguish between policies with a
+[=policy/disposition=] of "`enforce`" or "`report`".
+</div>
