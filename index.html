@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version d765c696b, updated Fri Mar 8 15:58:52 2024 -0800" name="generator">
   <link href="https://mikewest.github.io/injection-mitigated/" rel="canonical">
-  <meta content="281edd132dd9a370b4e1545cfe624633c8e9c3b6" name="revision">
+  <meta content="72f9670367e4569941cf5e998e0e20339e6e83b5" name="revision">
   <meta content="dark light" name="color-scheme">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -2586,12 +2586,19 @@ added later via <code><a data-link-type="element" href="https://html.spec.whatwg
 deal of experimentation and research over the years since CSP was introduced. <a data-link-type="biblio" href="#biblio-long-live-csp" title="CSP Is Dead, Long Live CSP! On the Insecurity of Whitelists and the Future of Content Security Policy">[long-live-csp]</a> is a seminal paper on the topic.</p>
    <p>Policies matching these requirements are deployed at scale today, and are
 emperically proven to be fairly robust defenses.</p>
+   <p class="issue" id="issue-174efc8d"><a class="self-link" href="#issue-174efc8d"></a> Anne noted in a previous iteration of this
+proposal that it differs meaningfully from [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext①">SecureContext</a></code>] and
+[<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#CrossOriginIsolated" id="ref-for-CrossOriginIsolated②">CrossOriginIsolated</a></code>] insofar as it doesn’t require anything of a
+context’s ancestors. That is, we’re evaluting the injection mitigation of a
+specific document or worker or etc, and would expose an IDL construct there
+regardless of whether that context’s parent also met the requirements. Should
+we apply the same considerations of <a href="https://w3c.github.io/webappsec-secure-contexts/#ancestors">ancestral risk</a> that we took into account when defining Secure Contexts? Perhaps! <a href="https://github.com/mikewest/securer-contexts/issues/1">[Issue #mikewest/securer-contexts#1]</a></p>
    <h3 class="heading settled" data-level="3.2" id="impl-apis"><span class="secno">3.2. </span><span class="content">What APIs should be marked as <code>[InjectionMitigated]</code>?</span><a class="self-link" href="#impl-apis"></a></h3>
    <p>Ideally, we’d be able to apply [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated①⓪">InjectionMitigated</a></code>] broadly, covering a
 broad spectrum of capabilities to ensure that they’re used for the purposes
 that users and developers alike might expect.</p>
    <p>Realistically, applying the attribute to existing APIs is going to be a
-difficult sell (similar to the introduction of the [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext①">SecureContext</a></code>]
+difficult sell (similar to the introduction of the [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext②">SecureContext</a></code>]
 attribute). We’ll want to pick our battles.</p>
    <p>The highest-priority APIs are those that grant access to capabilities that sit
 somewhat outside the web’s general origin-based security model. Device
@@ -2894,6 +2901,13 @@ and pieces of trusted types. We could parameterize the IDL attribute, for
 example (e.g. <code>[InjectionMitigated=Basic]</code> vs <code>[InjectionMitigated=RequireTrustedTypes]</code>), though I’ve no idea how we’d
 spell out a meaningful bar that would allow folks creating APIs to decide
 which they’d prefer. <a class="issue-return" href="#issue-9410ab2d" title="Jump to section">↵</a></div>
+   <div class="issue"> Anne noted in a previous iteration of this
+proposal that it differs meaningfully from [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></code>] and
+[<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#CrossOriginIsolated">CrossOriginIsolated</a></code>] insofar as it doesn’t require anything of a
+context’s ancestors. That is, we’re evaluting the injection mitigation of a
+specific document or worker or etc, and would expose an IDL construct there
+regardless of whether that context’s parent also met the requirements. Should
+we apply the same considerations of <a href="https://w3c.github.io/webappsec-secure-contexts/#ancestors">ancestral risk</a> that we took into account when defining Secure Contexts? Perhaps! <a href="https://github.com/mikewest/securer-contexts/issues/1">[Issue #mikewest/securer-contexts#1]</a> <a class="issue-return" href="#issue-174efc8d" title="Jump to section">↵</a></div>
   </div>
 <script>/* Boilerplate: script-dom-helper */
 "use strict";
@@ -3133,13 +3147,13 @@ let dfnPanelData = {
 "abstract-opdef-obtain-directive": {"dfnID":"abstract-opdef-obtain-directive","dfnText":"obtain\nthe active directive","external":false,"refSections":[{"refs":[{"id":"ref-for-abstract-opdef-obtain-directive"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-abstract-opdef-obtain-directive\u2460"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"#abstract-opdef-obtain-directive"},
 "ae8def21": {"dfnID":"ae8def21","dfnText":"contain","external":true,"refSections":[{"refs":[{"id":"ref-for-list-contain"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-list-contain\u2460"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://infra.spec.whatwg.org/#list-contain"},
 "b197a79c": {"dfnID":"b197a79c","dfnText":"callback interface","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-callback-interface"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-callback-interface\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-callback-interface"},
-"b75bb3bd": {"dfnID":"b75bb3bd","dfnText":"SecureContext","external":true,"refSections":[{"refs":[{"id":"ref-for-SecureContext"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"},{"refs":[{"id":"ref-for-SecureContext\u2460"}],"title":"3.2. What APIs should be marked as [InjectionMitigated]?"}],"url":"https://webidl.spec.whatwg.org/#SecureContext"},
+"b75bb3bd": {"dfnID":"b75bb3bd","dfnText":"SecureContext","external":true,"refSections":[{"refs":[{"id":"ref-for-SecureContext"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"},{"refs":[{"id":"ref-for-SecureContext\u2460"}],"title":"3.1. What defenses does [InjectionMitigated] require?"},{"refs":[{"id":"ref-for-SecureContext\u2461"}],"title":"3.2. What APIs should be marked as [InjectionMitigated]?"}],"url":"https://webidl.spec.whatwg.org/#SecureContext"},
 "bac9095f": {"dfnID":"bac9095f","dfnText":"operation","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-operation"},{"id":"ref-for-dfn-operation\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-operation"},
 "bd1db03d": {"dfnID":"bd1db03d","dfnText":"policy container","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-policy-container"}],"title":"2.2. HTML"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container"},
 "c71e04da": {"dfnID":"c71e04da","dfnText":"overloaded","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-overloaded"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-overloaded"},
 "c80aa797": {"dfnID":"c80aa797","dfnText":"directives","external":true,"refSections":[{"refs":[{"id":"ref-for-directives"}],"title":"2.1.2. Obtain the active directive for a type"}],"url":"https://w3c.github.io/webappsec-csp/#directives"},
 "c847111b": {"dfnID":"c847111b","dfnText":"base","external":true,"refSections":[{"refs":[{"id":"ref-for-the-base-element"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://html.spec.whatwg.org/multipage/semantics.html#the-base-element"},
-"cc2141c1": {"dfnID":"cc2141c1","dfnText":"CrossOriginIsolated","external":true,"refSections":[{"refs":[{"id":"ref-for-CrossOriginIsolated"},{"id":"ref-for-CrossOriginIsolated\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#CrossOriginIsolated"},
+"cc2141c1": {"dfnID":"cc2141c1","dfnText":"CrossOriginIsolated","external":true,"refSections":[{"refs":[{"id":"ref-for-CrossOriginIsolated"},{"id":"ref-for-CrossOriginIsolated\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"},{"refs":[{"id":"ref-for-CrossOriginIsolated\u2461"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://webidl.spec.whatwg.org/#CrossOriginIsolated"},
 "csp-list-meaningfully-mitigate-injection-attacks": {"dfnID":"csp-list-meaningfully-mitigate-injection-attacks","dfnText":"meaningfully\nmitigate injection attacks","external":false,"refSections":[{"refs":[{"id":"ref-for-csp-list-meaningfully-mitigate-injection-attacks"}],"title":"2.2. HTML"}],"url":"#csp-list-meaningfully-mitigate-injection-attacks"},
 "d08c79a9": {"dfnID":"d08c79a9","dfnText":"interface mixin","external":true,"refSections":[{"refs":[{"id":"ref-for-interface-mixin"},{"id":"ref-for-interface-mixin\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#interface-mixin"},
 "d0eba3fd": {"dfnID":"d0eba3fd","dfnText":"partial interface","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-partial-interface"},{"id":"ref-for-dfn-partial-interface\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-partial-interface"},

@@ -448,6 +448,17 @@ deal of experimentation and research over the years since CSP was introduced.
 Policies matching these requirements are deployed at scale today, and are
 emperically proven to be fairly robust defenses.
 
+ISSUE(mikewest/securer-contexts#1): Anne noted in a previous iteration of this
+proposal that it differs meaningfully from [{{SecureContext}}] and
+[{{CrossOriginIsolated}}] insofar as it doesn't require anything of a
+context's ancestors. That is, we're evaluting the injection mitigation of a
+specific document or worker or etc, and would expose an IDL construct there
+regardless of whether that context's parent also met the requirements. Should
+we apply the same considerations of
+[ancestral risk](https://w3c.github.io/webappsec-secure-contexts/#ancestors)
+that we took into account when defining Secure Contexts? Perhaps!
+
+
 What APIs should be marked as `[InjectionMitigated]`? {#impl-apis}
 -----------------------------------------------------
 
