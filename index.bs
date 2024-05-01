@@ -5,7 +5,6 @@ Status: DREAM
 Repository: mikewest/injection-mitigated
 URL: https://mikewest.github.io/injection-mitigated/
 Editor: Mike West, Google LLC.
-Abstract: A short description of your spec, one or two sentences.
 Abstract:
   This document defines the `[InjectionMitigated]` WebIDL attribute
   as a way of limiting the exposure of capabilities to those
@@ -95,7 +94,7 @@ believe are necessary to address it.
 <div algorithm="meaningfully mitigates injection">
 With the characteristics described in [[#impl-csp]] in mind, a [=CSP list=]
 |policies| is said to
-<dfn for="CSP list" export lt="csp-list-mitigate-injection">meaningfully
+<dfn for="CSP list" export local-lt="mitigate">meaningfully
 mitigate injection attacks</dfn> if the following algorithm returns
 "`Meaningful`":
 
@@ -284,7 +283,7 @@ determining whether or not a given IDL construct is exposed on the associated
 An [=environment settings object=] is said to
 <dfn for="environment settings object" export>meaningfully mitigate injection attacks</dfn> if its
 [=environment settings object/policy container=]'s [=policy container/CSP list=]
-<a lt="csp-list-mitigate-injection">meaningfully mitigates injection attacks</a>.
+<a for="CSP list" lt="mitigate">meaningfully mitigates injection attacks</a>.
 
 Note: Because the definition of meaningful injection mitigation for a CSP list depends only upon
 the header-delivered policies, this property will not mutate during an environment's lifetime.

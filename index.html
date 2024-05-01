@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version d765c696b, updated Fri Mar 8 15:58:52 2024 -0800" name="generator">
   <link href="https://mikewest.github.io/injection-mitigated/" rel="canonical">
-  <meta content="22e2ea87aa7958fdbb51c9b54b810354cbf79fb1" name="revision">
+  <meta content="281edd132dd9a370b4e1545cfe624633c8e9c3b6" name="revision">
   <meta content="dark light" name="color-scheme">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -2216,7 +2216,6 @@ Parts of this work may be from another specification document.  If so, those par
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
-   <p>A short description of your spec, one or two sentences.</p>
    <p>This document defines the <code>[InjectionMitigated]</code> WebIDL attribute
 as a way of limiting the exposure of capabilities to those
 contexts which are sufficiently protected against injection attacks
@@ -2303,7 +2302,7 @@ few supporting algorithms as well, but <a href="#meaningful-injection-mitigation
 believe are necessary to address it.</p>
    <h4 class="heading settled" data-level="2.1.1" id="meaningful-injection-mitigation"><span class="secno">2.1.1. </span><span class="content">Does a policy meaningfully mitigate injection attacks?</span><a class="self-link" href="#meaningful-injection-mitigation"></a></h4>
    <div class="algorithm" data-algorithm="meaningfully mitigates injection">
-     With the characteristics described in <a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> in mind, a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-csp/#csp-list" id="ref-for-csp-list①">CSP list</a> <var>policies</var> is said to <dfn class="dfn-paneled" data-dfn-for="CSP list" data-dfn-type="dfn" data-export data-lt="csp-list-mitigate-injection" id="csp-list-csp-list-mitigate-injection">meaningfully
+     With the characteristics described in <a href="#impl-csp">§ 3.1 What defenses does [InjectionMitigated] require?</a> in mind, a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-csp/#csp-list" id="ref-for-csp-list①">CSP list</a> <var>policies</var> is said to <dfn class="dfn-paneled" data-dfn-for="CSP list" data-dfn-type="dfn" data-export data-local-lt="mitigate" data-lt="meaningfully mitigate injection attacks" id="csp-list-meaningfully-mitigate-injection-attacks">meaningfully
 mitigate injection attacks</dfn> if the following algorithm returns
 "<code>Meaningful</code>": 
     <ol class="algorithm">
@@ -2469,7 +2468,7 @@ the following algorithm returns "<code>Sufficient</code>":
 of the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object">environment settings object</a> that will be examined from <a data-link-type="biblio" href="#biblio-webidl" title="Web IDL Standard">[WEBIDL]</a> when
 determining whether or not a given IDL construct is exposed on the associated <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-global" id="ref-for-concept-settings-object-global">global object</a>.</p>
    <div class="algorithm" data-algorithm="environment settings object mitigates injection">
-     An <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object①">environment settings object</a> is said to <dfn class="dfn-paneled" data-dfn-for="environment settings object" data-dfn-type="dfn" data-export id="environment-settings-object-meaningfully-mitigate-injection-attacks">meaningfully mitigate injection attacks</dfn> if its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container" id="ref-for-concept-settings-object-policy-container">policy container</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#policy-container-csp-list" id="ref-for-policy-container-csp-list">CSP list</a> <a data-link-type="dfn" href="#csp-list-csp-list-mitigate-injection" id="ref-for-csp-list-csp-list-mitigate-injection">meaningfully mitigates injection attacks</a>. 
+     An <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-environment-settings-object①">environment settings object</a> is said to <dfn class="dfn-paneled" data-dfn-for="environment settings object" data-dfn-type="dfn" data-export id="environment-settings-object-meaningfully-mitigate-injection-attacks">meaningfully mitigate injection attacks</dfn> if its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container" id="ref-for-concept-settings-object-policy-container">policy container</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#policy-container-csp-list" id="ref-for-policy-container-csp-list">CSP list</a> <a data-link-type="dfn" href="#csp-list-meaningfully-mitigate-injection-attacks" id="ref-for-csp-list-meaningfully-mitigate-injection-attacks">meaningfully mitigates injection attacks</a>. 
     <p class="note" role="note"><span class="marker">Note:</span> Because the definition of meaningful injection mitigation for a CSP list depends only upon
 the header-delivered policies, this property will not mutate during an environment’s lifetime.</p>
    </div>
@@ -2755,10 +2754,15 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#csp-list-csp-list-mitigate-injection">csp-list-mitigate-injection</a><span>, in § 2.1.1</span>
    <li><a href="#dfn-exposed">exposed</a><span>, in § 2.3.2</span>
    <li><a href="#InjectionMitigated">InjectionMitigated</a><span>, in § 2.3</span>
-   <li><a href="#environment-settings-object-meaningfully-mitigate-injection-attacks">meaningfully mitigate injection attacks</a><span>, in § 2.2</span>
+   <li>
+    meaningfully mitigate injection attacks
+    <ul>
+     <li><a href="#csp-list-meaningfully-mitigate-injection-attacks">dfn for CSP list</a><span>, in § 2.1.1</span>
+     <li><a href="#environment-settings-object-meaningfully-mitigate-injection-attacks">dfn for environment settings object</a><span>, in § 2.2</span>
+    </ul>
+   <li><a href="#csp-list-meaningfully-mitigate-injection-attacks">mitigate</a><span>, in § 2.1.1</span>
    <li><a href="#abstract-opdef-obtain-directive">obtain-directive</a><span>, in § 2.1.2</span>
    <li><a href="#policy-sufficiently-mitigates-dom-sinks">sufficiently mitigates DOM sinks</a><span>, in § 2.1.6</span>
    <li><a href="#policy-sufficiently-mitigates-plugins">sufficiently mitigates plugins</a><span>, in § 2.1.3</span>
@@ -3136,7 +3140,7 @@ let dfnPanelData = {
 "c80aa797": {"dfnID":"c80aa797","dfnText":"directives","external":true,"refSections":[{"refs":[{"id":"ref-for-directives"}],"title":"2.1.2. Obtain the active directive for a type"}],"url":"https://w3c.github.io/webappsec-csp/#directives"},
 "c847111b": {"dfnID":"c847111b","dfnText":"base","external":true,"refSections":[{"refs":[{"id":"ref-for-the-base-element"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://html.spec.whatwg.org/multipage/semantics.html#the-base-element"},
 "cc2141c1": {"dfnID":"cc2141c1","dfnText":"CrossOriginIsolated","external":true,"refSections":[{"refs":[{"id":"ref-for-CrossOriginIsolated"},{"id":"ref-for-CrossOriginIsolated\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#CrossOriginIsolated"},
-"csp-list-csp-list-mitigate-injection": {"dfnID":"csp-list-csp-list-mitigate-injection","dfnText":"meaningfully\nmitigate injection attacks","external":false,"refSections":[{"refs":[{"id":"ref-for-csp-list-csp-list-mitigate-injection"}],"title":"2.2. HTML"}],"url":"#csp-list-csp-list-mitigate-injection"},
+"csp-list-meaningfully-mitigate-injection-attacks": {"dfnID":"csp-list-meaningfully-mitigate-injection-attacks","dfnText":"meaningfully\nmitigate injection attacks","external":false,"refSections":[{"refs":[{"id":"ref-for-csp-list-meaningfully-mitigate-injection-attacks"}],"title":"2.2. HTML"}],"url":"#csp-list-meaningfully-mitigate-injection-attacks"},
 "d08c79a9": {"dfnID":"d08c79a9","dfnText":"interface mixin","external":true,"refSections":[{"refs":[{"id":"ref-for-interface-mixin"},{"id":"ref-for-interface-mixin\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#interface-mixin"},
 "d0eba3fd": {"dfnID":"d0eba3fd","dfnText":"partial interface","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-partial-interface"},{"id":"ref-for-dfn-partial-interface\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-partial-interface"},
 "d4ec2d19": {"dfnID":"d4ec2d19","dfnText":"scheme-source","external":true,"refSections":[{"refs":[{"id":"ref-for-grammardef-scheme-source"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"https://w3c.github.io/webappsec-csp/#grammardef-scheme-source"},
@@ -3541,7 +3545,7 @@ function genLinkingSyntaxes(dfn) {
 let refsData = {
 "#InjectionMitigated": {"export":true,"for_":[],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"InjectionMitigated","type":"extended-attribute","url":"#InjectionMitigated"},
 "#abstract-opdef-obtain-directive": {"export":true,"for_":[],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"obtain-directive","type":"abstract-op","url":"#abstract-opdef-obtain-directive"},
-"#csp-list-csp-list-mitigate-injection": {"export":true,"for_":["CSP list"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"csp-list-mitigate-injection","type":"dfn","url":"#csp-list-csp-list-mitigate-injection"},
+"#csp-list-meaningfully-mitigate-injection-attacks": {"export":true,"for_":["CSP list"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"mitigate","type":"dfn","url":"#csp-list-meaningfully-mitigate-injection-attacks"},
 "#dfn-exposed": {"export":true,"for_":[],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"exposed","type":"dfn","url":"#dfn-exposed"},
 "#environment-settings-object-meaningfully-mitigate-injection-attacks": {"export":true,"for_":["environment settings object"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"meaningfully mitigate injection attacks","type":"dfn","url":"#environment-settings-object-meaningfully-mitigate-injection-attacks"},
 "#policy-sufficiently-mitigates-dom-sinks": {"export":true,"for_":["policy"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"sufficiently mitigates dom sinks","type":"dfn","url":"#policy-sufficiently-mitigates-dom-sinks"},
