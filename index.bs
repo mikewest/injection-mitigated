@@ -112,7 +112,7 @@ mitigate injection attacks</dfn> if the following algorithm returns
         1.  If |policy| [=policy/sufficiently mitigates plugins=], set
             |meets object requirements| to `true`. 
 
-        1.  If |policy| [=policy/sufficiently mitigates redirection=], set
+        1.  If |policy| [=policy/sufficiently mitigates relative URL manipulation=], set
             |meets base requirements| to `true`. 
 
         1.  If |policy| [=policy/sufficiently mitigates script execution=], set
@@ -173,10 +173,10 @@ Note: This algorithm does not distinguish between policies with a
 [=policy/disposition=] of "`enforce`" or "`report`".
 </div>
 
-### Does a policy sufficiently mitigate redirection? ### {#csp-redirection-mitigation}
+### Does a policy sufficiently mitigate relative URL manipulation? ### {#csp-relative-url}
 
 <div algorithm="base requirements">
-A [=policy=] |policy| <dfn for="policy">sufficiently mitigates redirection</dfn> if
+A [=policy=] |policy| <dfn for="policy">sufficiently mitigates relative URL manipulation</dfn> if
 the following algorithm returns "`Sufficient`":
 
 <ol class="algorithm">
