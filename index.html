@@ -1,7 +1,7 @@
 <!doctype html><html lang="en">
  <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-  <title>The [InjectionMitigated] WebIDL Attribute</title>
+  <title>The `[InjectionMitigated]` WebIDL Attribute</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 <style data-fill-with="stylesheet">/******************************************************************************
  *                   Style sheet for the W3C specifications                   *
@@ -1488,9 +1488,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version d765c696b, updated Fri Mar 8 15:58:52 2024 -0800" name="generator">
+  <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://mikewest.github.io/injection-mitigated/" rel="canonical">
-  <meta content="dark light" name="color-scheme">
+  <meta content="62638b3f1e4808a4f438d011041b2dc265f1944b" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -1562,6 +1562,7 @@ pre .property::before, pre .property::after {
 }
 </style>
 <style>/* Boilerplate: style-colors */
+
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
 :root {
     color-scheme: light dark;
@@ -1815,15 +1816,11 @@ figcaption:not(.no-marker)::before {
 :root {
     --dfnpanel-bg: #ddd;
     --dfnpanel-text: var(--text);
-    --dfnpanel-target-bg: #ffc;
-    --dfnpanel-target-outline: orange;
 }
 @media (prefers-color-scheme: dark) {
     :root {
         --dfnpanel-bg: #222;
         --dfnpanel-text: var(--text);
-        --dfnpanel-target-bg: #333;
-        --dfnpanel-target-outline: silver;
     }
 }
 .dfn-panel {
@@ -1846,13 +1843,11 @@ figcaption:not(.no-marker)::before {
 .dfn-panel > b { display: block; }
 .dfn-panel a { color: var(--dfnpanel-text); }
 .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
-.dfn-panel a:focus {
-    outline: 5px auto Highlight;
-    outline: 5px auto -webkit-focus-ring-color;
-}
 .dfn-panel > b + b { margin-top: 0.25em; }
 .dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
 .dfn-panel li a {
+    white-space: pre;
+    display: inline-block;
     max-width: calc(300px - 1.5em - 1em);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1861,79 +1856,67 @@ figcaption:not(.no-marker)::before {
 .dfn-panel.activated {
     display: inline-block;
     position: fixed;
-    left: 8px;
+    left: .5em;
     bottom: 2em;
     margin: 0 auto;
     max-width: calc(100vw - 1.5em - .4em - .5em);
     max-height: 30vh;
-    transition: left 1s ease-out, bottom 1s ease-out;
 }
 
-.dfn-panel .link-item:hover {
-    text-decoration: underline;
+.dfn-paneled[role="button"] { cursor: pointer; }
+</style>
+<style>/* Boilerplate: style-dfn-panel */
+:root {
+    --dfnpanel-bg: #ddd;
+    --dfnpanel-text: var(--text);
 }
-.dfn-panel .link-item .copy-icon {
-    opacity: 0;
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dfnpanel-bg: #222;
+        --dfnpanel-text: var(--text);
+    }
 }
-.dfn-panel .link-item:hover .copy-icon,
-.dfn-panel .link-item .copy-icon:focus {
-    opacity: 1;
-}
-
-.dfn-panel .copy-icon {
-    display: inline-block;
-    margin-right: 0.5em;
-    width: 0.85em;
-    height: 1em;
-    border-radius: 3px;
-    background-color: #ccc;
-    cursor: pointer;
-}
-
-.dfn-panel .copy-icon .icon {
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.dfn-panel .copy-icon .icon::before {
-    content: "";
+.dfn-panel {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 1px solid black;
-    background-color: #ccc;
-    opacity: 0.25;
-    transform: translate(3px, -3px);
+    z-index: 35;
+    width: 20em;
+    width: 300px;
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: var(--dfnpanel-bg);
+    color: var(--dfnpanel-text);
+    border: outset 0.2em;
+    white-space: normal; /* in case it's moved into a pre */
+}
+.dfn-panel:not(.on) { display: none; }
+.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+.dfn-panel > b { display: block; }
+.dfn-panel a { color: var(--dfnpanel-text); }
+.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel > b + b { margin-top: 0.25em; }
+.dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
+.dfn-panel li a {
+    white-space: pre;
+    display: inline-block;
+    max-width: calc(300px - 1.5em - 1em);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.dfn-panel .copy-icon:active .icon::before {
-    opacity: 1;
+.dfn-panel.activated {
+    display: inline-block;
+    position: fixed;
+    left: .5em;
+    bottom: 2em;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5em - .4em - .5em);
+    max-height: 30vh;
 }
 
-.dfn-paneled[role="button"] { cursor: help; }
-
-.highlighted {
-    animation: target-fade 3s;
-}
-
-@keyframes target-fade {
-    from {
-        background-color: var(--dfnpanel-target-bg);
-        outline: 5px solid var(--dfnpanel-target-outline);
-    }
-    to {
-        color: var(--a-normal-text);
-        background-color: transparent;
-        outline: transparent;
-    }
-}
+.dfn-paneled[role="button"] { cursor: pointer; }
 </style>
 <style>/* Boilerplate: style-issues */
 a[href].issue-return {
@@ -1954,40 +1937,8 @@ a[href].issue-return {
     margin-bottom: 0;
 }
 </style>
-<style>/* Boilerplate: style-ref-hints */
-:root {
-    --ref-hint-bg: #ddd;
-    --ref-hint-text: var(--text);
-}
-@media (prefers-color-scheme: dark) {
-    :root {
-        --ref-hint-bg: #222;
-        --ref-hint-text: var(--text);
-    }
-}
-
-.ref-hint {
-    display: inline-block;
-    position: absolute;
-    z-index: 35;
-    width: 20em;
-    width: 300px;
-    height: auto;
-    max-height: 500px;
-    overflow: auto;
-    padding: 0.5em 0.5em;
-    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-    background: var(--ref-hint-bg);
-    color: var(--ref-hint-text);
-    border: outset 0.2em;
-    white-space: normal; /* in case it's moved into a pre */
-}
-
-.ref-hint * { margin: 0; padding: 0; text-indent: 0; }
-
-.ref-hint ul { padding: 0 0 0 1em; list-style: none; }
-</style>
 <style>/* Boilerplate: style-selflinks */
+
 :root {
     --selflink-text: white;
     --selflink-bg: gray;
@@ -2047,6 +1998,7 @@ a.self-link::before            { content: "¶"; }
 dfn > a.self-link::before      { content: "#"; }
 </style>
 <style>/* Boilerplate: style-syntax-highlighting */
+
 code.highlight { padding: .1em; border-radius: .3em; }
 pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
 
@@ -2103,6 +2055,7 @@ c-[vc] { color: #0077aa } /* Name.Variable.Class */
 c-[vg] { color: #0077aa } /* Name.Variable.Global */
 c-[vi] { color: #0077aa } /* Name.Variable.Instance */
 c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
+
 
 @media (prefers-color-scheme: dark) {
     .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
@@ -2179,20 +2132,20 @@ D50 2deg illuminant, L in [0,100], a and b in [-128, 128]
 5 = lab(85,-10,-50)
 6 = lab(85,35,-15)
 */
-[data-algorithm] var { cursor: pointer; }
-var[data-var-color="0"] { background-color: #F4D200; box-shadow: 0 0 0 2px #F4D200; }
-var[data-var-color="1"] { background-color: #FF87A2; box-shadow: 0 0 0 2px #FF87A2; }
-var[data-var-color="2"] { background-color: #96E885; box-shadow: 0 0 0 2px #96E885; }
-var[data-var-color="3"] { background-color: #3EEED2; box-shadow: 0 0 0 2px #3EEED2; }
-var[data-var-color="4"] { background-color: #EACFB6; box-shadow: 0 0 0 2px #EACFB6; }
-var[data-var-color="5"] { background-color: #82DDFF; box-shadow: 0 0 0 2px #82DDFF; }
-var[data-var-color="6"] { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
+var { cursor: pointer; }
+var.selected0 { background-color: #F4D200; box-shadow: 0 0 0 2px #F4D200; }
+var.selected1 { background-color: #FF87A2; box-shadow: 0 0 0 2px #FF87A2; }
+var.selected2 { background-color: #96E885; box-shadow: 0 0 0 2px #96E885; }
+var.selected3 { background-color: #3EEED2; box-shadow: 0 0 0 2px #3EEED2; }
+var.selected4 { background-color: #EACFB6; box-shadow: 0 0 0 2px #EACFB6; }
+var.selected5 { background-color: #82DDFF; box-shadow: 0 0 0 2px #82DDFF; }
+var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
 </style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
-   <h1 class="p-name no-ref" id="title">The [InjectionMitigated] WebIDL Attribute</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2024-05-09">9 May 2024</time></span></h2>
+   <h1 class="p-name no-ref" id="title">The `[InjectionMitigated]` WebIDL Attribute</h1>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">A Collection of Interesting Ideas, <time class="dt-updated" datetime="2024-10-08">8 October 2024</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2207,18 +2160,19 @@ var[data-var-color="6"] { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBC
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 9 May 2024,
-the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
-which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
+In addition, as of 8 October 2024,
+the editors have made this specification available under the <a href="https://www.openwebfoundation.org/the-agreements/the-owf-1-0-agreements-granted-claims/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
+which is available at https://www.openwebfoundation.org/the-agreements/the-owf-1-0-agreements-granted-claims/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
    <p>This document defines the <code>[InjectionMitigated]</code> WebIDL attribute
-as a way of limiting the exposure of capabilities to those
-contexts which are sufficiently protected against injection attacks
-like XSS.</p>
+
+  as a way of limiting the exposure of capabilities to those
+  contexts which are sufficiently protected against injection attacks
+  like XSS.</p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
@@ -2251,6 +2205,11 @@ like XSS.</p>
      <ol class="toc">
       <li><a href="#impl-csp"><span class="secno">3.1</span> <span class="content">What defenses does <code>[InjectionMitigated]</code> require?</span></a>
       <li><a href="#impl-apis"><span class="secno">3.2</span> <span class="content">What APIs should be marked as <code>[InjectionMitigated]</code>?</span></a>
+     </ol>
+    <li>
+     <a href="#security"><span class="secno">4</span> <span class="content">Security Considerations</span></a>
+     <ol class="toc">
+      <li><a href="#security-same-origin"><span class="secno">4.1</span> <span class="content">Same-origin Documents</span></a>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
@@ -2475,7 +2434,7 @@ the header-delivered policies, this property will not mutate during an environme
    <p>In WebIDL, we’ll define the <code>[InjectionMitigated]</code> attribute, and wire it up to the hook created
 in HTML above:</p>
    <h4 class="heading settled dfn-paneled idl-code" data-dfn-type="extended-attribute" data-export data-level="2.3.1" data-lt="InjectionMitigated" id="InjectionMitigated"><span class="secno">2.3.1. </span><span class="content">[InjectionMitigated]</span><a class="self-link" href="#InjectionMitigated" id="ref-for-InjectionMitigated"></a></h4>
-   <p>If the [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated①①">InjectionMitigated</a></code>] <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-extended-attribute" id="ref-for-dfn-extended-attribute">extended attribute</a> appears on an <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface" id="ref-for-dfn-interface">interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-partial-interface" id="ref-for-dfn-partial-interface">partial interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#interface-mixin" id="ref-for-interface-mixin">interface mixin</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#partial-interface-mixin" id="ref-for-partial-interface-mixin">partial interface mixin</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-callback-interface" id="ref-for-dfn-callback-interface">callback interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace" id="ref-for-dfn-namespace">namespace</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-partial-namespace" id="ref-for-dfn-partial-namespace">partial namespace</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface-member" id="ref-for-dfn-interface-member">interface member</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#interface-mixin-member" id="ref-for-interface-mixin-member">interface mixin member</a>, or <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace-member" id="ref-for-dfn-namespace-member">namespace member</a>,
+   <p>If the [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated①②">InjectionMitigated</a></code>] <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-extended-attribute" id="ref-for-dfn-extended-attribute">extended attribute</a> appears on an <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface" id="ref-for-dfn-interface">interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-partial-interface" id="ref-for-dfn-partial-interface">partial interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#interface-mixin" id="ref-for-interface-mixin">interface mixin</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#partial-interface-mixin" id="ref-for-partial-interface-mixin">partial interface mixin</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-callback-interface" id="ref-for-dfn-callback-interface">callback interface</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace" id="ref-for-dfn-namespace">namespace</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-partial-namespace" id="ref-for-dfn-partial-namespace">partial namespace</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-interface-member" id="ref-for-dfn-interface-member">interface member</a>, <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#interface-mixin-member" id="ref-for-interface-mixin-member">interface mixin member</a>, or <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-namespace-member" id="ref-for-dfn-namespace-member">namespace member</a>,
 it indicates that the construct is <a data-link-type="dfn" href="#dfn-exposed" id="ref-for-dfn-exposed">exposed</a> only within an environment which can <a data-link-type="dfn" href="#environment-settings-object-meaningfully-mitigate-injection-attacks" id="ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks">meaningfully mitigate injection attacks</a>. The
 [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated①">InjectionMitigated</a></code>] extended attribute must not be used on any other construct.</p>
    <p>The [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated②">InjectionMitigated</a></code>] extended attribute must <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-xattr-no-arguments" id="ref-for-dfn-xattr-no-arguments">take no arguments</a>.</p>
@@ -2585,23 +2544,17 @@ added later via <code><a data-link-type="element" href="https://html.spec.whatwg
 deal of experimentation and research over the years since CSP was introduced. <a data-link-type="biblio" href="#biblio-long-live-csp" title="CSP Is Dead, Long Live CSP! On the Insecurity of Whitelists and the Future of Content Security Policy">[long-live-csp]</a> is a seminal paper on the topic.</p>
    <p>Policies matching these requirements are deployed at scale today, and are
 emperically proven to be fairly robust defenses.</p>
-   <p class="issue" id="issue-174efc8d"><a class="self-link" href="#issue-174efc8d"></a> Anne noted in a previous iteration of this
-proposal that it differs meaningfully from [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext①">SecureContext</a></code>] and
-[<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#CrossOriginIsolated" id="ref-for-CrossOriginIsolated②">CrossOriginIsolated</a></code>] insofar as it doesn’t require anything of a
-context’s ancestors. That is, we’re evaluting the injection mitigation of a
-specific document or worker or etc, and would expose an IDL construct there
-regardless of whether that context’s parent also met the requirements. Should
-we apply the same considerations of <a href="https://w3c.github.io/webappsec-secure-contexts/#ancestors">ancestral risk</a> that we took into account when defining Secure Contexts? Perhaps! <a href="https://github.com/mikewest/securer-contexts/issues/1">[Issue #mikewest/securer-contexts#1]</a></p>
    <h3 class="heading settled" data-level="3.2" id="impl-apis"><span class="secno">3.2. </span><span class="content">What APIs should be marked as <code>[InjectionMitigated]</code>?</span><a class="self-link" href="#impl-apis"></a></h3>
    <p>Ideally, we’d be able to apply [<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated①⓪">InjectionMitigated</a></code>] broadly, covering a
 broad spectrum of capabilities to ensure that they’re used for the purposes
 that users and developers alike might expect.</p>
    <p>Realistically, applying the attribute to existing APIs is going to be a
-difficult sell (similar to the introduction of the [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext②">SecureContext</a></code>]
+difficult sell (similar to the introduction of the [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext①">SecureContext</a></code>]
 attribute). We’ll want to pick our battles.</p>
    <p>The highest-priority APIs are those that grant access to capabilities that sit
-somewhat outside the web’s general origin-based security model. Device
-capabilities like <a data-link-type="biblio" href="#biblio-webusb" title="WebUSB API">[WebUSB]</a>, OS primitives like the clipboard, and user
+somewhat outside the web’s general origin-based security model. Identity primitives
+like Digital Credentials (see <a href="https://github.com/WICG/digital-credentials/issues/133">wicg/digital-credentials#133</a>).
+Device capabilities like <a data-link-type="biblio" href="#biblio-webusb" title="WebUSB API">[WebUSB]</a>, OS primitives like the clipboard, and user
 location are all good examples of powerful and potentially dangerous capabilites
 that we’d really like to ensure are used by the site to whom they’re granted,
 and not to anyone who can trick the site into executing script.</p>
@@ -2610,6 +2563,42 @@ for this new attribute. When user agents gain confidence that code running on
 an origin is code that origin intended to execute, we can make a much more
 reasonable claim about the exclusivity associated with a user’s choice to grant
 a capability to that origin, and thereby ship new capabilities more safely.</p>
+   <h2 class="heading settled" data-level="4" id="security"><span class="secno">4. </span><span class="content">Security Considerations</span><a class="self-link" href="#security"></a></h2>
+   <h3 class="heading settled" data-level="4.1" id="security-same-origin"><span class="secno">4.1. </span><span class="content">Same-origin Documents</span><a class="self-link" href="#security-same-origin"></a></h3>
+   <p>The rules associated with "<a data-link-type="dfn" href="#environment-settings-object-meaningfully-mitigate-injection-attacks" id="ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks②">meaningfully mitigate injection attacks</a>"
+differ in one important way from those associated with [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext②">SecureContext</a></code>] and
+[<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#CrossOriginIsolated" id="ref-for-CrossOriginIsolated②">CrossOriginIsolated</a></code>]. Those attributes ensure not only that a given
+document is protected, but also set up constraints that prevent other,
+same-origin documents from accessing a protected document.</p>
+   <p>[<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext③">SecureContext</a></code>] requires that a document and its ancestors be delivered
+securely. <a data-link-type="biblio" href="#biblio-mix" title="Mixed Content">[MIX]</a> implies, therefore, that any nested document in its frame
+tree will also be delivered securely, as non-secure frames would be blocked
+or upgraded. Similarly, any other document that has access to the secure
+context through a window handle must likewise be delivered securely, as the
+scheme forms part of the origin. Any API gated on [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext④">SecureContext</a></code>], then,
+is fairly well protected from access in non-secure contexts.</p>
+   <p class="note" role="note"><span class="marker">NOTE:</span> I think the only scenario that allows this access would be a secure
+context that pops up a non-secure context that then frames the original
+context’s origin. The framed document would not itself be a secure context,
+but could reach through its parents' <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-opener" id="ref-for-dom-opener">opener</a></code> to access otherwise
+protected data. Are there more?</p>
+   <p>Similarly, [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#CrossOriginIsolated" id="ref-for-CrossOriginIsolated③">CrossOriginIsolated</a></code>] requires COEP and COOP constraints that
+separate same-origin documents with different policies into distinct <a data-link-type="dfn" href="https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-agent-clusters" id="ref-for-sec-agent-clusters">agent clusters</a>, preventing them from accessing each other. This is a
+robust protection against a non-COI context gaining access to an API that’s
+gated on [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#CrossOriginIsolated" id="ref-for-CrossOriginIsolated④">CrossOriginIsolated</a></code>].</p>
+   <p>[<code class="idl"><a data-link-type="idl" href="#InjectionMitigated" id="ref-for-InjectionMitigated①①">InjectionMitigated</a></code>], on the other hand, does not require anything in
+particular from its embedders or embedees, nor does it prevent a same-origin
+document elsewhere from gaining a handle to its window and thereby accessing
+the otherwise-protected API.</p>
+   <p>Should we apply the same considerations <a data-link-type="biblio" href="#biblio-secure-contexts" title="Secure Contexts">[SECURE-CONTEXTS]</a> described in <a href="https://w3c.github.io/webappsec-secure-contexts/#ancestors"><cite>Secure Contexts</cite> § 4.2 Ancestral Risk</a>? Should we go further, requiring some COOP
+variant like <code>noopener-allow-popups</code>? Even further, forcing agent cluster
+separation for injection-mitigated contexts?</p>
+   <p>Maybe? It’s certainly a hole. It’s not clear to me whether it’s a hole
+worth paying the probable cost to ease of deployment (COI hasn’t exactly
+caught the world by storm). WDYT?</p>
+   <p class="issue" id="issue-b0f2e524"><a class="self-link" href="#issue-b0f2e524"></a> This is an open decision point that
+Anne raised in a previous version of this proposal. We should hammer it out,
+one way or the other. <a href="https://github.com/mikewest/securer-contexts/issues/1">[Issue #mikewest/securer-contexts#1]</a></p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -2649,7 +2638,7 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
       on = !document.body.classList.contains('toc-sidebar');
     }
 
-    /* Don't scroll to compensate for the ToC if we're above it already. */
+    /* Don’t scroll to compensate for the ToC if we’re above it already. */
     var headY = 0;
     var head = document.querySelector('.head');
     if (head) {
@@ -2680,16 +2669,16 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
       }
       if (toggle.matches(':hover')) {
         /* Unfocus button when not using keyboard navigation,
-           because I don't know where else to send the focus. */
+           because I don’t know where else to send the focus. */
         toggle.blur();
       }
     }
   }
 
   function createSidebarToggle() {
-    /* Create the sidebar toggle in JS; it shouldn't exist when JS is off. */
+    /* Create the sidebar toggle in JS; it shouldn’t exist when JS is off. */
     var toggle = document.createElement('a');
-      /* This should probably be a button, but appearance isn't standards-track.*/
+      /* This should probably be a button, but appearance isn’t standards-track.*/
     toggle.id = 'toc-toggle';
     toggle.class = 'toc-toggle';
     toggle.href = '#toc';
@@ -2705,7 +2694,7 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
     toggle.addEventListener('click', toggler, false);
 
 
-    /* Get <nav id=toc-nav>, or make it if we don't have one. */
+    /* Get <nav id=toc-nav>, or make it if we don’t have one. */
     var tocNav = document.getElementById('toc-nav');
     if (!tocNav) {
       tocNav = document.createElement('p');
@@ -2713,7 +2702,7 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
       /* Prepend for better keyboard navigation */
       document.body.insertBefore(tocNav, document.body.firstChild);
     }
-    /* While we're at it, make sure we have a Jump to Toc link. */
+    /* While we’re at it, make sure we have a Jump to Toc link. */
     var tocJump = document.getElementById('toc-jump');
     if (!tocJump) {
       tocJump = document.createElement('a');
@@ -2741,7 +2730,7 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
     }, false);
   }
   else {
-    console.warn("Can't find Table of Contents. Please use <nav id='toc'> around the ToC.");
+    console.warn("Can’t find Table of Contents. Please use <nav id='toc'> around the ToC.");
   }
 
   /* Wrap tables in case they overflow */
@@ -2797,6 +2786,7 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
    <li>
     <a data-link-type="biblio">[ECMASCRIPT]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="353564d6">agent clusters</span>
      <li><span class="dfn-paneled" id="a5f015e3">realm</span>
     </ul>
    <li>
@@ -2809,6 +2799,7 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
      <li><span class="dfn-paneled" id="3e12e042">environment settings object</span>
      <li><span class="dfn-paneled" id="8a30477b">global object</span>
      <li><span class="dfn-paneled" id="64b89595">meta</span>
+     <li><span class="dfn-paneled" id="cbe46402">opener</span>
      <li><span class="dfn-paneled" id="bd1db03d">policy container</span>
      <li><span class="dfn-paneled" id="65181da8">secure context</span>
      <li><span class="dfn-paneled" id="7deb6835">settings object</span>
@@ -2862,6 +2853,8 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
+   <dt id="biblio-secure-contexts">[SECURE-CONTEXTS]
+   <dd>Mike West. <a href="https://w3c.github.io/webappsec-secure-contexts/"><cite>Secure Contexts</cite></a>. URL: <a href="https://w3c.github.io/webappsec-secure-contexts/">https://w3c.github.io/webappsec-secure-contexts/</a>
    <dt id="biblio-trusted-types">[Trusted-Types]
    <dd>Krzysztof Kotowicz. <a href="https://w3c.github.io/trusted-types/dist/spec/"><cite>Trusted Types</cite></a>. URL: <a href="https://w3c.github.io/trusted-types/dist/spec/">https://w3c.github.io/trusted-types/dist/spec/</a>
    <dt id="biblio-webidl">[WEBIDL]
@@ -2871,6 +2864,8 @@ a capability to that origin, and thereby ship new capabilities more safely.</p>
   <dl>
    <dt id="biblio-long-live-csp">[LONG-LIVE-CSP]
    <dd>Lukas Weichselbaum; et al. <a href="https://dl.acm.org/doi/10.1145/2976749.2978363"><cite>CSP Is Dead, Long Live CSP! On the Insecurity of Whitelists and the Future of Content Security Policy</cite></a>. 24 October 2016. URL: <a href="https://dl.acm.org/doi/10.1145/2976749.2978363">https://dl.acm.org/doi/10.1145/2976749.2978363</a>
+   <dt id="biblio-mix">[MIX]
+   <dd>Emily Stark; Mike West; Carlos IbarraLopez. <a href="https://w3c.github.io/webappsec-mixed-content/"><cite>Mixed Content</cite></a>. URL: <a href="https://w3c.github.io/webappsec-mixed-content/">https://w3c.github.io/webappsec-mixed-content/</a>
    <dt id="biblio-securer-contexts">[SECURER-CONTEXTS]
    <dd>Mike West. <a href="https://github.com/mikewest/securer-contexts"><cite>Securer Contexts</cite></a>. URL: <a href="https://github.com/mikewest/securer-contexts">https://github.com/mikewest/securer-contexts</a>
    <dt id="biblio-strict-csp">[STRICT-CSP]
@@ -2900,16 +2895,382 @@ and pieces of trusted types. We could parameterize the IDL attribute, for
 example (e.g. <code>[InjectionMitigated=Basic]</code> vs <code>[InjectionMitigated=RequireTrustedTypes]</code>), though I’ve no idea how we’d
 spell out a meaningful bar that would allow folks creating APIs to decide
 which they’d prefer. <a class="issue-return" href="#issue-9410ab2d" title="Jump to section">↵</a></div>
-   <div class="issue"> Anne noted in a previous iteration of this
-proposal that it differs meaningfully from [<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#SecureContext">SecureContext</a></code>] and
-[<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#CrossOriginIsolated">CrossOriginIsolated</a></code>] insofar as it doesn’t require anything of a
-context’s ancestors. That is, we’re evaluting the injection mitigation of a
-specific document or worker or etc, and would expose an IDL construct there
-regardless of whether that context’s parent also met the requirements. Should
-we apply the same considerations of <a href="https://w3c.github.io/webappsec-secure-contexts/#ancestors">ancestral risk</a> that we took into account when defining Secure Contexts? Perhaps! <a href="https://github.com/mikewest/securer-contexts/issues/1">[Issue #mikewest/securer-contexts#1]</a> <a class="issue-return" href="#issue-174efc8d" title="Jump to section">↵</a></div>
+   <div class="issue"> This is an open decision point that
+Anne raised in a previous version of this proposal. We should hammer it out,
+one way or the other. <a href="https://github.com/mikewest/securer-contexts/issues/1">[Issue #mikewest/securer-contexts#1]</a> <a class="issue-return" href="#issue-b0f2e524" title="Jump to section">↵</a></div>
   </div>
-<script>/* Boilerplate: script-dom-helper */
+<script>/* Boilerplate: script-dfn-panel */
 "use strict";
+{
+    const dfnsJson = window.dfnsJson || {};
+
+    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
+        return mk.aside({
+            class: "dfn-panel",
+            id: `infopanel-for-${dfnID}`,
+            "data-for": dfnID,
+            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+            },
+            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+                `Info about the '${dfnText}' ${external?"external":""} reference.`),
+            mk.a({href:url}, url),
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({
+                                    href: `#${ref.id}`
+                                    },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        );
+    }
+
+    function genAllDfnPanels() {
+        for(const panelData of Object.values(window.dfnpanelData)) {
+            const dfnID = panelData.dfnID;
+            const dfn = document.getElementById(dfnID);
+            if(!dfn) {
+                console.log(`Can't find dfn#${dfnID}.`, panelData);
+            } else {
+                const panel = genDfnPanel(panelData);
+                append(document.body, panel);
+                insertDfnPopupAction(dfn, panel)
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", ()=>{
+        genAllDfnPanels();
+
+        // Add popup behavior to all dfns to show the corresponding dfn-panel.
+        var dfns = queryAll('.dfn-paneled');
+        for(let dfn of dfns) { ; }
+
+        document.body.addEventListener("click", (e) => {
+            // If not handled already, just hide all dfn panels.
+            hideAllDfnPanels();
+        });
+    })
+
+
+    function hideAllDfnPanels() {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
+    }
+
+    function showDfnPanel(dfnPanel, dfn) {
+        hideAllDfnPanels(); // Only display one at this time.
+        dfn.setAttribute("aria-expanded", "true");
+        dfnPanel.classList.add("on");
+        dfnPanel.style.left = "5px";
+        dfnPanel.style.top = "0px";
+        const panelRect = dfnPanel.getBoundingClientRect();
+        const panelWidth = panelRect.right - panelRect.left;
+        if (panelRect.right > document.body.scrollWidth) {
+            // Panel's overflowing the screen.
+            // Just drop it below the dfn and flip it rightward instead.
+            // This still wont' fix things if the screen is *really* wide,
+            // but fixing that's a lot harder without 'anchor()'.
+            dfnPanel.style.top = "1.5em";
+            dfnPanel.style.left = "auto";
+            dfnPanel.style.right = "0px";
+        }
+    }
+
+    function pinDfnPanel(dfnPanel) {
+        // Switch it to "activated" state, which pins it.
+        dfnPanel.classList.add("activated");
+        dfnPanel.style.left = null;
+        dfnPanel.style.top = null;
+    }
+
+    function hideDfnPanel(dfnPanel, dfn) {
+        if(!dfn) {
+            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
+        }
+        dfn.setAttribute("aria-expanded", "false")
+        dfnPanel.classList.remove("on");
+        dfnPanel.classList.remove("activated");
+    }
+
+    function toggleDfnPanel(dfnPanel, dfn) {
+        if(dfnPanel.classList.contains("on")) {
+            hideDfnPanel(dfnPanel, dfn);
+        } else {
+            showDfnPanel(dfnPanel, dfn);
+        }
+    }
+
+    function insertDfnPopupAction(dfn, dfnPanel) {
+        // Find dfn panel
+        const panelWrapper = document.createElement('span');
+        panelWrapper.appendChild(dfnPanel);
+        panelWrapper.style.position = "relative";
+        panelWrapper.style.height = "0px";
+        dfn.insertAdjacentElement("afterend", panelWrapper);
+        dfn.setAttribute('role', 'button');
+        dfn.setAttribute('aria-expanded', 'false')
+        dfn.tabIndex = 0;
+        dfn.classList.add('has-dfn-panel');
+        dfn.addEventListener('click', (event) => {
+            showDfnPanel(dfnPanel, dfn);
+            event.stopPropagation();
+        });
+        dfn.addEventListener('keypress', (event) => {
+            const kc = event.keyCode;
+            // 32->Space, 13->Enter
+            if(kc == 32 || kc == 13) {
+                toggleDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        });
+
+        dfnPanel.addEventListener('click', (event) => {
+            if (event.target.nodeName == 'A') {
+                pinDfnPanel(dfnPanel);
+            }
+            event.stopPropagation();
+        });
+
+        dfnPanel.addEventListener('keydown', (event) => {
+            if(event.keyCode == 27) { // Escape key
+                hideDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        })
+    }
+}
+</script>
+<script>/* Boilerplate: script-dfn-panel */
+"use strict";
+{
+    const dfnsJson = window.dfnsJson || {};
+
+    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
+        return mk.aside({
+            class: "dfn-panel",
+            id: `infopanel-for-${dfnID}`,
+            "data-for": dfnID,
+            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+            },
+            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+                `Info about the '${dfnText}' ${external?"external":""} reference.`),
+            mk.a({href:url}, url),
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({
+                                    href: `#${ref.id}`
+                                    },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        );
+    }
+
+    function genAllDfnPanels() {
+        for(const panelData of Object.values(window.dfnpanelData)) {
+            const dfnID = panelData.dfnID;
+            const dfn = document.getElementById(dfnID);
+            if(!dfn) {
+                console.log(`Can't find dfn#${dfnID}.`, panelData);
+            } else {
+                const panel = genDfnPanel(panelData);
+                append(document.body, panel);
+                insertDfnPopupAction(dfn, panel)
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", ()=>{
+        genAllDfnPanels();
+
+        // Add popup behavior to all dfns to show the corresponding dfn-panel.
+        var dfns = queryAll('.dfn-paneled');
+        for(let dfn of dfns) { ; }
+
+        document.body.addEventListener("click", (e) => {
+            // If not handled already, just hide all dfn panels.
+            hideAllDfnPanels();
+        });
+    })
+
+
+    function hideAllDfnPanels() {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
+    }
+
+    function showDfnPanel(dfnPanel, dfn) {
+        hideAllDfnPanels(); // Only display one at this time.
+        dfn.setAttribute("aria-expanded", "true");
+        dfnPanel.classList.add("on");
+        dfnPanel.style.left = "5px";
+        dfnPanel.style.top = "0px";
+        const panelRect = dfnPanel.getBoundingClientRect();
+        const panelWidth = panelRect.right - panelRect.left;
+        if (panelRect.right > document.body.scrollWidth) {
+            // Panel's overflowing the screen.
+            // Just drop it below the dfn and flip it rightward instead.
+            // This still wont' fix things if the screen is *really* wide,
+            // but fixing that's a lot harder without 'anchor()'.
+            dfnPanel.style.top = "1.5em";
+            dfnPanel.style.left = "auto";
+            dfnPanel.style.right = "0px";
+        }
+    }
+
+    function pinDfnPanel(dfnPanel) {
+        // Switch it to "activated" state, which pins it.
+        dfnPanel.classList.add("activated");
+        dfnPanel.style.left = null;
+        dfnPanel.style.top = null;
+    }
+
+    function hideDfnPanel(dfnPanel, dfn) {
+        if(!dfn) {
+            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
+        }
+        dfn.setAttribute("aria-expanded", "false")
+        dfnPanel.classList.remove("on");
+        dfnPanel.classList.remove("activated");
+    }
+
+    function toggleDfnPanel(dfnPanel, dfn) {
+        if(dfnPanel.classList.contains("on")) {
+            hideDfnPanel(dfnPanel, dfn);
+        } else {
+            showDfnPanel(dfnPanel, dfn);
+        }
+    }
+
+    function insertDfnPopupAction(dfn, dfnPanel) {
+        // Find dfn panel
+        const panelWrapper = document.createElement('span');
+        panelWrapper.appendChild(dfnPanel);
+        panelWrapper.style.position = "relative";
+        panelWrapper.style.height = "0px";
+        dfn.insertAdjacentElement("afterend", panelWrapper);
+        dfn.setAttribute('role', 'button');
+        dfn.setAttribute('aria-expanded', 'false')
+        dfn.tabIndex = 0;
+        dfn.classList.add('has-dfn-panel');
+        dfn.addEventListener('click', (event) => {
+            showDfnPanel(dfnPanel, dfn);
+            event.stopPropagation();
+        });
+        dfn.addEventListener('keypress', (event) => {
+            const kc = event.keyCode;
+            // 32->Space, 13->Enter
+            if(kc == 32 || kc == 13) {
+                toggleDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        });
+
+        dfnPanel.addEventListener('click', (event) => {
+            if (event.target.nodeName == 'A') {
+                pinDfnPanel(dfnPanel);
+            }
+            event.stopPropagation();
+        });
+
+        dfnPanel.addEventListener('keydown', (event) => {
+            if(event.keyCode == 27) { // Escape key
+                hideDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        })
+    }
+}
+</script>
+<script>/* Boilerplate: script-dfn-panel-json */
+window.dfnpanelData = {};
+window.dfnpanelData['76a07ab2'] = {"dfnID": "76a07ab2", "url": "https://w3c.github.io/webappsec-csp/#directive-fallback-list", "dfnText": "Get fetch directive fallback list", "refSections": [{"refs": [{"id": "ref-for-directive-fallback-list"}], "title": "2.1.2. Obtain the active directive for a type"}], "external": true};
+window.dfnpanelData['78b596f6'] = {"dfnID": "78b596f6", "url": "https://w3c.github.io/webappsec-csp/#csp-list", "dfnText": "csp list", "refSections": [{"refs": [{"id": "ref-for-csp-list"}], "title": "2.1. Content Security Policy"}, {"refs": [{"id": "ref-for-csp-list\u2460"}], "title": "2.1.1. Does a policy meaningfully mitigate injection attacks?"}], "external": true};
+window.dfnpanelData['3d7ed2c2'] = {"dfnID": "3d7ed2c2", "url": "https://w3c.github.io/webappsec-csp/#policy-directive-set", "dfnText": "directive set", "refSections": [{"refs": [{"id": "ref-for-policy-directive-set"}], "title": "2.1.2. Obtain the active directive for a type"}, {"refs": [{"id": "ref-for-policy-directive-set\u2460"}], "title": "2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"}, {"refs": [{"id": "ref-for-policy-directive-set\u2461"}], "title": "2.1.6. Does a policy sufficiently mitigate DOM sinks?"}], "external": true};
+window.dfnpanelData['c80aa797'] = {"dfnID": "c80aa797", "url": "https://w3c.github.io/webappsec-csp/#directives", "dfnText": "directives", "refSections": [{"refs": [{"id": "ref-for-directives"}], "title": "2.1.2. Obtain the active directive for a type"}], "external": true};
+window.dfnpanelData['4582ec82'] = {"dfnID": "4582ec82", "url": "https://w3c.github.io/webappsec-csp/#policy-disposition", "dfnText": "disposition", "refSections": [{"refs": [{"id": "ref-for-policy-disposition"}], "title": "2.1.1. Does a policy meaningfully mitigate injection attacks?"}, {"refs": [{"id": "ref-for-policy-disposition\u2460"}], "title": "2.1.3. Does a policy sufficiently mitigate plugins?"}, {"refs": [{"id": "ref-for-policy-disposition\u2461"}], "title": "2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"}, {"refs": [{"id": "ref-for-policy-disposition\u2462"}], "title": "2.1.5. Does a policy sufficiently mitigate script execution?"}, {"refs": [{"id": "ref-for-policy-disposition\u2463"}], "title": "2.1.6. Does a policy sufficiently mitigate DOM sinks?"}], "external": true};
+window.dfnpanelData['550c8676'] = {"dfnID": "550c8676", "url": "https://w3c.github.io/webappsec-csp/#grammardef-hash-source", "dfnText": "hash-source", "refSections": [{"refs": [{"id": "ref-for-grammardef-hash-source"}], "title": "2.1.5. Does a policy sufficiently mitigate script execution?"}], "external": true};
+window.dfnpanelData['0950067d'] = {"dfnID": "0950067d", "url": "https://w3c.github.io/webappsec-csp/#grammardef-host-source", "dfnText": "host-source", "refSections": [{"refs": [{"id": "ref-for-grammardef-host-source"}], "title": "2.1.5. Does a policy sufficiently mitigate script execution?"}], "external": true};
+window.dfnpanelData['51218496'] = {"dfnID": "51218496", "url": "https://w3c.github.io/webappsec-csp/#directive-name", "dfnText": "name", "refSections": [{"refs": [{"id": "ref-for-directive-name"}], "title": "2.1.2. Obtain the active directive for a type"}, {"refs": [{"id": "ref-for-directive-name\u2460"}], "title": "2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"}, {"refs": [{"id": "ref-for-directive-name\u2461"}], "title": "2.1.6. Does a policy sufficiently mitigate DOM sinks?"}], "external": true};
+window.dfnpanelData['4945e6fc'] = {"dfnID": "4945e6fc", "url": "https://w3c.github.io/webappsec-csp/#grammardef-nonce-source", "dfnText": "nonce-source", "refSections": [{"refs": [{"id": "ref-for-grammardef-nonce-source"}], "title": "2.1.5. Does a policy sufficiently mitigate script execution?"}], "external": true};
+window.dfnpanelData['de921304'] = {"dfnID": "de921304", "url": "https://w3c.github.io/webappsec-csp/#violation-policy", "dfnText": "policy", "refSections": [{"refs": [{"id": "ref-for-violation-policy"}], "title": "2.1.2. Obtain the active directive for a type"}, {"refs": [{"id": "ref-for-violation-policy\u2460"}], "title": "2.1.3. Does a policy sufficiently mitigate plugins?"}, {"refs": [{"id": "ref-for-violation-policy\u2461"}], "title": "2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"}, {"refs": [{"id": "ref-for-violation-policy\u2462"}], "title": "2.1.5. Does a policy sufficiently mitigate script execution?"}, {"refs": [{"id": "ref-for-violation-policy\u2463"}], "title": "2.1.6. Does a policy sufficiently mitigate DOM sinks?"}], "external": true};
+window.dfnpanelData['d4ec2d19'] = {"dfnID": "d4ec2d19", "url": "https://w3c.github.io/webappsec-csp/#grammardef-scheme-source", "dfnText": "scheme-source", "refSections": [{"refs": [{"id": "ref-for-grammardef-scheme-source"}], "title": "2.1.5. Does a policy sufficiently mitigate script execution?"}], "external": true};
+window.dfnpanelData['54872557'] = {"dfnID": "54872557", "url": "https://w3c.github.io/webappsec-csp/#policy-source", "dfnText": "source", "refSections": [{"refs": [{"id": "ref-for-policy-source"}], "title": "2.1.1. Does a policy meaningfully mitigate injection attacks?"}], "external": true};
+window.dfnpanelData['461b765a'] = {"dfnID": "461b765a", "url": "https://w3c.github.io/webappsec-csp/#directive-value", "dfnText": "value", "refSections": [{"refs": [{"id": "ref-for-directive-value"}, {"id": "ref-for-directive-value\u2460"}], "title": "2.1.3. Does a policy sufficiently mitigate plugins?"}, {"refs": [{"id": "ref-for-directive-value\u2461"}, {"id": "ref-for-directive-value\u2462"}], "title": "2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"}, {"refs": [{"id": "ref-for-directive-value\u2463"}], "title": "2.1.5. Does a policy sufficiently mitigate script execution?"}, {"refs": [{"id": "ref-for-directive-value\u2464"}], "title": "2.1.6. Does a policy sufficiently mitigate DOM sinks?"}], "external": true};
+window.dfnpanelData['353564d6'] = {"dfnID": "353564d6", "url": "https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#sec-agent-clusters", "dfnText": "agent clusters", "refSections": [{"refs": [{"id": "ref-for-sec-agent-clusters"}], "title": "4.1. Same-origin Documents"}], "external": true};
+window.dfnpanelData['a5f015e3'] = {"dfnID": "a5f015e3", "url": "https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#realm", "dfnText": "realm", "refSections": [{"refs": [{"id": "ref-for-realm"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": true};
+window.dfnpanelData['c847111b'] = {"dfnID": "c847111b", "url": "https://html.spec.whatwg.org/multipage/semantics.html#the-base-element", "dfnText": "base", "refSections": [{"refs": [{"id": "ref-for-the-base-element"}], "title": "3.1. What defenses does [InjectionMitigated] require?"}], "external": true};
+window.dfnpanelData['473036cd'] = {"dfnID": "473036cd", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-cross-origin-isolated-capability", "dfnText": "cross-origin isolated capability", "refSections": [{"refs": [{"id": "ref-for-concept-settings-object-cross-origin-isolated-capability"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-concept-settings-object-cross-origin-isolated-capability\u2460"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": true};
+window.dfnpanelData['158b3a38'] = {"dfnID": "158b3a38", "url": "https://html.spec.whatwg.org/multipage/browsers.html#policy-container-csp-list", "dfnText": "csp list", "refSections": [{"refs": [{"id": "ref-for-policy-container-csp-list"}], "title": "2.2. HTML"}], "external": true};
+window.dfnpanelData['6eb8a5d8'] = {"dfnID": "6eb8a5d8", "url": "https://html.spec.whatwg.org/multipage/urls-and-fetching.html#document-base-url", "dfnText": "document base url", "refSections": [{"refs": [{"id": "ref-for-document-base-url"}], "title": "3.1. What defenses does [InjectionMitigated] require?"}], "external": true};
+window.dfnpanelData['3e12e042'] = {"dfnID": "3e12e042", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object", "dfnText": "environment settings object", "refSections": [{"refs": [{"id": "ref-for-environment-settings-object"}, {"id": "ref-for-environment-settings-object\u2460"}], "title": "2.2. HTML"}, {"refs": [{"id": "ref-for-environment-settings-object\u2461"}], "title": "3.1. What defenses does [InjectionMitigated] require?"}], "external": true};
+window.dfnpanelData['8a30477b'] = {"dfnID": "8a30477b", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-global", "dfnText": "global object", "refSections": [{"refs": [{"id": "ref-for-concept-settings-object-global"}], "title": "2.2. HTML"}], "external": true};
+window.dfnpanelData['64b89595'] = {"dfnID": "64b89595", "url": "https://html.spec.whatwg.org/multipage/semantics.html#meta", "dfnText": "meta", "refSections": [{"refs": [{"id": "ref-for-meta"}], "title": "3.1. What defenses does [InjectionMitigated] require?"}], "external": true};
+window.dfnpanelData['cbe46402'] = {"dfnID": "cbe46402", "url": "https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-opener", "dfnText": "opener", "refSections": [{"refs": [{"id": "ref-for-dom-opener"}], "title": "4.1. Same-origin Documents"}], "external": true};
+window.dfnpanelData['bd1db03d'] = {"dfnID": "bd1db03d", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container", "dfnText": "policy container", "refSections": [{"refs": [{"id": "ref-for-concept-settings-object-policy-container"}], "title": "2.2. HTML"}], "external": true};
+window.dfnpanelData['65181da8'] = {"dfnID": "65181da8", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#secure-context", "dfnText": "secure context", "refSections": [{"refs": [{"id": "ref-for-secure-context"}], "title": "1. Introduction"}, {"refs": [{"id": "ref-for-secure-context\u2460"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": true};
+window.dfnpanelData['7deb6835'] = {"dfnID": "7deb6835", "url": "https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-settings-object", "dfnText": "settings object", "refSections": [{"refs": [{"id": "ref-for-concept-realm-settings-object"}, {"id": "ref-for-concept-realm-settings-object\u2460"}, {"id": "ref-for-concept-realm-settings-object\u2461"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": true};
+window.dfnpanelData['7f9469b5'] = {"dfnID": "7f9469b5", "url": "https://infra.spec.whatwg.org/#ascii-case-insensitive", "dfnText": "ascii case-insensitive", "refSections": [{"refs": [{"id": "ref-for-ascii-case-insensitive"}], "title": "2.1.3. Does a policy sufficiently mitigate plugins?"}, {"refs": [{"id": "ref-for-ascii-case-insensitive\u2460"}], "title": "2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"}, {"refs": [{"id": "ref-for-ascii-case-insensitive\u2461"}, {"id": "ref-for-ascii-case-insensitive\u2462"}, {"id": "ref-for-ascii-case-insensitive\u2463"}, {"id": "ref-for-ascii-case-insensitive\u2464"}], "title": "2.1.5. Does a policy sufficiently mitigate script execution?"}, {"refs": [{"id": "ref-for-ascii-case-insensitive\u2465"}], "title": "2.1.6. Does a policy sufficiently mitigate DOM sinks?"}], "external": true};
+window.dfnpanelData['36858240'] = {"dfnID": "36858240", "url": "https://infra.spec.whatwg.org/#boolean", "dfnText": "boolean", "refSections": [{"refs": [{"id": "ref-for-boolean"}], "title": "2.1.1. Does a policy meaningfully mitigate injection attacks?"}], "external": true};
+window.dfnpanelData['ae8def21'] = {"dfnID": "ae8def21", "url": "https://infra.spec.whatwg.org/#list-contain", "dfnText": "contain", "refSections": [{"refs": [{"id": "ref-for-list-contain"}], "title": "2.1.2. Obtain the active directive for a type"}, {"refs": [{"id": "ref-for-list-contain\u2460"}], "title": "2.1.6. Does a policy sufficiently mitigate DOM sinks?"}], "external": true};
+window.dfnpanelData['f937b7b6'] = {"dfnID": "f937b7b6", "url": "https://infra.spec.whatwg.org/#iteration-continue", "dfnText": "continue", "refSections": [{"refs": [{"id": "ref-for-iteration-continue"}], "title": "2.1.1. Does a policy meaningfully mitigate injection attacks?"}], "external": true};
+window.dfnpanelData['16d07e10'] = {"dfnID": "16d07e10", "url": "https://infra.spec.whatwg.org/#list-iterate", "dfnText": "for each", "refSections": [{"refs": [{"id": "ref-for-list-iterate"}], "title": "2.1.1. Does a policy meaningfully mitigate injection attacks?"}, {"refs": [{"id": "ref-for-list-iterate\u2460"}], "title": "2.1.2. Obtain the active directive for a type"}, {"refs": [{"id": "ref-for-list-iterate\u2461"}], "title": "2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"}, {"refs": [{"id": "ref-for-list-iterate\u2462"}], "title": "2.1.5. Does a policy sufficiently mitigate script execution?"}, {"refs": [{"id": "ref-for-list-iterate\u2463"}], "title": "2.1.6. Does a policy sufficiently mitigate DOM sinks?"}], "external": true};
+window.dfnpanelData['0204d188'] = {"dfnID": "0204d188", "url": "https://infra.spec.whatwg.org/#list-size", "dfnText": "size", "refSections": [{"refs": [{"id": "ref-for-list-size"}], "title": "2.1.3. Does a policy sufficiently mitigate plugins?"}, {"refs": [{"id": "ref-for-list-size\u2460"}], "title": "2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"}], "external": true};
+window.dfnpanelData['cc2141c1'] = {"dfnID": "cc2141c1", "url": "https://webidl.spec.whatwg.org/#CrossOriginIsolated", "dfnText": "CrossOriginIsolated", "refSections": [{"refs": [{"id": "ref-for-CrossOriginIsolated"}, {"id": "ref-for-CrossOriginIsolated\u2460"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}, {"refs": [{"id": "ref-for-CrossOriginIsolated\u2461"}, {"id": "ref-for-CrossOriginIsolated\u2462"}, {"id": "ref-for-CrossOriginIsolated\u2463"}], "title": "4.1. Same-origin Documents"}], "external": true};
+window.dfnpanelData['b75bb3bd'] = {"dfnID": "b75bb3bd", "url": "https://webidl.spec.whatwg.org/#SecureContext", "dfnText": "SecureContext", "refSections": [{"refs": [{"id": "ref-for-SecureContext"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}, {"refs": [{"id": "ref-for-SecureContext\u2460"}], "title": "3.2. What APIs should be marked as [InjectionMitigated]?"}, {"refs": [{"id": "ref-for-SecureContext\u2461"}, {"id": "ref-for-SecureContext\u2462"}, {"id": "ref-for-SecureContext\u2463"}], "title": "4.1. Same-origin Documents"}], "external": true};
+window.dfnpanelData['b197a79c'] = {"dfnID": "b197a79c", "url": "https://webidl.spec.whatwg.org/#dfn-callback-interface", "dfnText": "callback interface", "refSections": [{"refs": [{"id": "ref-for-dfn-callback-interface"}], "title": "2.3.1. [InjectionMitigated]"}, {"refs": [{"id": "ref-for-dfn-callback-interface\u2460"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": true};
+window.dfnpanelData['d9659204'] = {"dfnID": "d9659204", "url": "https://webidl.spec.whatwg.org/#dfn-conditionally-exposed", "dfnText": "conditionally exposed", "refSections": [{"refs": [{"id": "ref-for-dfn-conditionally-exposed"}, {"id": "ref-for-dfn-conditionally-exposed\u2460"}, {"id": "ref-for-dfn-conditionally-exposed\u2461"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": true};
+window.dfnpanelData['631ad9e6'] = {"dfnID": "631ad9e6", "url": "https://webidl.spec.whatwg.org/#dfn-exposure-set", "dfnText": "exposure set", "refSections": [{"refs": [{"id": "ref-for-dfn-exposure-set"}, {"id": "ref-for-dfn-exposure-set\u2460"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": true};
+window.dfnpanelData['3f252540'] = {"dfnID": "3f252540", "url": "https://webidl.spec.whatwg.org/#dfn-extended-attribute", "dfnText": "extended attribute", "refSections": [{"refs": [{"id": "ref-for-dfn-extended-attribute"}, {"id": "ref-for-dfn-extended-attribute\u2460"}, {"id": "ref-for-dfn-extended-attribute\u2461"}, {"id": "ref-for-dfn-extended-attribute\u2462"}, {"id": "ref-for-dfn-extended-attribute\u2463"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['5dcb6b9f'] = {"dfnID": "5dcb6b9f", "url": "https://webidl.spec.whatwg.org/#dfn-idl-fragment", "dfnText": "idl fragment", "refSections": [{"refs": [{"id": "ref-for-dfn-idl-fragment"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['eab3771a'] = {"dfnID": "eab3771a", "url": "https://webidl.spec.whatwg.org/#dfn-inherit", "dfnText": "inherit", "refSections": [{"refs": [{"id": "ref-for-dfn-inherit"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['1422ec4e'] = {"dfnID": "1422ec4e", "url": "https://webidl.spec.whatwg.org/#dfn-interface", "dfnText": "interface", "refSections": [{"refs": [{"id": "ref-for-dfn-interface"}, {"id": "ref-for-dfn-interface\u2460"}, {"id": "ref-for-dfn-interface\u2461"}], "title": "2.3.1. [InjectionMitigated]"}, {"refs": [{"id": "ref-for-dfn-interface\u2462"}, {"id": "ref-for-dfn-interface\u2463"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": true};
+window.dfnpanelData['1c84257e'] = {"dfnID": "1c84257e", "url": "https://webidl.spec.whatwg.org/#dfn-interface-member", "dfnText": "interface member", "refSections": [{"refs": [{"id": "ref-for-dfn-interface-member"}, {"id": "ref-for-dfn-interface-member\u2460"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['d08c79a9'] = {"dfnID": "d08c79a9", "url": "https://webidl.spec.whatwg.org/#interface-mixin", "dfnText": "interface mixin", "refSections": [{"refs": [{"id": "ref-for-interface-mixin"}, {"id": "ref-for-interface-mixin\u2460"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['d7a206d7'] = {"dfnID": "d7a206d7", "url": "https://webidl.spec.whatwg.org/#interface-mixin-member", "dfnText": "interface mixin member", "refSections": [{"refs": [{"id": "ref-for-interface-mixin-member"}, {"id": "ref-for-interface-mixin-member\u2460"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['22e6d952'] = {"dfnID": "22e6d952", "url": "https://webidl.spec.whatwg.org/#dfn-member", "dfnText": "members", "refSections": [{"refs": [{"id": "ref-for-dfn-member"}, {"id": "ref-for-dfn-member\u2460"}], "title": "2.3.1. [InjectionMitigated]"}, {"refs": [{"id": "ref-for-dfn-member\u2461"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": true};
+window.dfnpanelData['2039631f'] = {"dfnID": "2039631f", "url": "https://webidl.spec.whatwg.org/#dfn-namespace", "dfnText": "namespace", "refSections": [{"refs": [{"id": "ref-for-dfn-namespace"}, {"id": "ref-for-dfn-namespace\u2460"}], "title": "2.3.1. [InjectionMitigated]"}, {"refs": [{"id": "ref-for-dfn-namespace\u2461"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": true};
+window.dfnpanelData['5be3b9a5'] = {"dfnID": "5be3b9a5", "url": "https://webidl.spec.whatwg.org/#dfn-namespace-member", "dfnText": "namespace member", "refSections": [{"refs": [{"id": "ref-for-dfn-namespace-member"}, {"id": "ref-for-dfn-namespace-member\u2460"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['bac9095f'] = {"dfnID": "bac9095f", "url": "https://webidl.spec.whatwg.org/#dfn-operation", "dfnText": "operation", "refSections": [{"refs": [{"id": "ref-for-dfn-operation"}, {"id": "ref-for-dfn-operation\u2460"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['c71e04da'] = {"dfnID": "c71e04da", "url": "https://webidl.spec.whatwg.org/#dfn-overloaded", "dfnText": "overloaded", "refSections": [{"refs": [{"id": "ref-for-dfn-overloaded"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['d0eba3fd'] = {"dfnID": "d0eba3fd", "url": "https://webidl.spec.whatwg.org/#dfn-partial-interface", "dfnText": "partial interface", "refSections": [{"refs": [{"id": "ref-for-dfn-partial-interface"}, {"id": "ref-for-dfn-partial-interface\u2460"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['33e1d425'] = {"dfnID": "33e1d425", "url": "https://webidl.spec.whatwg.org/#partial-interface-mixin", "dfnText": "partial interface mixin", "refSections": [{"refs": [{"id": "ref-for-partial-interface-mixin"}, {"id": "ref-for-partial-interface-mixin\u2460"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['2f83c241'] = {"dfnID": "2f83c241", "url": "https://webidl.spec.whatwg.org/#dfn-partial-namespace", "dfnText": "partial namespace", "refSections": [{"refs": [{"id": "ref-for-dfn-partial-namespace"}, {"id": "ref-for-dfn-partial-namespace\u2460"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['843fcc5a'] = {"dfnID": "843fcc5a", "url": "https://webidl.spec.whatwg.org/#dfn-xattr-no-arguments", "dfnText": "takes no arguments", "refSections": [{"refs": [{"id": "ref-for-dfn-xattr-no-arguments"}], "title": "2.3.1. [InjectionMitigated]"}], "external": true};
+window.dfnpanelData['csp-list-meaningfully-mitigate-injection-attacks'] = {"dfnID": "csp-list-meaningfully-mitigate-injection-attacks", "url": "#csp-list-meaningfully-mitigate-injection-attacks", "dfnText": "meaningfully\nmitigate injection attacks", "refSections": [{"refs": [{"id": "ref-for-csp-list-meaningfully-mitigate-injection-attacks"}], "title": "2.2. HTML"}], "external": false};
+window.dfnpanelData['abstract-opdef-obtain-directive'] = {"dfnID": "abstract-opdef-obtain-directive", "url": "#abstract-opdef-obtain-directive", "dfnText": "obtain\nthe active directive", "refSections": [{"refs": [{"id": "ref-for-abstract-opdef-obtain-directive"}], "title": "2.1.3. Does a policy sufficiently mitigate plugins?"}, {"refs": [{"id": "ref-for-abstract-opdef-obtain-directive\u2460"}], "title": "2.1.5. Does a policy sufficiently mitigate script execution?"}], "external": false};
+window.dfnpanelData['policy-sufficiently-mitigates-plugins'] = {"dfnID": "policy-sufficiently-mitigates-plugins", "url": "#policy-sufficiently-mitigates-plugins", "dfnText": "sufficiently mitigates plugins", "refSections": [{"refs": [{"id": "ref-for-policy-sufficiently-mitigates-plugins"}], "title": "2.1.1. Does a policy meaningfully mitigate injection attacks?"}], "external": false};
+window.dfnpanelData['policy-sufficiently-mitigates-relative-url-manipulation'] = {"dfnID": "policy-sufficiently-mitigates-relative-url-manipulation", "url": "#policy-sufficiently-mitigates-relative-url-manipulation", "dfnText": "sufficiently mitigates relative URL manipulation", "refSections": [{"refs": [{"id": "ref-for-policy-sufficiently-mitigates-relative-url-manipulation"}], "title": "2.1.1. Does a policy meaningfully mitigate injection attacks?"}], "external": false};
+window.dfnpanelData['policy-sufficiently-mitigates-script-execution'] = {"dfnID": "policy-sufficiently-mitigates-script-execution", "url": "#policy-sufficiently-mitigates-script-execution", "dfnText": "sufficiently mitigates script execution", "refSections": [{"refs": [{"id": "ref-for-policy-sufficiently-mitigates-script-execution"}], "title": "2.1.1. Does a policy meaningfully mitigate injection attacks?"}], "external": false};
+window.dfnpanelData['policy-sufficiently-mitigates-dom-sinks'] = {"dfnID": "policy-sufficiently-mitigates-dom-sinks", "url": "#policy-sufficiently-mitigates-dom-sinks", "dfnText": "sufficiently mitigates DOM sinks", "refSections": [{"refs": [{"id": "ref-for-policy-sufficiently-mitigates-dom-sinks"}], "title": "2.1.1. Does a policy meaningfully mitigate injection attacks?"}], "external": false};
+window.dfnpanelData['environment-settings-object-meaningfully-mitigate-injection-attacks'] = {"dfnID": "environment-settings-object-meaningfully-mitigate-injection-attacks", "url": "#environment-settings-object-meaningfully-mitigate-injection-attacks", "dfnText": "meaningfully mitigate injection attacks", "refSections": [{"refs": [{"id": "ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks"}], "title": "2.3.1. [InjectionMitigated]"}, {"refs": [{"id": "ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks\u2460"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}, {"refs": [{"id": "ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks\u2461"}], "title": "4.1. Same-origin Documents"}], "external": false};
+window.dfnpanelData['InjectionMitigated'] = {"dfnID": "InjectionMitigated", "url": "#InjectionMitigated", "dfnText": "2.3.1. [InjectionMitigated]", "refSections": [{"refs": [{"id": "ref-for-InjectionMitigated"}, {"id": "ref-for-InjectionMitigated"}, {"id": "ref-for-InjectionMitigated\u2460"}, {"id": "ref-for-InjectionMitigated\u2461"}, {"id": "ref-for-InjectionMitigated\u2462"}, {"id": "ref-for-InjectionMitigated\u2463"}, {"id": "ref-for-InjectionMitigated\u2464"}, {"id": "ref-for-InjectionMitigated\u2465"}, {"id": "ref-for-InjectionMitigated\u2466"}, {"id": "ref-for-InjectionMitigated\u2467"}], "title": "2.3.1. [InjectionMitigated]"}, {"refs": [{"id": "ref-for-InjectionMitigated\u2468"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}, {"refs": [{"id": "ref-for-InjectionMitigated\u2460\u24ea"}], "title": "3.2. What APIs should be marked as [InjectionMitigated]?"}, {"refs": [{"id": "ref-for-InjectionMitigated\u2460\u2460"}], "title": "4.1. Same-origin Documents"}], "external": false};
+window.dfnpanelData['dfn-exposed'] = {"dfnID": "dfn-exposed", "url": "#dfn-exposed", "dfnText": "exposed", "refSections": [{"refs": [{"id": "ref-for-dfn-exposed"}], "title": "2.3.1. [InjectionMitigated]"}, {"refs": [{"id": "ref-for-dfn-exposed\u2460"}], "title": "2.3.2. Patches to the \"exposed\" algorithm"}], "external": false};
+</script>
+<script>/* Boilerplate: script-dom-helper */
 function query(sel) { return document.querySelector(sel); }
 
 function queryAll(sel) { return [...document.querySelectorAll(sel)]; }
@@ -3103,799 +3464,103 @@ function parseHTML(markup) {
 		el.innerHTML = markup;
 		return el.content;
 	}
-}</script>
-<script>/* Boilerplate: script-dfn-panel */
-"use strict";
-{
-let dfnPanelData = {
-"0204d188": {"dfnID":"0204d188","dfnText":"size","external":true,"refSections":[{"refs":[{"id":"ref-for-list-size"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-list-size\u2460"}],"title":"2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"}],"url":"https://infra.spec.whatwg.org/#list-size"},
-"0950067d": {"dfnID":"0950067d","dfnText":"host-source","external":true,"refSections":[{"refs":[{"id":"ref-for-grammardef-host-source"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"https://w3c.github.io/webappsec-csp/#grammardef-host-source"},
-"1422ec4e": {"dfnID":"1422ec4e","dfnText":"interface","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-interface"},{"id":"ref-for-dfn-interface\u2460"},{"id":"ref-for-dfn-interface\u2461"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-interface\u2462"},{"id":"ref-for-dfn-interface\u2463"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-interface"},
-"158b3a38": {"dfnID":"158b3a38","dfnText":"csp list","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-container-csp-list"}],"title":"2.2. HTML"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#policy-container-csp-list"},
-"16d07e10": {"dfnID":"16d07e10","dfnText":"for each","external":true,"refSections":[{"refs":[{"id":"ref-for-list-iterate"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"},{"refs":[{"id":"ref-for-list-iterate\u2460"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-list-iterate\u2461"}],"title":"2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"},{"refs":[{"id":"ref-for-list-iterate\u2462"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"},{"refs":[{"id":"ref-for-list-iterate\u2463"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://infra.spec.whatwg.org/#list-iterate"},
-"1c84257e": {"dfnID":"1c84257e","dfnText":"interface member","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-interface-member"},{"id":"ref-for-dfn-interface-member\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-interface-member"},
-"2039631f": {"dfnID":"2039631f","dfnText":"namespace","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-namespace"},{"id":"ref-for-dfn-namespace\u2460"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-namespace\u2461"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-namespace"},
-"22e6d952": {"dfnID":"22e6d952","dfnText":"members","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-member"},{"id":"ref-for-dfn-member\u2460"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-member\u2461"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-member"},
-"2f83c241": {"dfnID":"2f83c241","dfnText":"partial namespace","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-partial-namespace"},{"id":"ref-for-dfn-partial-namespace\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-partial-namespace"},
-"33e1d425": {"dfnID":"33e1d425","dfnText":"partial interface mixin","external":true,"refSections":[{"refs":[{"id":"ref-for-partial-interface-mixin"},{"id":"ref-for-partial-interface-mixin\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#partial-interface-mixin"},
-"36858240": {"dfnID":"36858240","dfnText":"boolean","external":true,"refSections":[{"refs":[{"id":"ref-for-boolean"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"https://infra.spec.whatwg.org/#boolean"},
-"3d7ed2c2": {"dfnID":"3d7ed2c2","dfnText":"directive set","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-directive-set"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-policy-directive-set\u2460"}],"title":"2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"},{"refs":[{"id":"ref-for-policy-directive-set\u2461"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://w3c.github.io/webappsec-csp/#policy-directive-set"},
-"3e12e042": {"dfnID":"3e12e042","dfnText":"environment settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-environment-settings-object"},{"id":"ref-for-environment-settings-object\u2460"}],"title":"2.2. HTML"},{"refs":[{"id":"ref-for-environment-settings-object\u2461"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object"},
-"3f252540": {"dfnID":"3f252540","dfnText":"extended attribute","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-extended-attribute"},{"id":"ref-for-dfn-extended-attribute\u2460"},{"id":"ref-for-dfn-extended-attribute\u2461"},{"id":"ref-for-dfn-extended-attribute\u2462"},{"id":"ref-for-dfn-extended-attribute\u2463"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-extended-attribute"},
-"4582ec82": {"dfnID":"4582ec82","dfnText":"disposition","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-disposition"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"},{"refs":[{"id":"ref-for-policy-disposition\u2460"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-policy-disposition\u2461"}],"title":"2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"},{"refs":[{"id":"ref-for-policy-disposition\u2462"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"},{"refs":[{"id":"ref-for-policy-disposition\u2463"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://w3c.github.io/webappsec-csp/#policy-disposition"},
-"461b765a": {"dfnID":"461b765a","dfnText":"value","external":true,"refSections":[{"refs":[{"id":"ref-for-directive-value"},{"id":"ref-for-directive-value\u2460"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-directive-value\u2461"},{"id":"ref-for-directive-value\u2462"}],"title":"2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"},{"refs":[{"id":"ref-for-directive-value\u2463"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"},{"refs":[{"id":"ref-for-directive-value\u2464"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://w3c.github.io/webappsec-csp/#directive-value"},
-"473036cd": {"dfnID":"473036cd","dfnText":"cross-origin isolated capability","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-cross-origin-isolated-capability"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-concept-settings-object-cross-origin-isolated-capability\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-cross-origin-isolated-capability"},
-"4945e6fc": {"dfnID":"4945e6fc","dfnText":"nonce-source","external":true,"refSections":[{"refs":[{"id":"ref-for-grammardef-nonce-source"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"https://w3c.github.io/webappsec-csp/#grammardef-nonce-source"},
-"51218496": {"dfnID":"51218496","dfnText":"name","external":true,"refSections":[{"refs":[{"id":"ref-for-directive-name"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-directive-name\u2460"}],"title":"2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"},{"refs":[{"id":"ref-for-directive-name\u2461"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://w3c.github.io/webappsec-csp/#directive-name"},
-"54872557": {"dfnID":"54872557","dfnText":"source","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-source"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"https://w3c.github.io/webappsec-csp/#policy-source"},
-"550c8676": {"dfnID":"550c8676","dfnText":"hash-source","external":true,"refSections":[{"refs":[{"id":"ref-for-grammardef-hash-source"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"https://w3c.github.io/webappsec-csp/#grammardef-hash-source"},
-"5be3b9a5": {"dfnID":"5be3b9a5","dfnText":"namespace member","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-namespace-member"},{"id":"ref-for-dfn-namespace-member\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-namespace-member"},
-"5dcb6b9f": {"dfnID":"5dcb6b9f","dfnText":"idl fragment","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-idl-fragment"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-idl-fragment"},
-"631ad9e6": {"dfnID":"631ad9e6","dfnText":"exposure set","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-exposure-set"},{"id":"ref-for-dfn-exposure-set\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-exposure-set"},
-"64b89595": {"dfnID":"64b89595","dfnText":"meta","external":true,"refSections":[{"refs":[{"id":"ref-for-meta"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://html.spec.whatwg.org/multipage/semantics.html#meta"},
-"65181da8": {"dfnID":"65181da8","dfnText":"secure context","external":true,"refSections":[{"refs":[{"id":"ref-for-secure-context"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-secure-context\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context"},
-"6eb8a5d8": {"dfnID":"6eb8a5d8","dfnText":"document base url","external":true,"refSections":[{"refs":[{"id":"ref-for-document-base-url"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://html.spec.whatwg.org/multipage/urls-and-fetching.html#document-base-url"},
-"76a07ab2": {"dfnID":"76a07ab2","dfnText":"Get fetch directive fallback list","external":true,"refSections":[{"refs":[{"id":"ref-for-directive-fallback-list"}],"title":"2.1.2. Obtain the active directive for a type"}],"url":"https://w3c.github.io/webappsec-csp/#directive-fallback-list"},
-"78b596f6": {"dfnID":"78b596f6","dfnText":"csp list","external":true,"refSections":[{"refs":[{"id":"ref-for-csp-list"}],"title":"2.1. Content Security Policy"},{"refs":[{"id":"ref-for-csp-list\u2460"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"https://w3c.github.io/webappsec-csp/#csp-list"},
-"7deb6835": {"dfnID":"7deb6835","dfnText":"settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-realm-settings-object"},{"id":"ref-for-concept-realm-settings-object\u2460"},{"id":"ref-for-concept-realm-settings-object\u2461"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-settings-object"},
-"7f9469b5": {"dfnID":"7f9469b5","dfnText":"ascii case-insensitive","external":true,"refSections":[{"refs":[{"id":"ref-for-ascii-case-insensitive"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-ascii-case-insensitive\u2460"}],"title":"2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"},{"refs":[{"id":"ref-for-ascii-case-insensitive\u2461"},{"id":"ref-for-ascii-case-insensitive\u2462"},{"id":"ref-for-ascii-case-insensitive\u2463"},{"id":"ref-for-ascii-case-insensitive\u2464"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"},{"refs":[{"id":"ref-for-ascii-case-insensitive\u2465"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://infra.spec.whatwg.org/#ascii-case-insensitive"},
-"843fcc5a": {"dfnID":"843fcc5a","dfnText":"takes no arguments","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-xattr-no-arguments"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-xattr-no-arguments"},
-"8a30477b": {"dfnID":"8a30477b","dfnText":"global object","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-global"}],"title":"2.2. HTML"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-global"},
-"InjectionMitigated": {"dfnID":"InjectionMitigated","dfnText":"2.3.1. [InjectionMitigated]","external":false,"refSections":[{"refs":[{"id":"ref-for-InjectionMitigated"},{"id":"ref-for-InjectionMitigated"},{"id":"ref-for-InjectionMitigated\u2460"},{"id":"ref-for-InjectionMitigated\u2461"},{"id":"ref-for-InjectionMitigated\u2462"},{"id":"ref-for-InjectionMitigated\u2463"},{"id":"ref-for-InjectionMitigated\u2464"},{"id":"ref-for-InjectionMitigated\u2465"},{"id":"ref-for-InjectionMitigated\u2466"},{"id":"ref-for-InjectionMitigated\u2467"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-InjectionMitigated\u2468"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"},{"refs":[{"id":"ref-for-InjectionMitigated\u2460\u24ea"}],"title":"3.2. What APIs should be marked as [InjectionMitigated]?"}],"url":"#InjectionMitigated"},
-"a5f015e3": {"dfnID":"a5f015e3","dfnText":"realm","external":true,"refSections":[{"refs":[{"id":"ref-for-realm"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#realm"},
-"abstract-opdef-obtain-directive": {"dfnID":"abstract-opdef-obtain-directive","dfnText":"obtain\nthe active directive","external":false,"refSections":[{"refs":[{"id":"ref-for-abstract-opdef-obtain-directive"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-abstract-opdef-obtain-directive\u2460"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"#abstract-opdef-obtain-directive"},
-"ae8def21": {"dfnID":"ae8def21","dfnText":"contain","external":true,"refSections":[{"refs":[{"id":"ref-for-list-contain"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-list-contain\u2460"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://infra.spec.whatwg.org/#list-contain"},
-"b197a79c": {"dfnID":"b197a79c","dfnText":"callback interface","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-callback-interface"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-callback-interface\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-callback-interface"},
-"b75bb3bd": {"dfnID":"b75bb3bd","dfnText":"SecureContext","external":true,"refSections":[{"refs":[{"id":"ref-for-SecureContext"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"},{"refs":[{"id":"ref-for-SecureContext\u2460"}],"title":"3.1. What defenses does [InjectionMitigated] require?"},{"refs":[{"id":"ref-for-SecureContext\u2461"}],"title":"3.2. What APIs should be marked as [InjectionMitigated]?"}],"url":"https://webidl.spec.whatwg.org/#SecureContext"},
-"bac9095f": {"dfnID":"bac9095f","dfnText":"operation","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-operation"},{"id":"ref-for-dfn-operation\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-operation"},
-"bd1db03d": {"dfnID":"bd1db03d","dfnText":"policy container","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-settings-object-policy-container"}],"title":"2.2. HTML"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container"},
-"c71e04da": {"dfnID":"c71e04da","dfnText":"overloaded","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-overloaded"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-overloaded"},
-"c80aa797": {"dfnID":"c80aa797","dfnText":"directives","external":true,"refSections":[{"refs":[{"id":"ref-for-directives"}],"title":"2.1.2. Obtain the active directive for a type"}],"url":"https://w3c.github.io/webappsec-csp/#directives"},
-"c847111b": {"dfnID":"c847111b","dfnText":"base","external":true,"refSections":[{"refs":[{"id":"ref-for-the-base-element"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://html.spec.whatwg.org/multipage/semantics.html#the-base-element"},
-"cc2141c1": {"dfnID":"cc2141c1","dfnText":"CrossOriginIsolated","external":true,"refSections":[{"refs":[{"id":"ref-for-CrossOriginIsolated"},{"id":"ref-for-CrossOriginIsolated\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"},{"refs":[{"id":"ref-for-CrossOriginIsolated\u2461"}],"title":"3.1. What defenses does [InjectionMitigated] require?"}],"url":"https://webidl.spec.whatwg.org/#CrossOriginIsolated"},
-"csp-list-meaningfully-mitigate-injection-attacks": {"dfnID":"csp-list-meaningfully-mitigate-injection-attacks","dfnText":"meaningfully\nmitigate injection attacks","external":false,"refSections":[{"refs":[{"id":"ref-for-csp-list-meaningfully-mitigate-injection-attacks"}],"title":"2.2. HTML"}],"url":"#csp-list-meaningfully-mitigate-injection-attacks"},
-"d08c79a9": {"dfnID":"d08c79a9","dfnText":"interface mixin","external":true,"refSections":[{"refs":[{"id":"ref-for-interface-mixin"},{"id":"ref-for-interface-mixin\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#interface-mixin"},
-"d0eba3fd": {"dfnID":"d0eba3fd","dfnText":"partial interface","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-partial-interface"},{"id":"ref-for-dfn-partial-interface\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-partial-interface"},
-"d4ec2d19": {"dfnID":"d4ec2d19","dfnText":"scheme-source","external":true,"refSections":[{"refs":[{"id":"ref-for-grammardef-scheme-source"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"}],"url":"https://w3c.github.io/webappsec-csp/#grammardef-scheme-source"},
-"d7a206d7": {"dfnID":"d7a206d7","dfnText":"interface mixin member","external":true,"refSections":[{"refs":[{"id":"ref-for-interface-mixin-member"},{"id":"ref-for-interface-mixin-member\u2460"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#interface-mixin-member"},
-"d9659204": {"dfnID":"d9659204","dfnText":"conditionally exposed","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-conditionally-exposed"},{"id":"ref-for-dfn-conditionally-exposed\u2460"},{"id":"ref-for-dfn-conditionally-exposed\u2461"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"https://webidl.spec.whatwg.org/#dfn-conditionally-exposed"},
-"de921304": {"dfnID":"de921304","dfnText":"policy","external":true,"refSections":[{"refs":[{"id":"ref-for-violation-policy"}],"title":"2.1.2. Obtain the active directive for a type"},{"refs":[{"id":"ref-for-violation-policy\u2460"}],"title":"2.1.3. Does a policy sufficiently mitigate plugins?"},{"refs":[{"id":"ref-for-violation-policy\u2461"}],"title":"2.1.4. Does a policy sufficiently mitigate relative URL manipulation?"},{"refs":[{"id":"ref-for-violation-policy\u2462"}],"title":"2.1.5. Does a policy sufficiently mitigate script execution?"},{"refs":[{"id":"ref-for-violation-policy\u2463"}],"title":"2.1.6. Does a policy sufficiently mitigate DOM sinks?"}],"url":"https://w3c.github.io/webappsec-csp/#violation-policy"},
-"dfn-exposed": {"dfnID":"dfn-exposed","dfnText":"exposed","external":false,"refSections":[{"refs":[{"id":"ref-for-dfn-exposed"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-dfn-exposed\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"#dfn-exposed"},
-"eab3771a": {"dfnID":"eab3771a","dfnText":"inherit","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-inherit"}],"title":"2.3.1. [InjectionMitigated]"}],"url":"https://webidl.spec.whatwg.org/#dfn-inherit"},
-"environment-settings-object-meaningfully-mitigate-injection-attacks": {"dfnID":"environment-settings-object-meaningfully-mitigate-injection-attacks","dfnText":"meaningfully mitigate injection attacks","external":false,"refSections":[{"refs":[{"id":"ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks"}],"title":"2.3.1. [InjectionMitigated]"},{"refs":[{"id":"ref-for-environment-settings-object-meaningfully-mitigate-injection-attacks\u2460"}],"title":"2.3.2. Patches to the \"exposed\" algorithm"}],"url":"#environment-settings-object-meaningfully-mitigate-injection-attacks"},
-"f937b7b6": {"dfnID":"f937b7b6","dfnText":"continue","external":true,"refSections":[{"refs":[{"id":"ref-for-iteration-continue"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"https://infra.spec.whatwg.org/#iteration-continue"},
-"policy-sufficiently-mitigates-dom-sinks": {"dfnID":"policy-sufficiently-mitigates-dom-sinks","dfnText":"sufficiently mitigates DOM sinks","external":false,"refSections":[{"refs":[{"id":"ref-for-policy-sufficiently-mitigates-dom-sinks"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"#policy-sufficiently-mitigates-dom-sinks"},
-"policy-sufficiently-mitigates-plugins": {"dfnID":"policy-sufficiently-mitigates-plugins","dfnText":"sufficiently mitigates plugins","external":false,"refSections":[{"refs":[{"id":"ref-for-policy-sufficiently-mitigates-plugins"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"#policy-sufficiently-mitigates-plugins"},
-"policy-sufficiently-mitigates-relative-url-manipulation": {"dfnID":"policy-sufficiently-mitigates-relative-url-manipulation","dfnText":"sufficiently mitigates relative URL manipulation","external":false,"refSections":[{"refs":[{"id":"ref-for-policy-sufficiently-mitigates-relative-url-manipulation"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"#policy-sufficiently-mitigates-relative-url-manipulation"},
-"policy-sufficiently-mitigates-script-execution": {"dfnID":"policy-sufficiently-mitigates-script-execution","dfnText":"sufficiently mitigates script execution","external":false,"refSections":[{"refs":[{"id":"ref-for-policy-sufficiently-mitigates-script-execution"}],"title":"2.1.1. Does a policy meaningfully mitigate injection attacks?"}],"url":"#policy-sufficiently-mitigates-script-execution"},
-};
-
-document.addEventListener("DOMContentLoaded", ()=>{
-    genAllDfnPanels();
-
-    document.body.addEventListener("click", (e) => {
-        // If not handled already, just hide all dfn panels.
-        hideAllDfnPanels();
-    });
-});
-
-window.addEventListener("resize", () => {
-    // Pin any visible dfn panel
-    queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>positionDfnPanel(el));
-});
-
-function genAllDfnPanels() {
-    for(const panelData of Object.values(dfnPanelData)) {
-        const dfnID = panelData.dfnID;
-        const dfn = document.getElementById(dfnID);
-        if(!dfn) {
-            console.log(`Can't find dfn#${dfnID}.`, panelData);
-            continue;
-        }
-        dfn.panelData = panelData;
-        insertDfnPopupAction(dfn);
-    }
-}
-
-function genDfnPanel(dfn, { dfnID, url, dfnText, refSections, external }) {
-    const dfnPanel = mk.aside({
-        class: "dfn-panel on",
-        id: `infopanel-for-${dfnID}`,
-        "data-for": dfnID,
-        "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
-        },
-        mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
-            `Info about the '${dfnText}' ${external?"external":""} reference.`),
-        mk.a({href:url, class:"dfn-link"}, url),
-        refSections.length == 0 ? [] :
-            mk.b({}, "Referenced in:"),
-            mk.ul({},
-                ...refSections.map(section=>
-                    mk.li({},
-                        ...section.refs.map((ref, refI)=>
-                            [
-                                mk.a({ href: `#${ref.id}` },
-                                    (refI == 0) ? section.title : `(${refI + 1})`
-                                ),
-                                " ",
-                            ]
-                        ),
-                    ),
-                ),
-            ),
-        genLinkingSyntaxes(dfn),
-    );
-
-    dfnPanel.addEventListener('click', (event) => {
-        if (event.target.nodeName == 'A') {
-            scrollToTargetAndHighlight(event);
-            pinDfnPanel(dfnPanel);
-        }
-        event.stopPropagation();
-        refocusOnTarget(event);
-    });
-    dfnPanel.addEventListener('keydown', (event) => {
-        if(event.keyCode == 27) { // Escape key
-            hideDfnPanel({dfnPanel});
-            event.stopPropagation();
-            event.preventDefault();
-        }
-    });
-
-    dfnPanel.dfn = dfn;
-    dfn.dfnPanel = dfnPanel;
-    return dfnPanel;
-}
-
-
-
-function hideAllDfnPanels() {
-    // Delete the currently-active dfn panel.
-    queryAll(".dfn-panel").forEach(dfnPanel=>hideDfnPanel({dfnPanel}));
-}
-
-function showDfnPanel(dfn) {
-    hideAllDfnPanels(); // Only display one at a time.
-
-    dfn.setAttribute("aria-expanded", "true");
-
-    const dfnPanel = genDfnPanel(dfn, dfn.panelData);
-
-    // Give the dfn a unique tabindex, and then
-    // give all the tabbable panel bits successive indexes.
-    let tabIndex = 100;
-    dfn.tabIndex = tabIndex++;
-    const tabbable = dfnPanel.querySelectorAll(":is(a, button)");
-    for (const el of tabbable) {
-        el.tabIndex = tabIndex++;
-    }
-
-    append(document.body, dfnPanel);
-    positionDfnPanel(dfnPanel);
-}
-
-function positionDfnPanel(dfnPanel) {
-    const dfn = dfnPanel.dfn;
-    const dfnPos = getBounds(dfn);
-    dfnPanel.style.top = dfnPos.bottom + "px";
-    dfnPanel.style.left = dfnPos.left + "px";
-
-    const panelPos = dfnPanel.getBoundingClientRect();
-    const panelMargin = 8;
-    const maxRight = document.body.parentNode.clientWidth - panelMargin;
-    if (panelPos.right > maxRight) {
-        const overflowAmount = panelPos.right - maxRight;
-        const newLeft = Math.max(panelMargin, dfnPos.left - overflowAmount);
-        dfnPanel.style.left = newLeft + "px";
-    }
-}
-
-function pinDfnPanel(dfnPanel) {
-    // Switch it to "activated" state, which pins it.
-    dfnPanel.classList.add("activated");
-    dfnPanel.style.position = "fixed";
-    dfnPanel.style.left = null;
-    dfnPanel.style.top = null;
-}
-
-function hideDfnPanel({dfn, dfnPanel}) {
-    if(!dfnPanel) dfnPanel = dfn.dfnPanel;
-    if(!dfn) dfn = dfnPanel.dfn;
-    dfn.dfnPanel = undefined;
-    dfnPanel.dfn = undefined;
-    dfn.setAttribute("aria-expanded", "false");
-    dfn.tabIndex = undefined;
-    dfnPanel.remove()
-}
-
-function toggleDfnPanel(dfn) {
-    if(dfn.dfnPanel) {
-        hideDfnPanel(dfn);
-    } else {
-        showDfnPanel(dfn);
-    }
-}
-
-function insertDfnPopupAction(dfn) {
-    dfn.setAttribute('role', 'button');
-    dfn.setAttribute('aria-expanded', 'false')
-    dfn.tabIndex = 0;
-    dfn.classList.add('has-dfn-panel');
-    dfn.addEventListener('click', (event) => {
-        toggleDfnPanel(dfn);
-        event.stopPropagation();
-    });
-    dfn.addEventListener('keypress', (event) => {
-        const kc = event.keyCode;
-        // 32->Space, 13->Enter
-        if(kc == 32 || kc == 13) {
-            toggleDfnPanel(dfn);
-            event.stopPropagation();
-            event.preventDefault();
-        }
-    });
-}
-
-function refocusOnTarget(event) {
-    const target = event.target;
-    setTimeout(() => {
-        // Refocus on the event.target element.
-        // This is needed after browser scrolls to the destination.
-        target.focus();
-    });
-}
-
-// TODO: shared util
-// Returns the root-level absolute position {left and top} of element.
-function getBounds(el, relativeTo=document.body) {
-    const relativeRect = relativeTo.getBoundingClientRect();
-    const elRect = el.getBoundingClientRect();
-    const top = elRect.top - relativeRect.top;
-    const left = elRect.left - relativeRect.left;
-    return {
-        top,
-        left,
-        bottom: top + elRect.height,
-        right: left + elRect.width,
-    }
-}
-
-function scrollToTargetAndHighlight(event) {
-    let hash = event.target.hash;
-    if (hash) {
-        hash = decodeURIComponent(hash.substring(1));
-        const dest = document.getElementById(hash);
-        if (dest) {
-            dest.classList.add('highlighted');
-            setTimeout(() => dest.classList.remove('highlighted'), 1000);
-        }
-    }
-}
-
-// Functions, divided by link type, that wrap an autolink's
-// contents with the appropriate outer syntax.
-// Alternately, a string naming another type they format
-// the same as.
-function needsFor(type) {
-    switch(type) {
-        case "descriptor":
-        case "value":
-        case "element-attr":
-        case "attr-value":
-        case "element-state":
-        case "method":
-        case "constructor":
-        case "argument":
-        case "attribute":
-        case "const":
-        case "dict-member":
-        case "event":
-        case "enum-value":
-        case "stringifier":
-        case "serializer":
-        case "iterator":
-        case "maplike":
-        case "setlike":
-        case "state":
-        case "mode":
-        case "context":
-        case "facet": return true;
-
-        default: return false;
-    }
-}
-function refusesFor(type) {
-    switch(type) {
-        case "property":
-        case "element":
-        case "interface":
-        case "namespace":
-        case "callback":
-        case "dictionary":
-        case "enum":
-        case "exception":
-        case "typedef":
-        case "http-header":
-        case "permission": return true;
-
-        default: return false;
-    }
-}
-function linkFormatterFromType(type) {
-    switch(type) {
-        case 'scheme':
-        case 'permission':
-        case 'dfn': return (text) => `[=${text}=]`;
-
-        case 'abstract-op': return (text) => `[\$${text}\$]`;
-
-        case 'function':
-        case 'at-rule':
-        case 'selector':
-        case 'value': return (text) => `''${text}''`;
-
-        case 'http-header': return (text) => `[:${text}:]`;
-
-        case 'interface':
-        case 'constructor':
-        case 'method':
-        case 'argument':
-        case 'attribute':
-        case 'callback':
-        case 'dictionary':
-        case 'dict-member':
-        case 'enum':
-        case 'enum-value':
-        case 'exception':
-        case 'const':
-        case 'typedef':
-        case 'stringifier':
-        case 'serializer':
-        case 'iterator':
-        case 'maplike':
-        case 'setlike':
-        case 'extended-attribute':
-        case 'event':
-        case 'idl': return (text) => `{{${text}}}`;
-
-        case 'element-state':
-        case 'element-attr':
-        case 'attr-value':
-        case 'element': return (element) => `<{${element}}>`;
-
-        case 'grammar': return (text) => `${text} (within a <pre class=prod>)`;
-
-        case 'type': return (text)=> `<<${text}>>`;
-
-        case 'descriptor':
-        case 'property': return (text) => `'${text}'`;
-
-        default: return;
-    };
-};
-
-function genLinkingSyntaxes(dfn) {
-    if(dfn.tagName != "DFN") return;
-
-    const type = dfn.getAttribute('data-dfn-type');
-    if(!type) {
-        console.log(`<dfn> doesn't have a data-dfn-type:`, dfn);
-        return [];
-    }
-
-    // Return a function that wraps link text based on the type
-    const linkFormatter = linkFormatterFromType(type);
-    if(!linkFormatter) {
-        console.log(`<dfn> has an unknown data-dfn-type:`, dfn);
-        return [];
-    }
-
-    let ltAlts;
-    if(dfn.hasAttribute('data-lt')) {
-        ltAlts = dfn.getAttribute('data-lt')
-            .split("|")
-            .map(x=>x.trim());
-    } else {
-        ltAlts = [dfn.textContent.trim()];
-    }
-    if(type == "type") {
-        // lt of "<foo>", but "foo" is the interior;
-        // <<foo/bar>> is how you write it with a for,
-        // not <foo/<bar>> or whatever.
-        for(var i = 0; i < ltAlts.length; i++) {
-            const lt = ltAlts[i];
-            const match = /<(.*)>/.exec(lt);
-            if(match) { ltAlts[i] = match[1]; }
-        }
-    }
-
-    let forAlts;
-    if(dfn.hasAttribute('data-dfn-for')) {
-        forAlts = dfn.getAttribute('data-dfn-for')
-            .split(",")
-            .map(x=>x.trim());
-    } else {
-        forAlts = [''];
-    }
-
-    let linkingSyntaxes = [];
-    if(!needsFor(type)) {
-        for(const lt of ltAlts) {
-            linkingSyntaxes.push(linkFormatter(lt));
-        }
-    }
-    if(!refusesFor(type)) {
-        for(const f of forAlts) {
-            linkingSyntaxes.push(linkFormatter(`${f}/${ltAlts[0]}`))
-        }
-    }
-    return [
-        mk.b({}, 'Possible linking syntaxes:'),
-        mk.ul({},
-            ...linkingSyntaxes.map(link => {
-                const copyLink = async () =>
-                    await navigator.clipboard.writeText(link);
-                return mk.li({},
-                    mk.div({ class: 'link-item' },
-                        mk.button({
-                            class: 'copy-icon', title: 'Copy',
-                            type: 'button',
-                            _onclick: copyLink,
-                            tabindex: 0,
-                        }, mk.span({ class: 'icon' }) ),
-                        mk.span({}, link)
-                    )
-                );
-            })
-        )
-    ];
-}
-}
-</script>
-<script>/* Boilerplate: script-ref-hints */
-"use strict";
-{
-let refsData = {
-"#InjectionMitigated": {"export":true,"for_":[],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"InjectionMitigated","type":"extended-attribute","url":"#InjectionMitigated"},
-"#abstract-opdef-obtain-directive": {"export":true,"for_":[],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"obtain-directive","type":"abstract-op","url":"#abstract-opdef-obtain-directive"},
-"#csp-list-meaningfully-mitigate-injection-attacks": {"export":true,"for_":["CSP list"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"mitigate","type":"dfn","url":"#csp-list-meaningfully-mitigate-injection-attacks"},
-"#dfn-exposed": {"export":true,"for_":[],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"exposed","type":"dfn","url":"#dfn-exposed"},
-"#environment-settings-object-meaningfully-mitigate-injection-attacks": {"export":true,"for_":["environment settings object"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"meaningfully mitigate injection attacks","type":"dfn","url":"#environment-settings-object-meaningfully-mitigate-injection-attacks"},
-"#policy-sufficiently-mitigates-dom-sinks": {"export":true,"for_":["policy"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"sufficiently mitigates dom sinks","type":"dfn","url":"#policy-sufficiently-mitigates-dom-sinks"},
-"#policy-sufficiently-mitigates-plugins": {"export":true,"for_":["policy"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"sufficiently mitigates plugins","type":"dfn","url":"#policy-sufficiently-mitigates-plugins"},
-"#policy-sufficiently-mitigates-relative-url-manipulation": {"export":true,"for_":["policy"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"sufficiently mitigates relative url manipulation","type":"dfn","url":"#policy-sufficiently-mitigates-relative-url-manipulation"},
-"#policy-sufficiently-mitigates-script-execution": {"export":true,"for_":["policy"],"level":"","normative":true,"shortname":"injection-mitigated","spec":"injection-mitigated","status":"local","text":"sufficiently mitigates script execution","type":"dfn","url":"#policy-sufficiently-mitigates-script-execution"},
-"https://html.spec.whatwg.org/multipage/browsers.html#policy-container-csp-list": {"export":true,"for_":["policy container"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"csp list","type":"dfn","url":"https://html.spec.whatwg.org/multipage/browsers.html#policy-container-csp-list"},
-"https://html.spec.whatwg.org/multipage/semantics.html#meta": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"meta","type":"element","url":"https://html.spec.whatwg.org/multipage/semantics.html#meta"},
-"https://html.spec.whatwg.org/multipage/semantics.html#the-base-element": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"base","type":"element","url":"https://html.spec.whatwg.org/multipage/semantics.html#the-base-element"},
-"https://html.spec.whatwg.org/multipage/urls-and-fetching.html#document-base-url": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"document base url","type":"dfn","url":"https://html.spec.whatwg.org/multipage/urls-and-fetching.html#document-base-url"},
-"https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-settings-object": {"export":true,"for_":["realm"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"settings object","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-realm-settings-object"},
-"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-cross-origin-isolated-capability": {"export":true,"for_":["environment settings object"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"cross-origin isolated capability","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-cross-origin-isolated-capability"},
-"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-global": {"export":true,"for_":["environment settings object"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"global object","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-global"},
-"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container": {"export":true,"for_":["environment settings object"],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"policy container","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-policy-container"},
-"https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"environment settings object","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object"},
-"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"secure context","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context"},
-"https://infra.spec.whatwg.org/#ascii-case-insensitive": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"ascii case-insensitive","type":"dfn","url":"https://infra.spec.whatwg.org/#ascii-case-insensitive"},
-"https://infra.spec.whatwg.org/#boolean": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"boolean","type":"dfn","url":"https://infra.spec.whatwg.org/#boolean"},
-"https://infra.spec.whatwg.org/#iteration-continue": {"export":true,"for_":["iteration"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"continue","type":"dfn","url":"https://infra.spec.whatwg.org/#iteration-continue"},
-"https://infra.spec.whatwg.org/#list-contain": {"export":true,"for_":["list","stack","queue","set"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"contain","type":"dfn","url":"https://infra.spec.whatwg.org/#list-contain"},
-"https://infra.spec.whatwg.org/#list-iterate": {"export":true,"for_":["list","set"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"for each","type":"dfn","url":"https://infra.spec.whatwg.org/#list-iterate"},
-"https://infra.spec.whatwg.org/#list-size": {"export":true,"for_":["list","stack","queue","set"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"size","type":"dfn","url":"https://infra.spec.whatwg.org/#list-size"},
-"https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#realm": {"export":true,"for_":["ECMAScript"],"level":"1","normative":true,"shortname":"ecmascript","spec":"ecmascript","status":"current","text":"realm","type":"dfn","url":"https://tc39.es/ecma262/multipage/executable-code-and-execution-contexts.html#realm"},
-"https://w3c.github.io/webappsec-csp/#csp-list": {"export":true,"for_":[],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"csp list","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#csp-list"},
-"https://w3c.github.io/webappsec-csp/#directive-fallback-list": {"export":true,"for_":[],"level":"","normative":true,"shortname":"csp3","spec":"csp3","status":"anchor-block","text":"Get fetch directive fallback list","type":"abstract-op","url":"https://w3c.github.io/webappsec-csp/#directive-fallback-list"},
-"https://w3c.github.io/webappsec-csp/#directive-name": {"export":true,"for_":["directive"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"name","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#directive-name"},
-"https://w3c.github.io/webappsec-csp/#directive-value": {"export":true,"for_":["directive"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"value","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#directive-value"},
-"https://w3c.github.io/webappsec-csp/#directives": {"export":true,"for_":[],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"directives","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#directives"},
-"https://w3c.github.io/webappsec-csp/#grammardef-hash-source": {"export":true,"for_":[],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"hash-source","type":"grammar","url":"https://w3c.github.io/webappsec-csp/#grammardef-hash-source"},
-"https://w3c.github.io/webappsec-csp/#grammardef-host-source": {"export":true,"for_":[],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"host-source","type":"grammar","url":"https://w3c.github.io/webappsec-csp/#grammardef-host-source"},
-"https://w3c.github.io/webappsec-csp/#grammardef-nonce-source": {"export":true,"for_":[],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"nonce-source","type":"grammar","url":"https://w3c.github.io/webappsec-csp/#grammardef-nonce-source"},
-"https://w3c.github.io/webappsec-csp/#grammardef-scheme-source": {"export":true,"for_":[],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"scheme-source","type":"grammar","url":"https://w3c.github.io/webappsec-csp/#grammardef-scheme-source"},
-"https://w3c.github.io/webappsec-csp/#policy-directive-set": {"export":true,"for_":["policy"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"directive set","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#policy-directive-set"},
-"https://w3c.github.io/webappsec-csp/#policy-disposition": {"export":true,"for_":["policy"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"disposition","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#policy-disposition"},
-"https://w3c.github.io/webappsec-csp/#policy-source": {"export":true,"for_":["policy"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"source","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#policy-source"},
-"https://w3c.github.io/webappsec-csp/#violation-policy": {"export":true,"for_":["violation"],"level":"3","normative":true,"shortname":"csp","spec":"csp3","status":"current","text":"policy","type":"dfn","url":"https://w3c.github.io/webappsec-csp/#violation-policy"},
-"https://webidl.spec.whatwg.org/#CrossOriginIsolated": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"CrossOriginIsolated","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#CrossOriginIsolated"},
-"https://webidl.spec.whatwg.org/#SecureContext": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"SecureContext","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#SecureContext"},
-"https://webidl.spec.whatwg.org/#dfn-callback-interface": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"callback interface","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-callback-interface"},
-"https://webidl.spec.whatwg.org/#dfn-conditionally-exposed": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"conditionally exposed","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-conditionally-exposed"},
-"https://webidl.spec.whatwg.org/#dfn-exposure-set": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"exposure set","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-exposure-set"},
-"https://webidl.spec.whatwg.org/#dfn-extended-attribute": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"extended attribute","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-extended-attribute"},
-"https://webidl.spec.whatwg.org/#dfn-idl-fragment": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"idl fragment","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-idl-fragment"},
-"https://webidl.spec.whatwg.org/#dfn-inherit": {"export":true,"for_":["interface"],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"inherit","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-inherit"},
-"https://webidl.spec.whatwg.org/#dfn-interface": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"interface","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-interface"},
-"https://webidl.spec.whatwg.org/#dfn-interface-member": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"interface member","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-interface-member"},
-"https://webidl.spec.whatwg.org/#dfn-member": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"members","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-member"},
-"https://webidl.spec.whatwg.org/#dfn-namespace": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"namespace","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-namespace"},
-"https://webidl.spec.whatwg.org/#dfn-namespace-member": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"namespace member","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-namespace-member"},
-"https://webidl.spec.whatwg.org/#dfn-operation": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"operation","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-operation"},
-"https://webidl.spec.whatwg.org/#dfn-overloaded": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"overloaded","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-overloaded"},
-"https://webidl.spec.whatwg.org/#dfn-partial-interface": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"partial interface","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-partial-interface"},
-"https://webidl.spec.whatwg.org/#dfn-partial-namespace": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"partial namespace","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-partial-namespace"},
-"https://webidl.spec.whatwg.org/#dfn-xattr-no-arguments": {"export":true,"for_":["extended attribute"],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"takes no arguments","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-xattr-no-arguments"},
-"https://webidl.spec.whatwg.org/#interface-mixin": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"interface mixin","type":"dfn","url":"https://webidl.spec.whatwg.org/#interface-mixin"},
-"https://webidl.spec.whatwg.org/#interface-mixin-member": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"interface mixin member","type":"dfn","url":"https://webidl.spec.whatwg.org/#interface-mixin-member"},
-"https://webidl.spec.whatwg.org/#partial-interface-mixin": {"export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"partial interface mixin","type":"dfn","url":"https://webidl.spec.whatwg.org/#partial-interface-mixin"},
-};
-
-function mkRefHint(link, ref) {
-    const linkText = link.textContent;
-    let dfnTextElements = '';
-    if (ref.text != linkText) {
-        dfnTextElements =
-            mk.li({},
-                mk.b({}, "Term: "),
-                mk.span({}, ref.text)
-            );
-    }
-    const forList = ref.for_;
-    let forListElements;
-    if(forList.length == 0) {
-        forListElements = [];
-    } else if(forList.length == 1) {
-        forListElements = mk.li({},
-            mk.b({}, "For: "),
-            mk.span({}, forList[0]),
-        );
-    } else {
-        forListElements = mk.li({},
-            mk.b({}, "For: "),
-            mk.ul({},
-                ...forList.map(forItem =>
-                    mk.li({},
-                        mk.span({}, forItem)
-                    ),
-                ),
-            ),
-        );
-    }
-    const url = ref.url;
-    const safeUrl = encodeURIComponent(url);
-    const hintPanel = mk.aside({
-        class: "ref-hint",
-        id: `ref-hint-for-${safeUrl}`,
-        "data-for": url,
-        "aria-labelled-by": `ref-hint-for-${safeUrl}`,
-    },
-        mk.ul({},
-            dfnTextElements,
-            mk.li({},
-                mk.b({}, "URL: "),
-                mk.a({ href: url, class: "ref" }, url),
-            ),
-            mk.li({},
-                mk.b({}, "Type: "),
-                mk.span({}, `${ref.type}`),
-            ),
-            mk.li({},
-                mk.b({}, "Spec: "),
-                mk.span({}, `${ref.spec ? ref.spec : ''}`),
-            ),
-            forListElements
-        ),
-    );
-    hintPanel.forLink = link;
-    setupRefHintEventListeners(link, hintPanel);
-    return hintPanel;
-}
-
-function hideAllRefHints() {
-    queryAll(".ref-hint").forEach(el=>hideRefHint(el));
-}
-
-function hideRefHint(refHint) {
-    const link = refHint.forLink;
-    link.setAttribute("aria-expanded", "false");
-    if(refHint.teardownEventListeners) {
-        refHint.teardownEventListeners();
-    }
-    refHint.remove();
-}
-
-function showRefHint(link) {
-    if(link.classList.contains("dfn-link")) return;
-    const url = link.getAttribute("href");
-    const ref = refsData[url];
-    if(!ref) return;
-
-    hideAllRefHints(); // Only display one at this time.
-
-    const refHint = mkRefHint(link, ref);
-    append(document.body, refHint);
-    link.setAttribute("aria-expanded", "true");
-    positionRefHint(refHint);
-}
-
-function setupRefHintEventListeners(link, refHint) {
-    if (refHint.teardownEventListeners) return;
-    // Add event handlers to hide the refHint after the user moves away
-    // from both the link and refHint, if not hovering either within one second.
-    let timeout = null;
-    const startHidingRefHint = (event) => {
-        if (timeout) {
-            clearTimeout(timeout);
-        }
-        timeout = setTimeout(() => {
-            hideRefHint(refHint);
-        }, 1000);
-    }
-    const resetHidingRefHint = (event) => {
-        if (timeout) clearTimeout(timeout);
-        timeout = null;
-    };
-    link.addEventListener("mouseleave", startHidingRefHint);
-    link.addEventListener("mouseenter", resetHidingRefHint);
-    link.addEventListener("blur", startHidingRefHint);
-    link.addEventListener("focus", resetHidingRefHint);
-    refHint.addEventListener("mouseleave", startHidingRefHint);
-    refHint.addEventListener("mouseenter", resetHidingRefHint);
-    refHint.addEventListener("blur", startHidingRefHint);
-    refHint.addEventListener("focus", resetHidingRefHint);
-
-    refHint.teardownEventListeners = () => {
-        // remove event listeners
-        resetHidingRefHint();
-        link.removeEventListener("mouseleave", startHidingRefHint);
-        link.removeEventListener("mouseenter", resetHidingRefHint);
-        link.removeEventListener("blur", startHidingRefHint);
-        link.removeEventListener("focus", resetHidingRefHint);
-        refHint.removeEventListener("mouseleave", startHidingRefHint);
-        refHint.removeEventListener("mouseenter", resetHidingRefHint);
-        refHint.removeEventListener("blur", startHidingRefHint);
-        refHint.removeEventListener("focus", resetHidingRefHint);
-    };
-}
-
-function positionRefHint(refHint) {
-    const link = refHint.forLink;
-    const linkPos = getBounds(link);
-    refHint.style.top = linkPos.bottom + "px";
-    refHint.style.left = linkPos.left + "px";
-
-    const panelPos = refHint.getBoundingClientRect();
-    const panelMargin = 8;
-    const maxRight = document.body.parentNode.clientWidth - panelMargin;
-    if (panelPos.right > maxRight) {
-        const overflowAmount = panelPos.right - maxRight;
-        const newLeft = Math.max(panelMargin, linkPos.left - overflowAmount);
-        refHint.style.left = newLeft + "px";
-    }
-}
-
-// TODO: shared util
-// Returns the root-level absolute position {left and top} of element.
-function getBounds(el, relativeTo=document.body) {
-    const relativeRect = relativeTo.getBoundingClientRect();
-    const elRect = el.getBoundingClientRect();
-    const top = elRect.top - relativeRect.top;
-    const left = elRect.left - relativeRect.left;
-    return {
-        top,
-        left,
-        bottom: top + elRect.height,
-        right: left + elRect.width,
-    }
-}
-
-function showRefHintListener(e) {
-    // If the target isn't in a link (or is a link),
-    // just ignore it.
-    let link = e.target.closest("a");
-    if(!link) return;
-
-    // If the target is in a ref-hint panel
-    // (aka a link in the already-open one),
-    // also just ignore it.
-    if(link.closest(".ref-hint")) return;
-
-    // Otherwise, show the panel for the link.
-    showRefHint(link);
-}
-
-function hideAllHintsListener(e) {
-    // If the click is inside a ref-hint panel, ignore it.
-    if(e.target.closest(".ref-hint")) return;
-    // Otherwise, close all the current panels.
-    hideAllRefHints();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    document.body.addEventListener("mousedown", showRefHintListener);
-    document.body.addEventListener("focus", showRefHintListener);
-
-    document.body.addEventListener("click", hideAllHintsListener);
-});
-
-window.addEventListener("resize", () => {
-    // Hide any open ref hint.
-    hideAllRefHints();
-});
 }
 </script>
 <script>/* Boilerplate: script-var-click-highlighting */
-"use strict";
-{
 /*
 Color-choosing design:
 
-* Colors are ordered by goodness.
-* On clicking a var, give it the earliest color
-    with the lowest usage in the algorithm.
-* On re-clicking, re-use the var's most recent color
-    if that's not currently being used elsewhere.
+Colors are ordered by goodness.
+Each color has a usage count (initially zero).
+Each variable has a last-used color.
+
+* If the var has a last-used color, and that color's usage is 0,
+    return that color.
+* Otherwise, return the lowest-indexed color with the lowest usage.
+    Increment the color's usage and set it as the last-used color
+    for that var.
+* On unclicking, decrement usage of the color.
 */
-
-const COLOR_COUNT = 7;
-
-document.addEventListener("click", e=>{
-    if(e.target.nodeName == "VAR") {
-        highlightSameAlgoVars(e.target);
-    }
-});
-
-function highlightSameAlgoVars(v) {
-    // Find the algorithm container.
-    let algoContainer = findAlgoContainer(v);
-
-    // Not highlighting document-global vars,
-    // too likely to be unrelated.
-    if(algoContainer == null) return;
-
-    const varName = nameFromVar(v);
-    if(!v.hasAttribute("data-var-color")) {
-        const newColor = chooseHighlightColor(algoContainer, v);
-        for(const el of algoContainer.querySelectorAll("var")) {
-            if(nameFromVar(el) == varName) {
-                el.setAttribute("data-var-color", newColor);
-                el.setAttribute("data-var-last-color", newColor);
+"use strict";
+{
+    document.addEventListener("click", e=>{
+        if(e.target.nodeName == "VAR") {
+            highlightSameAlgoVars(e.target);
+        }
+    });
+    const indexCounts = new Map();
+    const indexNames = new Map();
+    function highlightSameAlgoVars(v) {
+        // Find the algorithm container.
+        let algoContainer = null;
+        let searchEl = v;
+        while(algoContainer == null && searchEl != document.body) {
+            searchEl = searchEl.parentNode;
+            if(searchEl.hasAttribute("data-algorithm")) {
+                algoContainer = searchEl;
             }
         }
-    } else {
+
+        // Not highlighting document-global vars,
+        // too likely to be unrelated.
+        if(algoContainer == null) return;
+
+        const algoName = algoContainer.getAttribute("data-algorithm");
+        const varName = getVarName(v);
+        const addClass = !v.classList.contains("selected");
+        let highlightClass = null;
+        if(addClass) {
+            const index = chooseHighlightIndex(algoName, varName);
+            indexCounts.get(algoName)[index] += 1;
+            indexNames.set(algoName+"///"+varName, index);
+            highlightClass = nameFromIndex(index);
+        } else {
+            const index = previousHighlightIndex(algoName, varName);
+            indexCounts.get(algoName)[index] -= 1;
+            highlightClass = nameFromIndex(index);
+        }
+
+        // Find all same-name vars, and toggle their class appropriately.
         for(const el of algoContainer.querySelectorAll("var")) {
-            if(nameFromVar(el) == varName) {
-                el.removeAttribute("data-var-color");
+            if(getVarName(el) == varName) {
+                el.classList.toggle("selected", addClass);
+                el.classList.toggle(highlightClass, addClass);
             }
         }
     }
-}
-function findAlgoContainer(el) {
-    while(el != document.body) {
-        if(el.hasAttribute("data-algorithm")) return el;
-        el = el.parentNode;
+    function getVarName(el) {
+        return el.textContent.replace(/(\s|\xa0)+/, " ").trim();
     }
-    return null;
-}
-function nameFromVar(el) {
-    return el.textContent.replace(/(\s|\xa0)+/g, " ").trim();
-}
-function colorCountsFromContainer(container) {
-    const namesFromColor = Array.from({length:COLOR_COUNT}, x=>new Set());
-    for(let v of container.querySelectorAll("var[data-var-color]")) {
-        let color = +v.getAttribute("data-var-color");
-        namesFromColor[color].add(nameFromVar(v));
-    }
+    function chooseHighlightIndex(algoName, varName) {
+        let indexes = null;
+        if(indexCounts.has(algoName)) {
+            indexes = indexCounts.get(algoName);
+        } else {
+            // 7 classes right now
+            indexes = [0,0,0,0,0,0,0];
+            indexCounts.set(algoName, indexes);
+        }
 
-    return namesFromColor.map(x=>x.size);
-}
-function leastUsedColor(colors) {
-    // Find the earliest color with the lowest count.
-    let minCount = Infinity;
-    let minColor = null;
-    for(var i = 0; i < colors.length; i++) {
-        if(colors[i] < minCount) {
-            minColor = i;
-            minCount = colors[i];
+        // If the element was recently unclicked,
+        // *and* that color is still unclaimed,
+        // give it back the same color.
+        const lastIndex = previousHighlightIndex(algoName, varName);
+        if(indexes[lastIndex] === 0) return lastIndex;
+
+        // Find the earliest index with the lowest count.
+        const minCount = Math.min.apply(null, indexes);
+        let index = null;
+        for(var i = 0; i < indexes.length; i++) {
+            if(indexes[i] == minCount) {
+                return i;
+            }
         }
     }
-    return minColor;
-}
-function chooseHighlightColor(container, v) {
-    const colorCounts = colorCountsFromContainer(container);
-    if(v.hasAttribute("data-var-last-color")) {
-        let color = +v.getAttribute("data-var-last-color");
-        if(colorCounts[color] == 0) return color;
+    function previousHighlightIndex(algoName, varName) {
+        return indexNames.get(algoName+"///"+varName);
     }
-    return leastUsedColor(colorCounts);
-}
+    function nameFromIndex(index) {
+        return "selected" + index;
+    }
 }
 </script>

@@ -448,16 +448,6 @@ deal of experimentation and research over the years since CSP was introduced.
 Policies matching these requirements are deployed at scale today, and are
 emperically proven to be fairly robust defenses.
 
-ISSUE(mikewest/securer-contexts#1): Anne noted in a previous iteration of this
-proposal that it differs meaningfully from [{{SecureContext}}] and
-[{{CrossOriginIsolated}}] insofar as it doesn't require anything of a
-context's ancestors. That is, we're evaluting the injection mitigation of a
-specific document or worker or etc, and would expose an IDL construct there
-regardless of whether that context's parent also met the requirements. Should
-we apply the same considerations of
-[ancestral risk](https://w3c.github.io/webappsec-secure-contexts/#ancestors)
-that we took into account when defining Secure Contexts? Perhaps!
-
 
 What APIs should be marked as `[InjectionMitigated]`? {#impl-apis}
 -----------------------------------------------------
@@ -471,8 +461,9 @@ difficult sell (similar to the introduction of the [{{SecureContext}}]
 attribute). We'll want to pick our battles.
 
 The highest-priority APIs are those that grant access to capabilities that sit
-somewhat outside the web's general origin-based security model. Device
-capabilities like [[WebUSB]], OS primitives like the clipboard, and user
+somewhat outside the web's general origin-based security model. Identity primitives
+like Digital Credentials (see [wicg/digital-credentials#133](https://github.com/WICG/digital-credentials/issues/133)).
+Device capabilities like [[WebUSB]], OS primitives like the clipboard, and user
 location are all good examples of powerful and potentially dangerous capabilites
 that we'd really like to ensure are used by the site to whom they're granted,
 and not to anyone who can trick the site into executing script.
@@ -482,3 +473,54 @@ for this new attribute. When user agents gain confidence that code running on
 an origin is code that origin intended to execute, we can make a much more
 reasonable claim about the exclusivity associated with a user's choice to grant
 a capability to that origin, and thereby ship new capabilities more safely.
+
+
+Security Considerations {#security}
+===================================
+
+Same-origin Documents {#security-same-origin}
+---------------------------------------------
+
+The rules associated with "[=environment settings object/meaningfully mitigate injection attacks=]"
+differ in one important way from those associated with [{{SecureContext}}] and
+[{{CrossOriginIsolated}}]. Those attributes ensure not only that a given
+document is protected, but also set up constraints that prevent other,
+same-origin documents from accessing a protected document.
+
+[{{SecureContext}}] requires that a document and its ancestors be delivered
+securely. [[MIX]] implies, therefore, that any nested document in its frame
+tree will also be delivered securely, as non-secure frames would be blocked
+or upgraded. Similarly, any other document that has access to the secure
+context through a window handle must likewise be delivered securely, as the
+scheme forms part of the origin. Any API gated on [{{SecureContext}}], then,
+is fairly well protected from access in non-secure contexts.
+
+NOTE: I think the only scenario that allows this access would be a secure
+context that pops up a non-secure context that then frames the original
+context's origin. The framed document would not itself be a secure context,
+but could reach through its parents' {{Window/opener}} to access otherwise
+protected data. Are there more?
+
+Similarly, [{{CrossOriginIsolated}}] requires COEP and COOP constraints that
+separate same-origin documents with different policies into distinct
+[=agent clusters=], preventing them from accessing each other. This is a
+robust protection against a non-COI context gaining access to an API that's
+gated on [{{CrossOriginIsolated}}].
+
+[{{InjectionMitigated}}], on the other hand, does not require anything in
+particular from its embedders or embedees, nor does it prevent a same-origin
+document elsewhere from gaining a handle to its window and thereby accessing
+the otherwise-protected API.
+
+Should we apply the same considerations [[SECURE-CONTEXTS]] described in
+[[SECURE-CONTEXTS#ancestors]]? Should we go further, requiring some COOP
+variant like `noopener-allow-popups`? Even further, forcing agent cluster
+separation for injection-mitigated contexts?
+
+Maybe? It's certainly a hole. It's not clear to me whether it's a hole
+worth paying the probable cost to ease of deployment (COI hasn't exactly
+caught the world by storm). WDYT?
+
+ISSUE(mikewest/securer-contexts#1): This is an open decision point that
+Anne raised in a previous version of this proposal. We should hammer it out,
+one way or the other.
